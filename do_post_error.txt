@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\Scott LaFond\.gemini\antigravity\scratch\mud_ai_agent\web_server.py", line 700, in do_POST
+    client.send_command(command)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Scott LaFond\.gemini\antigravity\scratch\mud_ai_agent\telnet_client.py", line 98, in send_command
+    raise ConnectionError("Not connected to MUD server.")
+ConnectionError: Not connected to MUD server.

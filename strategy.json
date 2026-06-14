@@ -1,0 +1,16 @@
+{
+  "Elizabethan tearoom": "Quest Tip: Walk 'in' to enter the Gravedigger's Cottage Hall directly. It is the best starting place.",
+  "Hall": "Quest Tip: The wardrobe to the west is a room; you enter it simply by moving west ('w') where you will find starter items. The kitchen door is locked south. Cellar is southwest, Lounge is east.",
+  "Fitted wardrobe": "Quest Tip: Grab all items here (fur coat, umbrella, scroll). Go east back to the Hall when done.",
+  "Lounge": "Quest Tip: The fire here can be used to light a stick to make a fire brand (torch). Study is east, Dining room is south, Hall is west.",
+  "Study": "Quest Tip: If the bookcase stands flush against the wall, type 'slide bookcase' to move it aside and reveal an opening.",
+  "Cellar": "Quest Tip: Extremely dark cellar. You must have a lit torch (brand) to see, or you will stumble around. Cellar contains spiders and keys.",
+  "Cave": "Quest Tip: To defeat the dragon here, you must feed it coal. Make sure you have coal in your inventory and type 'give coal to dragon' or 'feed coal to dragon'. Note: if you are invisible, your invisibility will drop immediately if the dragon enters the room. If you are visible, the dragon will immediately attack you!",
+  "Dragon's cave": "Quest Tip: To defeat the dragon here, you must feed it coal. Make sure you have coal in your inventory and type 'give coal to dragon' or 'feed coal to dragon'. Note: if you are invisible, your invisibility will drop immediately if the dragon enters the room. If you are visible, the dragon will immediately attack you!",
+  "Swamp": "Quest Tip: This is the drop-off zone. Drop all your positive-value treasures here using 'dr t' to convert them to points and level up!",
+  "Rocky beach": "Quest Tip: Look for a boat. Enter the boat using 'enter boat' (or 'get in boat'). Once inside, sail west ('w') to reach the wrecked galleon.",
+  "Boat": "Quest Tip: You are in the boat. Sail west ('w') to travel to the wrecked galleon. If you notice signs of rain, immediately sail east ('e') back to the beach and get out!",
+  "Wrecked galleon": "Quest Tip: You are at the wrecked galleon. Explore the deck, cabin, and hold for valuable treasures.",
+  "Slippery rocks": "Quest Tip: Slippery rocks are dangerous. CRITICAL SAFETY WARNING: If it is raining, DO NOT move south ('s') as you will drown. Sleep or move in a different direction instead!",
+  "Misty graveyard": "Quest Tip: You are in the Misty Graveyard maze. The AI agent has a built-in navigator that will automatically execute the 24-step sequence to the final room. IMPORTANT: If you are playing manually, make sure to type 'start ai' at the very entrance of the graveyard so the AI starts the sequence from step 1!"
+}

@@ -1,0 +1,1335 @@
+DBASE.BCL:205:".resurrect",	S.SFUNC,	SF.RESURRECT,	0,
+MUD.TXT:874:Hello wizard, guess what mortals can't see without help? Try ne or w.
+MUD.TXT:917:Hi wizards! Try n or sw.
+MUD.TXT:920:Hi wizards! Try e or ne.
+MUD.TXT:923:Hi wizards! Try nw or sw.
+MUD.TXT:926:Hi wizards! Try nw or s.
+MUD.TXT:929:Hi wizards! Try n or s.
+MUD.TXT:4075:go	.go	none	none	iflevel	null	10	0	;let berserk wizards, too
+MUD.TXT:4079:back	.back	none	none	iflevel	null	10	0	;let berserk wizards, too
+MUD.TXT:4095:witches	wizards
+MUD.TXT:5322:3	On a huge grave is the name, "Evil the Wizard".
+MUD.TXT:5327:the Wizard".
+MUD.TXT:5331:11	On a grave close by reads, "Gwyn the Wizard lies only a few feet from
+MUD.TXT:5333:12	Before you looms an obsidian vault, insculpt "Shadow the Wizard".
+MUD.TXT:5337:15	Two tombstones to your left read, "Helmut the Wizard".
+MUD.TXT:5338:16	A tombstone here bears the epitaph, "Fenwyn (Wizard".
+MUD.TXT:5339:17	The tomb of Jock the Wizard rises before you, inscribed, "But for a
+MUD.TXT:5341:18	A small rock to one side marks the grave of Foxy the Wizard.
+MUD.TXT:5343:where Egor the Wizard has danced.
+MUD.TXT:5344:20	The headstone of Gorpli the Wizard stands here, with nothing significant
+MUD.TXT:5346:21	Hacked into a tombstone before you is the epitaph, "Madmax the Wizard".
+MUD.TXT:5347:22	The tomb before you bears the name, "Roddy the Wizard", which has
+MUD.TXT:5351:24	Here stands the grave of Clive the Wizard, QED.
+MUD.TXT:5356:27	Alan the wizard is virtually buried here.
+MUD.TXT:5357:28	Christian the wizard is buried here, beneath a tombstone reading, "A
+MUD.TXT:5361:30	Inscribed on a headstone to your left are the words, "Saavik, a wizard
+MUD.TXT:5363:31	Before you stands the grave of Balastor the wizard, made without any
+MUD.TXT:5364:help whatsoever from Egor the Wizard...
+MUD.TXT:5369:the Wizard, in his favourite position (horizontal)".
+MUD.TXT:5370:34	Gripper the wizard's aerial-bearing tombstone nearby reads "heavy
+MUD.TXT:5372:35	The tomb of Mugsanon the wizard stands before you, inscribed
+MUD.TXT:5382:words, "Jon the wizard".
+MUD.TXT:5383:41	This is the tombstone of Achetus the wizard, but his bones are lost in
+MUD.TXT:5398:8	The grave of Nic the Wizard is eventually here.
+MUD.TXT:5399:9	The grave of Andy the Wizard is somehow here.
+MUD.TXT:5400:10	The grave of Eric the Wizard was here until you started playing.
+MUD.TXT:5401:11	The tomb of Ridicule the Wizard has been gradually built up here.
+MUD.TXT:5404:13	The grave of Zardoz the Wizard is here - "Forgotten but not gone".
+MUD.TXT:5407:15	You smell the grave of Conn the Wizard some way to one side.
+MUD.TXT:5409:17	The tomb of Zaphod the Wizard is here, marked "Do not open until 2am".
+MUD.TXT:5412:19	The grave of the unknown wizard stands before you, beneath which lies
+MUD.TXT:5413:entombed Egor the Wizard.
+MUD.TXT:5415:21	To one side lies the securely water-proofed grave of Cesil the Wizard.
+MUD.TXT:5416:22	The grave of Tremble the Wizard is here, made almost entirely of old
+MUD.TXT:5418:23	Before you stands the grave of Thor the wizard, marked, "Stopped Press".
+MUD.TXT:5420:25	The tombstone of Rudy the wizard stands here, marked, "Gone before his
+MUD.TXT:5422:26	Nick the wizard is buried here. The tombstone has been removed for the
+MUD.TXT:5424:27	Elric the wizard is buried here beneath a tomb reading, "See where
+MUD.TXT:5426:28	A headstone before you reads, "Azax the wizard lies here". The word
+MUD.TXT:5432:31	Six feet below you lie the remains of Happy the Wizard, "deep in
+MUD.TXT:5434:32	Far to the east is the grave of Limhongch the Wizard.
+MUD.TXT:5435:33	A black monolith before you encases the body of Vulnax the Wizard.
+MUD.TXT:5436:34	The grave of Jason the whinging Wizard stands here, insculpt "He
+MUD.TXT:5439:Chester the Wizard.
+MUD.TXT:5441:37	Etched onto the grave of Dan the Wizard here are the words, "I got
+MUD.TXT:5443:38	The double-size grave of Fazz the Wizard here bears the sentence,
+MUD.TXT:5447:40	Here stands the tomb of Vivian the Wizard, "A sufferer of swamp
+MUD.TXT:5449:41	The proud marble headstone of Tixy the Wizard stands before you,
+MUD.TXT:8228:get to be a wizard or witch, of course! In the meantime, however, the
+MUD1.BCL:72:(WIZARD of LH from player.names!i)=1->(bit bitand present -> "appeared with a crash of thunder", "di
+MUD1.BCL:132:if WIZARD of profile writes(tty,"----")
+MUD1.BCL:282:unless WIZARD of profile error()
+MUD2.BCL:169:if WIZARD of profile ne 0 return
+MUD2.BCL:192:test WIZARD of profile Describe(newrm,true) or
+MUD2.BCL:227:if numbargs()\=2/\((max.obj()<OBJ.CARRIED of profile)\/(max.wt()<CARRY.COUNT of profile))/\(WIZARD o
+MUD2.BCL:229:if (A.SMALL bitand ATTRIB of newrm)/\(wizard of profile)=0 then unless newrm=room
+MUD2.BCL:233:if (bit bitand who.cpy) /\(WIZARD of LH from player.names!I)=0 then
+MUD3.BCL:46:if SCORE of prof ge sm\/WIZARD of prof=1 resultis true
+MUD3.BCL:57:unless asking if (WIZARD of profile)=1 return
+MUD3.BCL:171:if WIZARD of profile=1/\instrmnt
+MUD3.BCL:207:unless WIZARD of profile resultis true
+MUD3.BCL:212:if WIZARD of profile resultis true
+MUD3.BCL:225:if WIZARD of nd resultis true
+MUD3.BCL:272:(WIZARD of profile=1\/flipping -> false, A.HIDE bitand (ATTRIB of pnum))
+MUD3.BCL:307:test us(me)\/(WIZARD of profile ne 0/\realwiz(me)) then STAMINA of profile_STAMINAMAX of profile or
+MUD4.BCL:125:if l=max.level unless WIZARD of profile
+MUD4.BCL:138:if (l=max.level-1/\(WIZARD of pr ne 0\/SCORE of pr ge sc1))\/(sc1 le SCORE of pr ls sc2)
+MUD4.BCL:152:if ~wizonly \/ WIZARD of p ne 0
+MUD5.BCL:49:test RELAXED/\WIZARD of profile=1/\(spectacular=0\/(spectacular ne 0/\maint)) then get.all() or
+MUD5.BCL:50:test spectacular/\(WIZARD of profile=0) then Error("Not during a spectacular!") or
+MUD5.BCL:114:test RELAXED/\WIZARD of profile=1/\(spectacular=0\/(spectacular ne 0/\maint)) then drop.everything(t
+MUD5.BCL:151:unless WIZARD of profile Error()
+MUD5.BCL:184:for i=0 to 35 if player.names!i/\WIZARD of LH from player.names!i ne 0 wiz bitor_1<<i
+MUD5.BCL:187:send(player.no, 0, WIZARD of profile->K.ISAHM,
+MUD5.BCL:188:DEXTERITY of profile gr 60->K.ISAHM, K.ISAMM, WIZARD of profile->10000, random((STRENGTH of profile)
+MUD5.BCL:189:or send(player.no, 0,WIZARD of profile\/random(100) le 40 -> K.ISAM,
+MUD5.BCL:205:=0, 0, WIZARD of profile=1/\find.room(objname), (rm1->LH of rm1, room), TRAVEL of rm
+MUD5.BCL:232:unless WIZARD of profile if ~(visible(rm))\/((A.DEATH bitor A.NOLOOK) bitand ATTRIB of rm) endcase
+MUD5.BCL:234:if WIZARD of profile out(":6*T", !rm)
+MUD5.BCL:267:unless WIZARD of profile if savescr=SCORE of profile
+MUD5.BCL:274:if WIZARD of profile=1/\PTYPE of objct=S.PLAYER
+MUD5.BCL:292:test (WIZARD of profile=1)\/random(player.level()+2) then move(DREC of objct) or
+MUD5.BCL:298:if WIZARD of profile
+MUD5.BCL:310:$(	let rm,old=WIZARD of profile=1/\find.room(objname),logstr
+MUD5.BCL:331:unless WIZARD of profile error()
+MUD5.BCL:346:if WIZARD of profile=1/\there out("there*T:F*C*L",there)
+MUD5.BCL:359:test WIZARD of profile then
+MUD5.BCL:375:if WIZARD of profile pl_max.level
+MUD5.BCL:478:$(	unless WIZARD of profile=1/\maint error()
+MUD5.BCL:517:for i=0 to 35 if player.names!i unless WIZARD of LH from player.names!i count+_1
+MUD5.BCL:544:send(i,nd,((who.copy bitand (1<<i))\/(WIZARD of profile))->K.BELW,K.DIST,nd!2)
+MUD5.BCL:593:if seq(objname, "lock") test WIZARD of profile/\(RELAXED\/us(me)) then
+MUD5.BCL:598:if seq(objname, "unlock") test WIZARD of profile/\(RELAXED\/us(me)) then
+MUD5.BCL:612:test WIZARD of profile then
+MUD5.BCL:613:$(	WIZARD of profile_false
+MUD5.BCL:616:$(	WIZARD of profile_true
+MUD5.BCL:721:$(	let ok=maint/\WIZARD of profile ne 0
+MUD5.BCL:739:unless WIZARD of profile Error()
+MUD5.BCL:807:WIZARD of profile_true
+MUD5.BCL:815:unless WIZARD of profile reset()<>error()
+MUD5.BCL:838:unless WIZARD of profile error()
+MUD5.BCL:855:case SF.RESURRECT:
+MUD5.BCL:856:unless WIZARD of profile reset()<>error()
+MUD5.BCL:877:Out(":P now :s.*C*L", objname, \val->"resurrected","deceased")
+MUD5.BCL:885:$(	unless WIZARD of profile error()
+MUD5.BCL:902:test spectacular/\WIZARD of profile=0 then Error("Not during a spectacular!") or
+MUD5.BCL:917:unless WIZARD of profile if A.SMALL bitand ATTRIB of room
+MUD5.BCL:931:case SF.GO://Go (check if wizard otherwise ignore)
+MUD5.BCL:932:if WIZARD of profile then
+MUD5.BCL:967:unless WIZARD of profile
+MUD5.BCL:1001:if WIZARD of profile then
+MUD5.BCL:1016:unless WIZARD of profile=1 | maint error("You can't try that unless you're a :s or :s!",female!MAX.L
+MUD5.BCL:1079:if WIZARD of profile out(":6 - ", !rm)
+MUD5.BCL:1105:unless (ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of profile)=0
+MUD5.BCL:1108:if cn(l,ob) test WIZARD of profile then
+MUD5.BCL:1157:$(	unless WIZARD of profile error("You have to be a :s or :s to do that, :s.", male!MAX.LEVEL,female
+MUD5.BCL:1180:$(	unless WIZARD of profile error("Wait until you're a :s...", (SEX of profile->female,male)!max.lev
+MUD5.BCL:1222:unless WIZARD of profile error("You have to be a :s or :s to do that, :s.", male!MAX.LEVEL,female!MA
+MUD5.BCL:1224:unless WIZARD of profile Error()
+MUD5.BCL:1238:if WIZARD of nm out(" in wiz mode")
+MUD5.BCL:1251:unless WIZARD of profile error()
+MUD5.BCL:1292:unless WIZARD of profile out("You've got to be a :s or :s to be able to do that!*C*L",female!MAX.LEV
+MUD5.BCL:1371:unless function=F.SSENDEMON\/(WIZARD of profile=1)\/((1<<pnum) bitand who.copy) loop
+MUD5.BCL:1391:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then resultis false
+MUD5.BCL:1392:while nd do test obj=nd /\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0)) then resultis true or
+MUD5.BCL:1447:if WIZARD of profile endcase
+MUD5.BCL:1450:unless WIZARD of profile endcase
+MUD5.BCL:1496:case F.IFLEVEL:	if player.level()<sm-1 /\(WIZARD of profile)=0 loop
+MUD5.BCL:1534:test Random(100) ls (1+player.level())*sm\/(WIZARD of profile=1) then
+MUD5.BCL:1538:test random(100) ls (1+player.level(LH from player.names!(P1 of objct)))*sm/\(WIZARD of profile=0)
+MUD5.BCL:1545:test Random(100) ls (1+player.level())*sm\/(WIZARD of profile)=1 then
+MUD5.BCL:1549:test random(100) ls (1+player.level(LH from player.names!(P1 of objct)))*sm/\(WIZARD of profile=0)
+MUD5.BCL:1558:case F.UNLESSLEVEL:	if player.level()>=sm-1 \/(WIZARD of profile)=1 loop
+MUD5.BCL:1568:if ifr/\(WIZARD of profile)=0 verb_0<>objct_fake.node("that")
+MUD5.BCL:1769:unless (ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of profile)=0
+MUD5.BCL:1851:unless RELAXED\/us(me) if WIZARD of profile error("I'm sure you don't mean it...")
+MUD5.BCL:1929:unless WIZARD of profile stamina of profile_-1
+MUD5.BCL:1945:unless WIZARD of profile ne 0 test spectacular then
+MUD5.BCL:1972:unless WIZARD of profile STAMINA of profile-_sm
+MUD5.BCL:2025:unless rm=room\/((ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of profile=0))
+MUD6.BCL:25:if WIZARD of profile out("(:6) ",!rm)
+MUD6.BCL:26:test (A.DEATH bitand ATTRIB of rm)/\(WIZARD of profile)=0 then outs("Land of the Dead.*C*L") or desc
+MUD6.BCL:31:if WIZARD of profile out("(:6) ",!rm)<>!lvfound_true
+MUD6.BCL:38:test CONTENTS of nd ne 0 /\ (WIZARD of profile ne 0 \/ DESTROYED of nd ge 0) then
+MUD6.BCL:42:if cn(l,n)/\(WIZARD of profile=1\/DESTROYED of n ge 0) num+_1
+MUD6.BCL:74:unless insides /\ (DISGUISED of insides=0 \/ WIZARD of profile=1) resultis false
+MUD6.BCL:83:test ((TRANSPARENT of insides ne 0 \/ looking)/\P4 of obj=0) \/ WIZARD of profile=1 then inventory(C
+MUD6.BCL:93:unless WIZARD of profile=1 \/ here(obj) then
+MUD6.BCL:96:until LH of nd=obj /\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0)) do
+MUD6.BCL:101:if FIXED of nd\/NOGET of nd test WIZARD of profile=1/\(RELAXED\/us(me))/\(spectacular=0\/maint) then
+MUD6.BCL:110:if WEIGHT of nd+CARRY.COUNT of profile>max.wt()/\(WIZARD of profile)=0 then
+MUD6.BCL:129:unless WIZARD of profile=1\/here.class(cl) error("I don't see any :s", objname)
+MUD6.BCL:134:(WIZARD of profile=1/\(RELAXED\/us(me))/\(spectacular=0\/maint))\/valof
+MUD6.BCL:139:if WEIGHT of nd+carry.count of profile>max.wt()/\(WIZARD of profile)=0 then
+MUD6.BCL:173:and full.up()=(max.obj()<=OBJ.CARRIED of profile)/\(WIZARD of profile)=0
+MUD6.BCL:278:rm_WIZARD of profile=0/\(A.DEATH bitand ATTRIB of room)->oldroom,place(room)
+MUD6.BCL:279:rm_WIZARD of profile=0/\(A.DMOVE bitand ATTRIB of rm)-> DMOVE of rm, rm
+MUD6.BCL:334:if (WTUSED of insides)+(WEIGHT of nd)>MAXWT of insides /\(WIZARD of profile)=0
+MUD6.BCL:370:$(	if (WEIGHT of nd)+(CARRY.COUNT of profile)>max.wt()/\(WIZARD of profile)=0
+MUD6.BCL:423:if A.HIDEAWAY bitand ATTRIB of rm unless WIZARD of profile=1/\numbargs() ne 3
+MUD6.BCL:433:if WIZARD of profile=1/\(brief ne -1\/long)
+MUD6.BCL:443:if (A.DEATH bitand ATTRIB of room)/\(WIZARD of profile)=0 then
+MUD6.BCL:458:if (A.HIDE bitand ATTRIB of room)/\(WIZARD of profile)=0 then return
+MUD6.BCL:459:unless (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then
+MUD6.BCL:526:if WIZARD of profile=1/\(brief ne -1\/long)
+MUD6.BCL:530:if WIZARD of profile=1
+MUD6.BCL:532:unless (DESTROYED of obj ls 0 /\(WIZARD of profile)=0)\/sprop of obj=0
+MUD6.BCL:610:$(	if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then resultis false
+MUD6.BCL:613:while nd do test obj=LH of nd /\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0)) then
+MUD6.BCL:628:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then resultis false
+MUD6.BCL:667:$) ge 0 ))/\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0))
+MUD7.BCL:60:$(	unless WIZARD of profile resultis true
+MUD7.BCL:161:unless (RELAXED\/us(me)\/us(objname))/\(flipping\/WIZARD of profile=1) error()
+MUD7.BCL:257:if us(objname) WIZARD of profile_true
+MUD7.BCL:270:$(	unless (RELAXED\/us(me))/\(WIZARD of profile=1\/flipping) error()
+MUD7.BCL:290:unless (RELAXED\/us(me))/\WIZARD of profile error("*C*LNo can do, old :s.", SEX of profile -> "girl"
+MUD7.BCL:337:for i=0 to 35 if wizard of LH from player.names!i dest bitor_1<<i
+MUD8.BCL:32:if WIZARD of profile
+MUD8.BCL:33:unless ~WIZVWIZ/\WIZARD of pp ne 0
+MUD8.BCL:39:unless WIZARD of profile unless bit bitand who.copy error(":p isn't here!",objname)
+MUD8.BCL:59:unless WIZARD of profile unless (1<<snd) bitand who.copy error(":p isn't here to :s.", objname, verb
+MUD8.BCL:65:unless WIZARD of profile if WIZARD of pp
+MUD8.BCL:75:WIZARD of LH from player.names!i then
+MUD8.BCL:84:unless RELAXED\/us(me)\/(WIZARD of pp ne 0) error("Not to mortals!")
+MUD8.BCL:91:unless WIZARD of profile unless bit bitand who.copy then
+MUD8.BCL:114:unless WIZARD of profile unless bit bitand who.copy then
+MUD8.BCL:138:unless WIZARD of profile unless who.copy bitand (1<<snd) error(":p isn't here to :s!",objname, verbn
+MUD8.BCL:156:unless WIZARD of profile unless who.copy bitand (1<<snd) do
+MUD8.BCL:175:unless us(me)\/snd=player.no if WIZARD of pp
+MUD8.BCL:186:unless WIZARD of profile unless (1<<snd)bitand who.copy error(":P isn't here!", objname)
+MUD8.BCL:188:if WIZARD of pp
+MUD8.BCL:206:WIZVWIZ/\WIZARD of profile ne 0 -> 0, LH from inf
+MUD8.BCL:221:send(snd,block,K.IACPT,WIZVWIZ/\WIZARD of profile ne 0->10000000,kipped->-1,DEXTERITY of profile)
+MUD8.BCL:229:if WIZARD of p ne 0\/(who.copy bitand (1<<i))
+MUD8.BCL:242:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(100)+1+(CARRY.COUNT of profile)/F.ENCMB
+MUD8.BCL:244:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->1000000,random(STRENGTH of profile/F.DMGE1)+1
+MUD8.BCL:260:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(100)+1+(CARRY.COUNT of profile)/F.ENCMB
+MUD8.BCL:262:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->10000000,random(STRENGTH of profile/F.DMGE2)+1
+MUD8.BCL:331:$(	damage_WIZARD of profile->0,random((WEIGHT of monster)/1000/F.DMGE2)+1
+MUD8.BCL:383:test WIZARD of profile then
+MUD8.BCL:425:test WIZARD of profile=1\/FUNC of block ne K.DIST then out("*C*L:p shouts",pn)
+MUD8.BCL:444:damage_WIZARD of profile->102,ASLEEP of profile->-1,random(100)+1
+MUD8.BCL:476:full.up())/\(WIZARD of profile)=0 then
+MUD8.BCL:504:full.up())/\(WIZARD of profile)=0 then
+MUD8.BCL:523:if WIZARD of profile unless inv out("*C*L:p has started following you.*C*L",pn)
+MUD8.BCL:536:if WIZARD of profile unless inv out("*C*L:p has stopped following you.*C*L", pn)
+MUD8.BCL:567:unless us(pn) if (WIZARD of profile ne 0) \/snooping ne -1 then
+MUD8.BCL:578:unless us(pn) if WIZARD of profile out("*C*L:p has stopped snooping on you.*C*L",pn)
+MUD8.BCL:613:WIZARD of profile_false
+MUD8.BCL:636:unless (ASLEEP of profile ne 0)\/(FUNC of block=K.SHBD/\(A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD 
+MUD8.BCL:687:$(	let dropsy, sumnd=WIZARD of pp, LH from INF
+MUD8.BCL:688:if sumnd if WIZARD of profile=1 \/ valof
+MUD8.BCL:719:if WIZARD of profile
+MUD8.BCL:788:WIZARD of theirp->""," not",SEX of theirp->female!max.level,male!max.level,
+MUD8.BCL:789:WIZARD of theirp->"...",".")
+MUD8.BCL:811:if WIZARD of profile
+MUD8.BCL:813:WIZARD of profile_false
+MUD8.BCL:831:$(	if WIZARD of profile Out(" in :6",!(CROOM of pp))
+MUDLIB.BCL:940:unless WIZARD of profile cccnt_CCTRIP*10
+MUDLIB.BCL:1135:unless ISWIZ of profile ne 0/\ps.word WIZARD of profile_false
+MUDLIB.BCL:1136:if us(name) WIZARD of profile_true<>maint_true
+MUDLIB.BCL:1163:if us(name) WIZARD of profile_true
+MUDLIB.BCL:1386:unless WIZARD of profile WIZD of place bitand_NOTINVIS
+MUDLIB.BCL:1436:outz($az"eg hero/heroine, witch/wizard")
+MUDLIB.BCL:1485:test WIZARD of prof then write(s, " the :s:s",us(nm)->"arch-","", (SEX of prof->female, male)!MAX.LE
+search_out.txt:1:DBASE.BCL:205:".resurrect",	S.SFUNC,	SF.RESURRECT,	0,
+search_out.txt:2:MUD.TXT:874:Hello wizard, guess what mortals can't see without help? Try ne or w.
+search_out.txt:3:MUD.TXT:917:Hi wizards! Try n or sw.
+search_out.txt:4:MUD.TXT:920:Hi wizards! Try e or ne.
+search_out.txt:5:MUD.TXT:923:Hi wizards! Try nw or sw.
+search_out.txt:6:MUD.TXT:926:Hi wizards! Try nw or s.
+search_out.txt:7:MUD.TXT:929:Hi wizards! Try n or s.
+search_out.txt:8:MUD.TXT:4075:go	.go	none	none	iflevel	null	10	0	;let berserk wizards, too
+search_out.txt:9:MUD.TXT:4079:back	.back	none	none	iflevel	null	10	0	;let berserk wizards, too
+search_out.txt:10:MUD.TXT:4095:witches	wizards
+search_out.txt:11:MUD.TXT:5322:3	On a huge grave is the name, "Evil the Wizard".
+search_out.txt:12:MUD.TXT:5327:the Wizard".
+search_out.txt:13:MUD.TXT:5331:11	On a grave close by reads, "Gwyn the Wizard lies only a few feet from
+search_out.txt:14:MUD.TXT:5333:12	Before you looms an obsidian vault, insculpt "Shadow the Wizard".
+search_out.txt:15:MUD.TXT:5337:15	Two tombstones to your left read, "Helmut the Wizard".
+search_out.txt:16:MUD.TXT:5338:16	A tombstone here bears the epitaph, "Fenwyn (Wizard".
+search_out.txt:17:MUD.TXT:5339:17	The tomb of Jock the Wizard rises before you, inscribed, "But for a
+search_out.txt:18:MUD.TXT:5341:18	A small rock to one side marks the grave of Foxy the Wizard.
+search_out.txt:19:MUD.TXT:5343:where Egor the Wizard has danced.
+search_out.txt:20:MUD.TXT:5344:20	The headstone of Gorpli the Wizard stands here, with nothing significant
+search_out.txt:21:MUD.TXT:5346:21	Hacked into a tombstone before you is the epitaph, "Madmax the Wizard".
+search_out.txt:22:MUD.TXT:5347:22	The tomb before you bears the name, "Roddy the Wizard", which has
+search_out.txt:23:MUD.TXT:5351:24	Here stands the grave of Clive the Wizard, QED.
+search_out.txt:24:MUD.TXT:5356:27	Alan the wizard is virtually buried here.
+search_out.txt:25:MUD.TXT:5357:28	Christian the wizard is buried here, beneath a tombstone reading, "A
+search_out.txt:26:MUD.TXT:5361:30	Inscribed on a headstone to your left are the words, "Saavik, a wizard
+search_out.txt:27:MUD.TXT:5363:31	Before you stands the grave of Balastor the wizard, made without any
+search_out.txt:28:MUD.TXT:5364:help whatsoever from Egor the Wizard...
+search_out.txt:29:MUD.TXT:5369:the Wizard, in his favourite position (horizontal)".
+search_out.txt:30:MUD.TXT:5370:34	Gripper the wizard's aerial-bearing tombstone nearby reads "heavy
+search_out.txt:31:MUD.TXT:5372:35	The tomb of Mugsanon the wizard stands before you, inscribed
+search_out.txt:32:MUD.TXT:5382:words, "Jon the wizard".
+search_out.txt:33:MUD.TXT:5383:41	This is the tombstone of Achetus the wizard, but his bones are lost in
+search_out.txt:34:MUD.TXT:5398:8	The grave of Nic the Wizard is eventually here.
+search_out.txt:35:MUD.TXT:5399:9	The grave of Andy the Wizard is somehow here.
+search_out.txt:36:MUD.TXT:5400:10	The grave of Eric the Wizard was here until you started playing.
+search_out.txt:37:MUD.TXT:5401:11	The tomb of Ridicule the Wizard has been gradually built up here.
+search_out.txt:38:MUD.TXT:5404:13	The grave of Zardoz the Wizard is here - "Forgotten but not gone".
+search_out.txt:39:MUD.TXT:5407:15	You smell the grave of Conn the Wizard some way to one side.
+search_out.txt:40:MUD.TXT:5409:17	The tomb of Zaphod the Wizard is here, marked "Do not open until 2am".
+search_out.txt:41:MUD.TXT:5412:19	The grave of the unknown wizard stands before you, beneath which lies
+search_out.txt:42:MUD.TXT:5413:entombed Egor the Wizard.
+search_out.txt:43:MUD.TXT:5415:21	To one side lies the securely water-proofed grave of Cesil the Wizard.
+search_out.txt:44:MUD.TXT:5416:22	The grave of Tremble the Wizard is here, made almost entirely of old
+search_out.txt:45:MUD.TXT:5418:23	Before you stands the grave of Thor the wizard, marked, "Stopped Press".
+search_out.txt:46:MUD.TXT:5420:25	The tombstone of Rudy the wizard stands here, marked, "Gone before his
+search_out.txt:47:MUD.TXT:5422:26	Nick the wizard is buried here. The tombstone has been removed for the
+search_out.txt:48:MUD.TXT:5424:27	Elric the wizard is buried here beneath a tomb reading, "See where
+search_out.txt:49:MUD.TXT:5426:28	A headstone before you reads, "Azax the wizard lies here". The word
+search_out.txt:50:MUD.TXT:5432:31	Six feet below you lie the remains of Happy the Wizard, "deep in
+search_out.txt:51:MUD.TXT:5434:32	Far to the east is the grave of Limhongch the Wizard.
+search_out.txt:52:MUD.TXT:5435:33	A black monolith before you encases the body of Vulnax the Wizard.
+search_out.txt:53:MUD.TXT:5436:34	The grave of Jason the whinging Wizard stands here, insculpt "He
+search_out.txt:54:MUD.TXT:5439:Chester the Wizard.
+search_out.txt:55:MUD.TXT:5441:37	Etched onto the grave of Dan the Wizard here are the words, "I got
+search_out.txt:56:MUD.TXT:5443:38	The double-size grave of Fazz the Wizard here bears the sentence,
+search_out.txt:57:MUD.TXT:5447:40	Here stands the tomb of Vivian the Wizard, "A sufferer of swamp
+search_out.txt:58:MUD.TXT:5449:41	The proud marble headstone of Tixy the Wizard stands before you,
+search_out.txt:59:MUD.TXT:8228:get to be a wizard or witch, of course! In the meantime, however, the
+search_out.txt:60:MUD1.BCL:72:(WIZARD of LH from player.names!i)=1->(bit bitand present -> "appeared with a crash of t
+search_out.txt:61:MUD1.BCL:132:if WIZARD of profile writes(tty,"----")
+search_out.txt:62:MUD1.BCL:282:unless WIZARD of profile error()
+search_out.txt:63:MUD2.BCL:169:if WIZARD of profile ne 0 return
+search_out.txt:64:MUD2.BCL:192:test WIZARD of profile Describe(newrm,true) or
+search_out.txt:65:MUD2.BCL:227:if numbargs()\=2/\((max.obj()<OBJ.CARRIED of profile)\/(max.wt()<CARRY.COUNT of profile
+search_out.txt:66:MUD2.BCL:229:if (A.SMALL bitand ATTRIB of newrm)/\(wizard of profile)=0 then unless newrm=room
+search_out.txt:67:MUD2.BCL:233:if (bit bitand who.cpy) /\(WIZARD of LH from player.names!I)=0 then
+search_out.txt:68:MUD3.BCL:46:if SCORE of prof ge sm\/WIZARD of prof=1 resultis true
+search_out.txt:69:MUD3.BCL:57:unless asking if (WIZARD of profile)=1 return
+search_out.txt:70:MUD3.BCL:171:if WIZARD of profile=1/\instrmnt
+search_out.txt:71:MUD3.BCL:207:unless WIZARD of profile resultis true
+search_out.txt:72:MUD3.BCL:212:if WIZARD of profile resultis true
+search_out.txt:73:MUD3.BCL:225:if WIZARD of nd resultis true
+search_out.txt:74:MUD3.BCL:272:(WIZARD of profile=1\/flipping -> false, A.HIDE bitand (ATTRIB of pnum))
+search_out.txt:75:MUD3.BCL:307:test us(me)\/(WIZARD of profile ne 0/\realwiz(me)) then STAMINA of profile_STAMINAMAX o
+search_out.txt:76:MUD4.BCL:125:if l=max.level unless WIZARD of profile
+search_out.txt:77:MUD4.BCL:138:if (l=max.level-1/\(WIZARD of pr ne 0\/SCORE of pr ge sc1))\/(sc1 le SCORE of pr ls sc2
+search_out.txt:78:MUD4.BCL:152:if ~wizonly \/ WIZARD of p ne 0
+search_out.txt:79:MUD5.BCL:49:test RELAXED/\WIZARD of profile=1/\(spectacular=0\/(spectacular ne 0/\maint)) then get.a
+search_out.txt:80:MUD5.BCL:50:test spectacular/\(WIZARD of profile=0) then Error("Not during a spectacular!") or
+search_out.txt:81:MUD5.BCL:114:test RELAXED/\WIZARD of profile=1/\(spectacular=0\/(spectacular ne 0/\maint)) then drop
+search_out.txt:82:MUD5.BCL:151:unless WIZARD of profile Error()
+search_out.txt:83:MUD5.BCL:184:for i=0 to 35 if player.names!i/\WIZARD of LH from player.names!i ne 0 wiz bitor_1<<i
+search_out.txt:84:MUD5.BCL:187:send(player.no, 0, WIZARD of profile->K.ISAHM,
+search_out.txt:85:MUD5.BCL:188:DEXTERITY of profile gr 60->K.ISAHM, K.ISAMM, WIZARD of profile->10000, random((STRENGT
+search_out.txt:86:MUD5.BCL:189:or send(player.no, 0,WIZARD of profile\/random(100) le 40 -> K.ISAM,
+search_out.txt:87:MUD5.BCL:205:=0, 0, WIZARD of profile=1/\find.room(objname), (rm1->LH of rm1, room), TRAVEL of rm
+search_out.txt:88:MUD5.BCL:232:unless WIZARD of profile if ~(visible(rm))\/((A.DEATH bitor A.NOLOOK) bitand ATTRIB of 
+search_out.txt:89:MUD5.BCL:234:if WIZARD of profile out(":6*T", !rm)
+search_out.txt:90:MUD5.BCL:267:unless WIZARD of profile if savescr=SCORE of profile
+search_out.txt:91:MUD5.BCL:274:if WIZARD of profile=1/\PTYPE of objct=S.PLAYER
+search_out.txt:92:MUD5.BCL:292:test (WIZARD of profile=1)\/random(player.level()+2) then move(DREC of objct) or
+search_out.txt:93:MUD5.BCL:298:if WIZARD of profile
+search_out.txt:94:MUD5.BCL:310:$(	let rm,old=WIZARD of profile=1/\find.room(objname),logstr
+search_out.txt:95:MUD5.BCL:331:unless WIZARD of profile error()
+search_out.txt:96:MUD5.BCL:346:if WIZARD of profile=1/\there out("there*T:F*C*L",there)
+search_out.txt:97:MUD5.BCL:359:test WIZARD of profile then
+search_out.txt:98:MUD5.BCL:375:if WIZARD of profile pl_max.level
+search_out.txt:99:MUD5.BCL:478:$(	unless WIZARD of profile=1/\maint error()
+search_out.txt:100:MUD5.BCL:517:for i=0 to 35 if player.names!i unless WIZARD of LH from player.names!i count+_1
+search_out.txt:101:MUD5.BCL:544:send(i,nd,((who.copy bitand (1<<i))\/(WIZARD of profile))->K.BELW,K.DIST,nd!2)
+search_out.txt:102:MUD5.BCL:593:if seq(objname, "lock") test WIZARD of profile/\(RELAXED\/us(me)) then
+search_out.txt:103:MUD5.BCL:598:if seq(objname, "unlock") test WIZARD of profile/\(RELAXED\/us(me)) then
+search_out.txt:104:MUD5.BCL:612:test WIZARD of profile then
+search_out.txt:105:MUD5.BCL:613:$(	WIZARD of profile_false
+search_out.txt:106:MUD5.BCL:616:$(	WIZARD of profile_true
+search_out.txt:107:MUD5.BCL:721:$(	let ok=maint/\WIZARD of profile ne 0
+search_out.txt:108:MUD5.BCL:739:unless WIZARD of profile Error()
+search_out.txt:109:MUD5.BCL:807:WIZARD of profile_true
+search_out.txt:110:MUD5.BCL:815:unless WIZARD of profile reset()<>error()
+search_out.txt:111:MUD5.BCL:838:unless WIZARD of profile error()
+search_out.txt:112:MUD5.BCL:855:case SF.RESURRECT:
+search_out.txt:113:MUD5.BCL:856:unless WIZARD of profile reset()<>error()
+search_out.txt:114:MUD5.BCL:877:Out(":P now :s.*C*L", objname, \val->"resurrected","deceased")
+search_out.txt:115:MUD5.BCL:885:$(	unless WIZARD of profile error()
+search_out.txt:116:MUD5.BCL:902:test spectacular/\WIZARD of profile=0 then Error("Not during a spectacular!") or
+search_out.txt:117:MUD5.BCL:917:unless WIZARD of profile if A.SMALL bitand ATTRIB of room
+search_out.txt:118:MUD5.BCL:931:case SF.GO://Go (check if wizard otherwise ignore)
+search_out.txt:119:MUD5.BCL:932:if WIZARD of profile then
+search_out.txt:120:MUD5.BCL:967:unless WIZARD of profile
+search_out.txt:121:MUD5.BCL:1001:if WIZARD of profile then
+search_out.txt:122:MUD5.BCL:1016:unless WIZARD of profile=1 | maint error("You can't try that unless you're a :s or :s!
+search_out.txt:123:MUD5.BCL:1079:if WIZARD of profile out(":6 - ", !rm)
+search_out.txt:124:MUD5.BCL:1105:unless (ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of profile)=0
+search_out.txt:125:MUD5.BCL:1108:if cn(l,ob) test WIZARD of profile then
+search_out.txt:126:MUD5.BCL:1157:$(	unless WIZARD of profile error("You have to be a :s or :s to do that, :s.", male!MA
+search_out.txt:127:MUD5.BCL:1180:$(	unless WIZARD of profile error("Wait until you're a :s...", (SEX of profile->female
+search_out.txt:128:MUD5.BCL:1222:unless WIZARD of profile error("You have to be a :s or :s to do that, :s.", male!MAX.L
+search_out.txt:129:MUD5.BCL:1224:unless WIZARD of profile Error()
+search_out.txt:130:MUD5.BCL:1238:if WIZARD of nm out(" in wiz mode")
+search_out.txt:131:MUD5.BCL:1251:unless WIZARD of profile error()
+search_out.txt:132:MUD5.BCL:1292:unless WIZARD of profile out("You've got to be a :s or :s to be able to do that!*C*L",
+search_out.txt:133:MUD5.BCL:1371:unless function=F.SSENDEMON\/(WIZARD of profile=1)\/((1<<pnum) bitand who.copy) loop
+search_out.txt:134:MUD5.BCL:1391:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then resultis false
+search_out.txt:135:MUD5.BCL:1392:while nd do test obj=nd /\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0)) then resulti
+search_out.txt:136:MUD5.BCL:1447:if WIZARD of profile endcase
+search_out.txt:137:MUD5.BCL:1450:unless WIZARD of profile endcase
+search_out.txt:138:MUD5.BCL:1496:case F.IFLEVEL:	if player.level()<sm-1 /\(WIZARD of profile)=0 loop
+search_out.txt:139:MUD5.BCL:1534:test Random(100) ls (1+player.level())*sm\/(WIZARD of profile=1) then
+search_out.txt:140:MUD5.BCL:1538:test random(100) ls (1+player.level(LH from player.names!(P1 of objct)))*sm/\(WIZARD o
+search_out.txt:141:MUD5.BCL:1545:test Random(100) ls (1+player.level())*sm\/(WIZARD of profile)=1 then
+search_out.txt:142:MUD5.BCL:1549:test random(100) ls (1+player.level(LH from player.names!(P1 of objct)))*sm/\(WIZARD o
+search_out.txt:143:MUD5.BCL:1558:case F.UNLESSLEVEL:	if player.level()>=sm-1 \/(WIZARD of profile)=1 loop
+search_out.txt:144:MUD5.BCL:1568:if ifr/\(WIZARD of profile)=0 verb_0<>objct_fake.node("that")
+search_out.txt:145:MUD5.BCL:1769:unless (ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of profile)=0
+search_out.txt:146:MUD5.BCL:1851:unless RELAXED\/us(me) if WIZARD of profile error("I'm sure you don't mean it...")
+search_out.txt:147:MUD5.BCL:1929:unless WIZARD of profile stamina of profile_-1
+search_out.txt:148:MUD5.BCL:1945:unless WIZARD of profile ne 0 test spectacular then
+search_out.txt:149:MUD5.BCL:1972:unless WIZARD of profile STAMINA of profile-_sm
+search_out.txt:150:MUD5.BCL:2025:unless rm=room\/((ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of profile=
+search_out.txt:151:MUD6.BCL:25:if WIZARD of profile out("(:6) ",!rm)
+search_out.txt:152:MUD6.BCL:26:test (A.DEATH bitand ATTRIB of rm)/\(WIZARD of profile)=0 then outs("Land of the Dead.*C
+search_out.txt:153:MUD6.BCL:31:if WIZARD of profile out("(:6) ",!rm)<>!lvfound_true
+search_out.txt:154:MUD6.BCL:38:test CONTENTS of nd ne 0 /\ (WIZARD of profile ne 0 \/ DESTROYED of nd ge 0) then
+search_out.txt:155:MUD6.BCL:42:if cn(l,n)/\(WIZARD of profile=1\/DESTROYED of n ge 0) num+_1
+search_out.txt:156:MUD6.BCL:74:unless insides /\ (DISGUISED of insides=0 \/ WIZARD of profile=1) resultis false
+search_out.txt:157:MUD6.BCL:83:test ((TRANSPARENT of insides ne 0 \/ looking)/\P4 of obj=0) \/ WIZARD of profile=1 then
+search_out.txt:158:MUD6.BCL:93:unless WIZARD of profile=1 \/ here(obj) then
+search_out.txt:159:MUD6.BCL:96:until LH of nd=obj /\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0)) do
+search_out.txt:160:MUD6.BCL:101:if FIXED of nd\/NOGET of nd test WIZARD of profile=1/\(RELAXED\/us(me))/\(spectacular=0
+search_out.txt:161:MUD6.BCL:110:if WEIGHT of nd+CARRY.COUNT of profile>max.wt()/\(WIZARD of profile)=0 then
+search_out.txt:162:MUD6.BCL:129:unless WIZARD of profile=1\/here.class(cl) error("I don't see any :s", objname)
+search_out.txt:163:MUD6.BCL:134:(WIZARD of profile=1/\(RELAXED\/us(me))/\(spectacular=0\/maint))\/valof
+search_out.txt:164:MUD6.BCL:139:if WEIGHT of nd+carry.count of profile>max.wt()/\(WIZARD of profile)=0 then
+search_out.txt:165:MUD6.BCL:173:and full.up()=(max.obj()<=OBJ.CARRIED of profile)/\(WIZARD of profile)=0
+search_out.txt:166:MUD6.BCL:278:rm_WIZARD of profile=0/\(A.DEATH bitand ATTRIB of room)->oldroom,place(room)
+search_out.txt:167:MUD6.BCL:279:rm_WIZARD of profile=0/\(A.DMOVE bitand ATTRIB of rm)-> DMOVE of rm, rm
+search_out.txt:168:MUD6.BCL:334:if (WTUSED of insides)+(WEIGHT of nd)>MAXWT of insides /\(WIZARD of profile)=0
+search_out.txt:169:MUD6.BCL:370:$(	if (WEIGHT of nd)+(CARRY.COUNT of profile)>max.wt()/\(WIZARD of profile)=0
+search_out.txt:170:MUD6.BCL:423:if A.HIDEAWAY bitand ATTRIB of rm unless WIZARD of profile=1/\numbargs() ne 3
+search_out.txt:171:MUD6.BCL:433:if WIZARD of profile=1/\(brief ne -1\/long)
+search_out.txt:172:MUD6.BCL:443:if (A.DEATH bitand ATTRIB of room)/\(WIZARD of profile)=0 then
+search_out.txt:173:MUD6.BCL:458:if (A.HIDE bitand ATTRIB of room)/\(WIZARD of profile)=0 then return
+search_out.txt:174:MUD6.BCL:459:unless (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then
+search_out.txt:175:MUD6.BCL:526:if WIZARD of profile=1/\(brief ne -1\/long)
+search_out.txt:176:MUD6.BCL:530:if WIZARD of profile=1
+search_out.txt:177:MUD6.BCL:532:unless (DESTROYED of obj ls 0 /\(WIZARD of profile)=0)\/sprop of obj=0
+search_out.txt:178:MUD6.BCL:610:$(	if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then resultis false
+search_out.txt:179:MUD6.BCL:613:while nd do test obj=LH of nd /\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0)) then
+search_out.txt:180:MUD6.BCL:628:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then resultis false
+search_out.txt:181:MUD6.BCL:667:$) ge 0 ))/\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0))
+search_out.txt:182:MUD7.BCL:60:$(	unless WIZARD of profile resultis true
+search_out.txt:183:MUD7.BCL:161:unless (RELAXED\/us(me)\/us(objname))/\(flipping\/WIZARD of profile=1) error()
+search_out.txt:184:MUD7.BCL:257:if us(objname) WIZARD of profile_true
+search_out.txt:185:MUD7.BCL:270:$(	unless (RELAXED\/us(me))/\(WIZARD of profile=1\/flipping) error()
+search_out.txt:186:MUD7.BCL:290:unless (RELAXED\/us(me))/\WIZARD of profile error("*C*LNo can do, old :s.", SEX of prof
+search_out.txt:187:MUD7.BCL:337:for i=0 to 35 if wizard of LH from player.names!i dest bitor_1<<i
+search_out.txt:188:MUD8.BCL:32:if WIZARD of profile
+search_out.txt:189:MUD8.BCL:33:unless ~WIZVWIZ/\WIZARD of pp ne 0
+search_out.txt:190:MUD8.BCL:39:unless WIZARD of profile unless bit bitand who.copy error(":p isn't here!",objname)
+search_out.txt:191:MUD8.BCL:59:unless WIZARD of profile unless (1<<snd) bitand who.copy error(":p isn't here to :s.", o
+search_out.txt:192:MUD8.BCL:65:unless WIZARD of profile if WIZARD of pp
+search_out.txt:193:MUD8.BCL:75:WIZARD of LH from player.names!i then
+search_out.txt:194:MUD8.BCL:84:unless RELAXED\/us(me)\/(WIZARD of pp ne 0) error("Not to mortals!")
+search_out.txt:195:MUD8.BCL:91:unless WIZARD of profile unless bit bitand who.copy then
+search_out.txt:196:MUD8.BCL:114:unless WIZARD of profile unless bit bitand who.copy then
+search_out.txt:197:MUD8.BCL:138:unless WIZARD of profile unless who.copy bitand (1<<snd) error(":p isn't here to :s!",o
+search_out.txt:198:MUD8.BCL:156:unless WIZARD of profile unless who.copy bitand (1<<snd) do
+search_out.txt:199:MUD8.BCL:175:unless us(me)\/snd=player.no if WIZARD of pp
+search_out.txt:200:MUD8.BCL:186:unless WIZARD of profile unless (1<<snd)bitand who.copy error(":P isn't here!", objname
+search_out.txt:201:MUD8.BCL:188:if WIZARD of pp
+search_out.txt:202:MUD8.BCL:206:WIZVWIZ/\WIZARD of profile ne 0 -> 0, LH from inf
+search_out.txt:203:MUD8.BCL:221:send(snd,block,K.IACPT,WIZVWIZ/\WIZARD of profile ne 0->10000000,kipped->-1,DEXTERITY o
+search_out.txt:204:MUD8.BCL:229:if WIZARD of p ne 0\/(who.copy bitand (1<<i))
+search_out.txt:205:MUD8.BCL:242:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(100)+1+(CARRY.COUNT of profile)/F.ENCM
+search_out.txt:206:MUD8.BCL:244:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->1000000,random(STRENGTH of profile/F.DMGE1)+
+search_out.txt:207:MUD8.BCL:260:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(100)+1+(CARRY.COUNT of profile)/F.ENCM
+search_out.txt:208:MUD8.BCL:262:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->10000000,random(STRENGTH of profile/F.DMGE2)
+search_out.txt:209:MUD8.BCL:331:$(	damage_WIZARD of profile->0,random((WEIGHT of monster)/1000/F.DMGE2)+1
+search_out.txt:210:MUD8.BCL:383:test WIZARD of profile then
+search_out.txt:211:MUD8.BCL:425:test WIZARD of profile=1\/FUNC of block ne K.DIST then out("*C*L:p shouts",pn)
+search_out.txt:212:MUD8.BCL:444:damage_WIZARD of profile->102,ASLEEP of profile->-1,random(100)+1
+search_out.txt:213:MUD8.BCL:476:full.up())/\(WIZARD of profile)=0 then
+search_out.txt:214:MUD8.BCL:504:full.up())/\(WIZARD of profile)=0 then
+search_out.txt:215:MUD8.BCL:523:if WIZARD of profile unless inv out("*C*L:p has started following you.*C*L",pn)
+search_out.txt:216:MUD8.BCL:536:if WIZARD of profile unless inv out("*C*L:p has stopped following you.*C*L", pn)
+search_out.txt:217:MUD8.BCL:567:unless us(pn) if (WIZARD of profile ne 0) \/snooping ne -1 then
+search_out.txt:218:MUD8.BCL:578:unless us(pn) if WIZARD of profile out("*C*L:p has stopped snooping on you.*C*L",pn)
+search_out.txt:219:MUD8.BCL:613:WIZARD of profile_false
+search_out.txt:220:MUD8.BCL:636:unless (ASLEEP of profile ne 0)\/(FUNC of block=K.SHBD/\(A.HIDEAWAY bitand ATTRIB of ro
+search_out.txt:221:MUD8.BCL:687:$(	let dropsy, sumnd=WIZARD of pp, LH from INF
+search_out.txt:222:MUD8.BCL:688:if sumnd if WIZARD of profile=1 \/ valof
+search_out.txt:223:MUD8.BCL:719:if WIZARD of profile
+search_out.txt:224:MUD8.BCL:788:WIZARD of theirp->""," not",SEX of theirp->female!max.level,male!max.level,
+search_out.txt:225:MUD8.BCL:789:WIZARD of theirp->"...",".")
+search_out.txt:226:MUD8.BCL:811:if WIZARD of profile
+search_out.txt:227:MUD8.BCL:813:WIZARD of profile_false
+search_out.txt:228:MUD8.BCL:831:$(	if WIZARD of profile Out(" in :6",!(CROOM of pp))
+search_out.txt:229:MUDLIB.BCL:940:unless WIZARD of profile cccnt_CCTRIP*10
+search_out.txt:230:MUDLIB.BCL:1135:unless ISWIZ of profile ne 0/\ps.word WIZARD of profile_false
+search_out.txt:231:MUDLIB.BCL:1136:if us(name) WIZARD of profile_true<>maint_true
+search_out.txt:232:MUDLIB.BCL:1163:if us(name) WIZARD of profile_true
+search_out.txt:233:MUDLIB.BCL:1386:unless WIZARD of profile WIZD of place bitand_NOTINVIS
+search_out.txt:234:MUDLIB.BCL:1436:outz($az"eg hero/heroine, witch/wizard")
+search_out.txt:235:MUDLIB.BCL:1485:test WIZARD of prof then write(s, " the :s:s",us(nm)->"arch-","", (SEX of prof->fema
+search_out.txt:236:search_out.txt:1:DBASE.BCL:205:".resurrect",	S.SFUNC,	SF.RESURRECT,	0,
+search_out.txt:237:search_out.txt:2:MUD.TXT:874:Hello wizard, guess what mortals can't see without help? Try ne or w.
+search_out.txt:238:search_out.txt:3:MUD.TXT:917:Hi wizards! Try n or sw.
+search_out.txt:239:search_out.txt:4:MUD.TXT:920:Hi wizards! Try e or ne.
+search_out.txt:240:search_out.txt:5:MUD.TXT:923:Hi wizards! Try nw or sw.
+search_out.txt:241:search_out.txt:6:MUD.TXT:926:Hi wizards! Try nw or s.
+search_out.txt:242:search_out.txt:7:MUD.TXT:929:Hi wizards! Try n or s.
+search_out.txt:243:search_out.txt:8:MUD.TXT:4075:go	.go	none	none	iflevel	null	10	0	;let berserk wizards, too
+search_out.txt:244:search_out.txt:9:MUD.TXT:4079:back	.back	none	none	iflevel	null	10	0	;let berserk wizards, too
+search_out.txt:245:search_out.txt:10:MUD.TXT:4095:witches	wizards
+search_out.txt:246:search_out.txt:11:MUD.TXT:5322:3	On a huge grave is the name, "Evil the Wizard".
+search_out.txt:247:search_out.txt:12:MUD.TXT:5327:the Wizard".
+search_out.txt:248:search_out.txt:13:MUD.TXT:5331:11	On a grave close by reads, "Gwyn the Wizard lies only a few feet f
+search_out.txt:249:search_out.txt:14:MUD.TXT:5333:12	Before you looms an obsidian vault, insculpt "Shadow the Wizard".
+search_out.txt:250:search_out.txt:15:MUD.TXT:5337:15	Two tombstones to your left read, "Helmut the Wizard".
+search_out.txt:251:search_out.txt:16:MUD.TXT:5338:16	A tombstone here bears the epitaph, "Fenwyn (Wizard".
+search_out.txt:252:search_out.txt:17:MUD.TXT:5339:17	The tomb of Jock the Wizard rises before you, inscribed, "But for 
+search_out.txt:253:search_out.txt:18:MUD.TXT:5341:18	A small rock to one side marks the grave of Foxy the Wizard.
+search_out.txt:254:search_out.txt:19:MUD.TXT:5343:where Egor the Wizard has danced.
+search_out.txt:255:search_out.txt:20:MUD.TXT:5344:20	The headstone of Gorpli the Wizard stands here, with nothing signi
+search_out.txt:256:search_out.txt:21:MUD.TXT:5346:21	Hacked into a tombstone before you is the epitaph, "Madmax the Wiz
+search_out.txt:257:search_out.txt:22:MUD.TXT:5347:22	The tomb before you bears the name, "Roddy the Wizard", which has
+search_out.txt:258:search_out.txt:23:MUD.TXT:5351:24	Here stands the grave of Clive the Wizard, QED.
+search_out.txt:259:search_out.txt:24:MUD.TXT:5356:27	Alan the wizard is virtually buried here.
+search_out.txt:260:search_out.txt:25:MUD.TXT:5357:28	Christian the wizard is buried here, beneath a tombstone reading, 
+search_out.txt:261:search_out.txt:26:MUD.TXT:5361:30	Inscribed on a headstone to your left are the words, "Saavik, a wi
+search_out.txt:262:search_out.txt:27:MUD.TXT:5363:31	Before you stands the grave of Balastor the wizard, made without a
+search_out.txt:263:search_out.txt:28:MUD.TXT:5364:help whatsoever from Egor the Wizard...
+search_out.txt:264:search_out.txt:29:MUD.TXT:5369:the Wizard, in his favourite position (horizontal)".
+search_out.txt:265:search_out.txt:30:MUD.TXT:5370:34	Gripper the wizard's aerial-bearing tombstone nearby reads "heavy
+search_out.txt:266:search_out.txt:31:MUD.TXT:5372:35	The tomb of Mugsanon the wizard stands before you, inscribed
+search_out.txt:267:search_out.txt:32:MUD.TXT:5382:words, "Jon the wizard".
+search_out.txt:268:search_out.txt:33:MUD.TXT:5383:41	This is the tombstone of Achetus the wizard, but his bones are los
+search_out.txt:269:search_out.txt:34:MUD.TXT:5398:8	The grave of Nic the Wizard is eventually here.
+search_out.txt:270:search_out.txt:35:MUD.TXT:5399:9	The grave of Andy the Wizard is somehow here.
+search_out.txt:271:search_out.txt:36:MUD.TXT:5400:10	The grave of Eric the Wizard was here until you started playing.
+search_out.txt:272:search_out.txt:37:MUD.TXT:5401:11	The tomb of Ridicule the Wizard has been gradually built up here.
+search_out.txt:273:search_out.txt:38:MUD.TXT:5404:13	The grave of Zardoz the Wizard is here - "Forgotten but not gone".
+search_out.txt:274:search_out.txt:39:MUD.TXT:5407:15	You smell the grave of Conn the Wizard some way to one side.
+search_out.txt:275:search_out.txt:40:MUD.TXT:5409:17	The tomb of Zaphod the Wizard is here, marked "Do not open until 2
+search_out.txt:276:search_out.txt:41:MUD.TXT:5412:19	The grave of the unknown wizard stands before you, beneath which l
+search_out.txt:277:search_out.txt:42:MUD.TXT:5413:entombed Egor the Wizard.
+search_out.txt:278:search_out.txt:43:MUD.TXT:5415:21	To one side lies the securely water-proofed grave of Cesil the Wiz
+search_out.txt:279:search_out.txt:44:MUD.TXT:5416:22	The grave of Tremble the Wizard is here, made almost entirely of o
+search_out.txt:280:search_out.txt:45:MUD.TXT:5418:23	Before you stands the grave of Thor the wizard, marked, "Stopped P
+search_out.txt:281:search_out.txt:46:MUD.TXT:5420:25	The tombstone of Rudy the wizard stands here, marked, "Gone before
+search_out.txt:282:search_out.txt:47:MUD.TXT:5422:26	Nick the wizard is buried here. The tombstone has been removed for
+search_out.txt:283:search_out.txt:48:MUD.TXT:5424:27	Elric the wizard is buried here beneath a tomb reading, "See where
+search_out.txt:284:search_out.txt:49:MUD.TXT:5426:28	A headstone before you reads, "Azax the wizard lies here". The wor
+search_out.txt:285:search_out.txt:50:MUD.TXT:5432:31	Six feet below you lie the remains of Happy the Wizard, "deep in
+search_out.txt:286:search_out.txt:51:MUD.TXT:5434:32	Far to the east is the grave of Limhongch the Wizard.
+search_out.txt:287:search_out.txt:52:MUD.TXT:5435:33	A black monolith before you encases the body of Vulnax the Wizard.
+search_out.txt:288:search_out.txt:53:MUD.TXT:5436:34	The grave of Jason the whinging Wizard stands here, insculpt "He
+search_out.txt:289:search_out.txt:54:MUD.TXT:5439:Chester the Wizard.
+search_out.txt:290:search_out.txt:55:MUD.TXT:5441:37	Etched onto the grave of Dan the Wizard here are the words, "I got
+search_out.txt:291:search_out.txt:56:MUD.TXT:5443:38	The double-size grave of Fazz the Wizard here bears the sentence,
+search_out.txt:292:search_out.txt:57:MUD.TXT:5447:40	Here stands the tomb of Vivian the Wizard, "A sufferer of swamp
+search_out.txt:293:search_out.txt:58:MUD.TXT:5449:41	The proud marble headstone of Tixy the Wizard stands before you,
+search_out.txt:294:search_out.txt:59:MUD.TXT:8228:get to be a wizard or witch, of course! In the meantime, however, the
+search_out.txt:295:search_out.txt:60:MUD1.BCL:72:(WIZARD of LH from player.names!i)=1->(bit bitand present -> "appeared
+search_out.txt:296:search_out.txt:61:MUD1.BCL:132:if WIZARD of profile writes(tty,"----")
+search_out.txt:297:search_out.txt:62:MUD1.BCL:282:unless WIZARD of profile error()
+search_out.txt:298:search_out.txt:63:MUD2.BCL:169:if WIZARD of profile ne 0 return
+search_out.txt:299:search_out.txt:64:MUD2.BCL:192:test WIZARD of profile Describe(newrm,true) or
+search_out.txt:301:search_out.txt:66:MUD2.BCL:229:if (A.SMALL bitand ATTRIB of newrm)/\(wizard of profile)=0 then unles
+search_out.txt:302:search_out.txt:67:MUD2.BCL:233:if (bit bitand who.cpy) /\(WIZARD of LH from player.names!I)=0 then
+search_out.txt:303:search_out.txt:68:MUD3.BCL:46:if SCORE of prof ge sm\/WIZARD of prof=1 resultis true
+search_out.txt:304:search_out.txt:69:MUD3.BCL:57:unless asking if (WIZARD of profile)=1 return
+search_out.txt:305:search_out.txt:70:MUD3.BCL:171:if WIZARD of profile=1/\instrmnt
+search_out.txt:306:search_out.txt:71:MUD3.BCL:207:unless WIZARD of profile resultis true
+search_out.txt:307:search_out.txt:72:MUD3.BCL:212:if WIZARD of profile resultis true
+search_out.txt:308:search_out.txt:73:MUD3.BCL:225:if WIZARD of nd resultis true
+search_out.txt:309:search_out.txt:74:MUD3.BCL:272:(WIZARD of profile=1\/flipping -> false, A.HIDE bitand (ATTRIB of pnu
+search_out.txt:310:search_out.txt:75:MUD3.BCL:307:test us(me)\/(WIZARD of profile ne 0/\realwiz(me)) then STAMINA of pr
+search_out.txt:311:search_out.txt:76:MUD4.BCL:125:if l=max.level unless WIZARD of profile
+search_out.txt:312:search_out.txt:77:MUD4.BCL:138:if (l=max.level-1/\(WIZARD of pr ne 0\/SCORE of pr ge sc1))\/(sc1 le 
+search_out.txt:313:search_out.txt:78:MUD4.BCL:152:if ~wizonly \/ WIZARD of p ne 0
+search_out.txt:314:search_out.txt:79:MUD5.BCL:49:test RELAXED/\WIZARD of profile=1/\(spectacular=0\/(spectacular ne 0/\
+search_out.txt:315:search_out.txt:80:MUD5.BCL:50:test spectacular/\(WIZARD of profile=0) then Error("Not during a spect
+search_out.txt:316:search_out.txt:81:MUD5.BCL:114:test RELAXED/\WIZARD of profile=1/\(spectacular=0\/(spectacular ne 0/
+search_out.txt:317:search_out.txt:82:MUD5.BCL:151:unless WIZARD of profile Error()
+search_out.txt:318:search_out.txt:83:MUD5.BCL:184:for i=0 to 35 if player.names!i/\WIZARD of LH from player.names!i ne 
+search_out.txt:319:search_out.txt:84:MUD5.BCL:187:send(player.no, 0, WIZARD of profile->K.ISAHM,
+search_out.txt:320:search_out.txt:85:MUD5.BCL:188:DEXTERITY of profile gr 60->K.ISAHM, K.ISAMM, WIZARD of profile->1000
+search_out.txt:321:search_out.txt:86:MUD5.BCL:189:or send(player.no, 0,WIZARD of profile\/random(100) le 40 -> K.ISAM,
+search_out.txt:322:search_out.txt:87:MUD5.BCL:205:=0, 0, WIZARD of profile=1/\find.room(objname), (rm1->LH of rm1, room
+search_out.txt:323:search_out.txt:88:MUD5.BCL:232:unless WIZARD of profile if ~(visible(rm))\/((A.DEATH bitor A.NOLOOK)
+search_out.txt:324:search_out.txt:89:MUD5.BCL:234:if WIZARD of profile out(":6*T", !rm)
+search_out.txt:325:search_out.txt:90:MUD5.BCL:267:unless WIZARD of profile if savescr=SCORE of profile
+search_out.txt:326:search_out.txt:91:MUD5.BCL:274:if WIZARD of profile=1/\PTYPE of objct=S.PLAYER
+search_out.txt:327:search_out.txt:92:MUD5.BCL:292:test (WIZARD of profile=1)\/random(player.level()+2) then move(DREC o
+search_out.txt:328:search_out.txt:93:MUD5.BCL:298:if WIZARD of profile
+search_out.txt:329:search_out.txt:94:MUD5.BCL:310:$(	let rm,old=WIZARD of profile=1/\find.room(objname),logstr
+search_out.txt:330:search_out.txt:95:MUD5.BCL:331:unless WIZARD of profile error()
+search_out.txt:331:search_out.txt:96:MUD5.BCL:346:if WIZARD of profile=1/\there out("there*T:F*C*L",there)
+search_out.txt:332:search_out.txt:97:MUD5.BCL:359:test WIZARD of profile then
+search_out.txt:333:search_out.txt:98:MUD5.BCL:375:if WIZARD of profile pl_max.level
+search_out.txt:334:search_out.txt:99:MUD5.BCL:478:$(	unless WIZARD of profile=1/\maint error()
+search_out.txt:335:search_out.txt:100:MUD5.BCL:517:for i=0 to 35 if player.names!i unless WIZARD of LH from player.name
+search_out.txt:336:search_out.txt:101:MUD5.BCL:544:send(i,nd,((who.copy bitand (1<<i))\/(WIZARD of profile))->K.BELW,K.
+search_out.txt:337:search_out.txt:102:MUD5.BCL:593:if seq(objname, "lock") test WIZARD of profile/\(RELAXED\/us(me)) th
+search_out.txt:338:search_out.txt:103:MUD5.BCL:598:if seq(objname, "unlock") test WIZARD of profile/\(RELAXED\/us(me)) 
+search_out.txt:339:search_out.txt:104:MUD5.BCL:612:test WIZARD of profile then
+search_out.txt:340:search_out.txt:105:MUD5.BCL:613:$(	WIZARD of profile_false
+search_out.txt:341:search_out.txt:106:MUD5.BCL:616:$(	WIZARD of profile_true
+search_out.txt:342:search_out.txt:107:MUD5.BCL:721:$(	let ok=maint/\WIZARD of profile ne 0
+search_out.txt:343:search_out.txt:108:MUD5.BCL:739:unless WIZARD of profile Error()
+search_out.txt:344:search_out.txt:109:MUD5.BCL:807:WIZARD of profile_true
+search_out.txt:345:search_out.txt:110:MUD5.BCL:815:unless WIZARD of profile reset()<>error()
+search_out.txt:346:search_out.txt:111:MUD5.BCL:838:unless WIZARD of profile error()
+search_out.txt:347:search_out.txt:112:MUD5.BCL:855:case SF.RESURRECT:
+search_out.txt:348:search_out.txt:113:MUD5.BCL:856:unless WIZARD of profile reset()<>error()
+search_out.txt:349:search_out.txt:114:MUD5.BCL:877:Out(":P now :s.*C*L", objname, \val->"resurrected","deceased")
+search_out.txt:350:search_out.txt:115:MUD5.BCL:885:$(	unless WIZARD of profile error()
+search_out.txt:351:search_out.txt:116:MUD5.BCL:902:test spectacular/\WIZARD of profile=0 then Error("Not during a spect
+search_out.txt:352:search_out.txt:117:MUD5.BCL:917:unless WIZARD of profile if A.SMALL bitand ATTRIB of room
+search_out.txt:353:search_out.txt:118:MUD5.BCL:931:case SF.GO://Go (check if wizard otherwise ignore)
+search_out.txt:354:search_out.txt:119:MUD5.BCL:932:if WIZARD of profile then
+search_out.txt:355:search_out.txt:120:MUD5.BCL:967:unless WIZARD of profile
+search_out.txt:356:search_out.txt:121:MUD5.BCL:1001:if WIZARD of profile then
+search_out.txt:357:search_out.txt:122:MUD5.BCL:1016:unless WIZARD of profile=1 | maint error("You can't try that unless
+search_out.txt:358:search_out.txt:123:MUD5.BCL:1079:if WIZARD of profile out(":6 - ", !rm)
+search_out.txt:359:search_out.txt:124:MUD5.BCL:1105:unless (ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of
+search_out.txt:360:search_out.txt:125:MUD5.BCL:1108:if cn(l,ob) test WIZARD of profile then
+search_out.txt:361:search_out.txt:126:MUD5.BCL:1157:$(	unless WIZARD of profile error("You have to be a :s or :s to do 
+search_out.txt:362:search_out.txt:127:MUD5.BCL:1180:$(	unless WIZARD of profile error("Wait until you're a :s...", (SEX
+search_out.txt:363:search_out.txt:128:MUD5.BCL:1222:unless WIZARD of profile error("You have to be a :s or :s to do tha
+search_out.txt:364:search_out.txt:129:MUD5.BCL:1224:unless WIZARD of profile Error()
+search_out.txt:365:search_out.txt:130:MUD5.BCL:1238:if WIZARD of nm out(" in wiz mode")
+search_out.txt:366:search_out.txt:131:MUD5.BCL:1251:unless WIZARD of profile error()
+search_out.txt:367:search_out.txt:132:MUD5.BCL:1292:unless WIZARD of profile out("You've got to be a :s or :s to be abl
+search_out.txt:368:search_out.txt:133:MUD5.BCL:1371:unless function=F.SSENDEMON\/(WIZARD of profile=1)\/((1<<pnum) bita
+search_out.txt:369:search_out.txt:134:MUD5.BCL:1391:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then r
+search_out.txt:370:search_out.txt:135:MUD5.BCL:1392:while nd do test obj=nd /\(WIZARD of profile=1 \/ (DESTROYED of nd 
+search_out.txt:371:search_out.txt:136:MUD5.BCL:1447:if WIZARD of profile endcase
+search_out.txt:372:search_out.txt:137:MUD5.BCL:1450:unless WIZARD of profile endcase
+search_out.txt:373:search_out.txt:138:MUD5.BCL:1496:case F.IFLEVEL:	if player.level()<sm-1 /\(WIZARD of profile)=0 loop
+search_out.txt:374:search_out.txt:139:MUD5.BCL:1534:test Random(100) ls (1+player.level())*sm\/(WIZARD of profile=1) th
+search_out.txt:375:search_out.txt:140:MUD5.BCL:1538:test random(100) ls (1+player.level(LH from player.names!(P1 of obj
+search_out.txt:376:search_out.txt:141:MUD5.BCL:1545:test Random(100) ls (1+player.level())*sm\/(WIZARD of profile)=1 th
+search_out.txt:377:search_out.txt:142:MUD5.BCL:1549:test random(100) ls (1+player.level(LH from player.names!(P1 of obj
+search_out.txt:378:search_out.txt:143:MUD5.BCL:1558:case F.UNLESSLEVEL:	if player.level()>=sm-1 \/(WIZARD of profile)=1
+search_out.txt:379:search_out.txt:144:MUD5.BCL:1568:if ifr/\(WIZARD of profile)=0 verb_0<>objct_fake.node("that")
+search_out.txt:380:search_out.txt:145:MUD5.BCL:1769:unless (ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\(WIZARD of
+search_out.txt:381:search_out.txt:146:MUD5.BCL:1851:unless RELAXED\/us(me) if WIZARD of profile error("I'm sure you don
+search_out.txt:382:search_out.txt:147:MUD5.BCL:1929:unless WIZARD of profile stamina of profile_-1
+search_out.txt:383:search_out.txt:148:MUD5.BCL:1945:unless WIZARD of profile ne 0 test spectacular then
+search_out.txt:384:search_out.txt:149:MUD5.BCL:1972:unless WIZARD of profile STAMINA of profile-_sm
+search_out.txt:385:search_out.txt:150:MUD5.BCL:2025:unless rm=room\/((ATTRIB of rm bitand (A.DEATH bitor A.HIDEAWAY))/\
+search_out.txt:386:search_out.txt:151:MUD6.BCL:25:if WIZARD of profile out("(:6) ",!rm)
+search_out.txt:387:search_out.txt:152:MUD6.BCL:26:test (A.DEATH bitand ATTRIB of rm)/\(WIZARD of profile)=0 then outs("
+search_out.txt:388:search_out.txt:153:MUD6.BCL:31:if WIZARD of profile out("(:6) ",!rm)<>!lvfound_true
+search_out.txt:389:search_out.txt:154:MUD6.BCL:38:test CONTENTS of nd ne 0 /\ (WIZARD of profile ne 0 \/ DESTROYED of n
+search_out.txt:390:search_out.txt:155:MUD6.BCL:42:if cn(l,n)/\(WIZARD of profile=1\/DESTROYED of n ge 0) num+_1
+search_out.txt:391:search_out.txt:156:MUD6.BCL:74:unless insides /\ (DISGUISED of insides=0 \/ WIZARD of profile=1) res
+search_out.txt:392:search_out.txt:157:MUD6.BCL:83:test ((TRANSPARENT of insides ne 0 \/ looking)/\P4 of obj=0) \/ WIZAR
+search_out.txt:393:search_out.txt:158:MUD6.BCL:93:unless WIZARD of profile=1 \/ here(obj) then
+search_out.txt:394:search_out.txt:159:MUD6.BCL:96:until LH of nd=obj /\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0)) 
+search_out.txt:395:search_out.txt:160:MUD6.BCL:101:if FIXED of nd\/NOGET of nd test WIZARD of profile=1/\(RELAXED\/us(m
+search_out.txt:396:search_out.txt:161:MUD6.BCL:110:if WEIGHT of nd+CARRY.COUNT of profile>max.wt()/\(WIZARD of profile)
+search_out.txt:397:search_out.txt:162:MUD6.BCL:129:unless WIZARD of profile=1\/here.class(cl) error("I don't see any :s
+search_out.txt:398:search_out.txt:163:MUD6.BCL:134:(WIZARD of profile=1/\(RELAXED\/us(me))/\(spectacular=0\/maint))\/va
+search_out.txt:399:search_out.txt:164:MUD6.BCL:139:if WEIGHT of nd+carry.count of profile>max.wt()/\(WIZARD of profile)
+search_out.txt:400:search_out.txt:165:MUD6.BCL:173:and full.up()=(max.obj()<=OBJ.CARRIED of profile)/\(WIZARD of profil
+search_out.txt:401:search_out.txt:166:MUD6.BCL:278:rm_WIZARD of profile=0/\(A.DEATH bitand ATTRIB of room)->oldroom,pla
+search_out.txt:402:search_out.txt:167:MUD6.BCL:279:rm_WIZARD of profile=0/\(A.DMOVE bitand ATTRIB of rm)-> DMOVE of rm,
+search_out.txt:403:search_out.txt:168:MUD6.BCL:334:if (WTUSED of insides)+(WEIGHT of nd)>MAXWT of insides /\(WIZARD of 
+search_out.txt:404:search_out.txt:169:MUD6.BCL:370:$(	if (WEIGHT of nd)+(CARRY.COUNT of profile)>max.wt()/\(WIZARD of p
+search_out.txt:405:search_out.txt:170:MUD6.BCL:423:if A.HIDEAWAY bitand ATTRIB of rm unless WIZARD of profile=1/\numbar
+search_out.txt:406:search_out.txt:171:MUD6.BCL:433:if WIZARD of profile=1/\(brief ne -1\/long)
+search_out.txt:407:search_out.txt:172:MUD6.BCL:443:if (A.DEATH bitand ATTRIB of room)/\(WIZARD of profile)=0 then
+search_out.txt:408:search_out.txt:173:MUD6.BCL:458:if (A.HIDE bitand ATTRIB of room)/\(WIZARD of profile)=0 then return
+search_out.txt:409:search_out.txt:174:MUD6.BCL:459:unless (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 the
+search_out.txt:410:search_out.txt:175:MUD6.BCL:526:if WIZARD of profile=1/\(brief ne -1\/long)
+search_out.txt:411:search_out.txt:176:MUD6.BCL:530:if WIZARD of profile=1
+search_out.txt:412:search_out.txt:177:MUD6.BCL:532:unless (DESTROYED of obj ls 0 /\(WIZARD of profile)=0)\/sprop of obj
+search_out.txt:413:search_out.txt:178:MUD6.BCL:610:$(	if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then
+search_out.txt:414:search_out.txt:179:MUD6.BCL:613:while nd do test obj=LH of nd /\(WIZARD of profile=1 \/ (DESTROYED o
+search_out.txt:415:search_out.txt:180:MUD6.BCL:628:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of profile)=0 then re
+search_out.txt:416:search_out.txt:181:MUD6.BCL:667:$) ge 0 ))/\(WIZARD of profile=1 \/ (DESTROYED of nd ge 0))
+search_out.txt:417:search_out.txt:182:MUD7.BCL:60:$(	unless WIZARD of profile resultis true
+search_out.txt:418:search_out.txt:183:MUD7.BCL:161:unless (RELAXED\/us(me)\/us(objname))/\(flipping\/WIZARD of profile=
+search_out.txt:419:search_out.txt:184:MUD7.BCL:257:if us(objname) WIZARD of profile_true
+search_out.txt:420:search_out.txt:185:MUD7.BCL:270:$(	unless (RELAXED\/us(me))/\(WIZARD of profile=1\/flipping) error()
+search_out.txt:421:search_out.txt:186:MUD7.BCL:290:unless (RELAXED\/us(me))/\WIZARD of profile error("*C*LNo can do, ol
+search_out.txt:422:search_out.txt:187:MUD7.BCL:337:for i=0 to 35 if wizard of LH from player.names!i dest bitor_1<<i
+search_out.txt:423:search_out.txt:188:MUD8.BCL:32:if WIZARD of profile
+search_out.txt:424:search_out.txt:189:MUD8.BCL:33:unless ~WIZVWIZ/\WIZARD of pp ne 0
+search_out.txt:425:search_out.txt:190:MUD8.BCL:39:unless WIZARD of profile unless bit bitand who.copy error(":p isn't h
+search_out.txt:426:search_out.txt:191:MUD8.BCL:59:unless WIZARD of profile unless (1<<snd) bitand who.copy error(":p is
+search_out.txt:427:search_out.txt:192:MUD8.BCL:65:unless WIZARD of profile if WIZARD of pp
+search_out.txt:428:search_out.txt:193:MUD8.BCL:75:WIZARD of LH from player.names!i then
+search_out.txt:429:search_out.txt:194:MUD8.BCL:84:unless RELAXED\/us(me)\/(WIZARD of pp ne 0) error("Not to mortals!")
+search_out.txt:430:search_out.txt:195:MUD8.BCL:91:unless WIZARD of profile unless bit bitand who.copy then
+search_out.txt:431:search_out.txt:196:MUD8.BCL:114:unless WIZARD of profile unless bit bitand who.copy then
+search_out.txt:432:search_out.txt:197:MUD8.BCL:138:unless WIZARD of profile unless who.copy bitand (1<<snd) error(":p i
+search_out.txt:433:search_out.txt:198:MUD8.BCL:156:unless WIZARD of profile unless who.copy bitand (1<<snd) do
+search_out.txt:434:search_out.txt:199:MUD8.BCL:175:unless us(me)\/snd=player.no if WIZARD of pp
+search_out.txt:435:search_out.txt:200:MUD8.BCL:186:unless WIZARD of profile unless (1<<snd)bitand who.copy error(":P is
+search_out.txt:436:search_out.txt:201:MUD8.BCL:188:if WIZARD of pp
+search_out.txt:437:search_out.txt:202:MUD8.BCL:206:WIZVWIZ/\WIZARD of profile ne 0 -> 0, LH from inf
+search_out.txt:438:search_out.txt:203:MUD8.BCL:221:send(snd,block,K.IACPT,WIZVWIZ/\WIZARD of profile ne 0->10000000,kip
+search_out.txt:439:search_out.txt:204:MUD8.BCL:229:if WIZARD of p ne 0\/(who.copy bitand (1<<i))
+search_out.txt:440:search_out.txt:205:MUD8.BCL:242:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(100)+1+(CARRY.COUNT
+search_out.txt:441:search_out.txt:206:MUD8.BCL:244:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->1000000,random(STRENGTH o
+search_out.txt:442:search_out.txt:207:MUD8.BCL:260:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(100)+1+(CARRY.COUNT
+search_out.txt:443:search_out.txt:208:MUD8.BCL:262:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->10000000,random(STRENGTH 
+search_out.txt:444:search_out.txt:209:MUD8.BCL:331:$(	damage_WIZARD of profile->0,random((WEIGHT of monster)/1000/F.DMG
+search_out.txt:445:search_out.txt:210:MUD8.BCL:383:test WIZARD of profile then
+search_out.txt:446:search_out.txt:211:MUD8.BCL:425:test WIZARD of profile=1\/FUNC of block ne K.DIST then out("*C*L:p s
+search_out.txt:447:search_out.txt:212:MUD8.BCL:444:damage_WIZARD of profile->102,ASLEEP of profile->-1,random(100)+1
+search_out.txt:448:search_out.txt:213:MUD8.BCL:476:full.up())/\(WIZARD of profile)=0 then
+search_out.txt:449:search_out.txt:214:MUD8.BCL:504:full.up())/\(WIZARD of profile)=0 then
+search_out.txt:450:search_out.txt:215:MUD8.BCL:523:if WIZARD of profile unless inv out("*C*L:p has started following yo
+search_out.txt:451:search_out.txt:216:MUD8.BCL:536:if WIZARD of profile unless inv out("*C*L:p has stopped following yo
+search_out.txt:452:search_out.txt:217:MUD8.BCL:567:unless us(pn) if (WIZARD of profile ne 0) \/snooping ne -1 then
+search_out.txt:453:search_out.txt:218:MUD8.BCL:578:unless us(pn) if WIZARD of profile out("*C*L:p has stopped snooping 
+search_out.txt:454:search_out.txt:219:MUD8.BCL:613:WIZARD of profile_false
+search_out.txt:456:search_out.txt:221:MUD8.BCL:687:$(	let dropsy, sumnd=WIZARD of pp, LH from INF
+search_out.txt:457:search_out.txt:222:MUD8.BCL:688:if sumnd if WIZARD of profile=1 \/ valof
+search_out.txt:458:search_out.txt:223:MUD8.BCL:719:if WIZARD of profile
+search_out.txt:459:search_out.txt:224:MUD8.BCL:788:WIZARD of theirp->""," not",SEX of theirp->female!max.level,male!max
+search_out.txt:460:search_out.txt:225:MUD8.BCL:789:WIZARD of theirp->"...",".")
+search_out.txt:461:search_out.txt:226:MUD8.BCL:811:if WIZARD of profile
+search_out.txt:462:search_out.txt:227:MUD8.BCL:813:WIZARD of profile_false
+search_out.txt:463:search_out.txt:228:MUD8.BCL:831:$(	if WIZARD of profile Out(" in :6",!(CROOM of pp))
+search_out.txt:464:search_out.txt:229:MUDLIB.BCL:940:unless WIZARD of profile cccnt_CCTRIP*10
+search_out.txt:465:search_out.txt:230:MUDLIB.BCL:1135:unless ISWIZ of profile ne 0/\ps.word WIZARD of profile_false
+search_out.txt:466:search_out.txt:231:MUDLIB.BCL:1136:if us(name) WIZARD of profile_true<>maint_true
+search_out.txt:467:search_out.txt:232:MUDLIB.BCL:1163:if us(name) WIZARD of profile_true
+search_out.txt:468:search_out.txt:233:MUDLIB.BCL:1386:unless WIZARD of profile WIZD of place bitand_NOTINVIS
+search_out.txt:469:search_out.txt:234:MUDLIB.BCL:1436:outz($az"eg hero/heroine, witch/wizard")
+search_out.txt:470:search_out.txt:235:MUDLIB.BCL:1485:test WIZARD of prof then write(s, " the :s:s",us(nm)->"arch-","",
+search_out.txt:471:search_out.txt:236:search_out.txt:1:DBASE.BCL:205:".resurrect",	S.SFUNC,	SF.RESURRECT,	0,
+search_out.txt:472:search_out.txt:237:search_out.txt:2:MUD.TXT:874:Hello wizard, guess what mortals can't see without h
+search_out.txt:473:search_out.txt:238:search_out.txt:3:MUD.TXT:917:Hi wizards! Try n or sw.
+search_out.txt:474:search_out.txt:239:search_out.txt:4:MUD.TXT:920:Hi wizards! Try e or ne.
+search_out.txt:475:search_out.txt:240:search_out.txt:5:MUD.TXT:923:Hi wizards! Try nw or sw.
+search_out.txt:476:search_out.txt:241:search_out.txt:6:MUD.TXT:926:Hi wizards! Try nw or s.
+search_out.txt:477:search_out.txt:242:search_out.txt:7:MUD.TXT:929:Hi wizards! Try n or s.
+search_out.txt:478:search_out.txt:243:search_out.txt:8:MUD.TXT:4075:go	.go	none	none	iflevel	null	10	0	;let berserk wiz
+search_out.txt:479:search_out.txt:244:search_out.txt:9:MUD.TXT:4079:back	.back	none	none	iflevel	null	10	0	;let berserk
+search_out.txt:480:search_out.txt:245:search_out.txt:10:MUD.TXT:4095:witches	wizards
+search_out.txt:481:search_out.txt:246:search_out.txt:11:MUD.TXT:5322:3	On a huge grave is the name, "Evil the Wizard".
+search_out.txt:482:search_out.txt:247:search_out.txt:12:MUD.TXT:5327:the Wizard".
+search_out.txt:483:search_out.txt:248:search_out.txt:13:MUD.TXT:5331:11	On a grave close by reads, "Gwyn the Wizard lie
+search_out.txt:484:search_out.txt:249:search_out.txt:14:MUD.TXT:5333:12	Before you looms an obsidian vault, insculpt "S
+search_out.txt:485:search_out.txt:250:search_out.txt:15:MUD.TXT:5337:15	Two tombstones to your left read, "Helmut the W
+search_out.txt:486:search_out.txt:251:search_out.txt:16:MUD.TXT:5338:16	A tombstone here bears the epitaph, "Fenwyn (Wi
+search_out.txt:487:search_out.txt:252:search_out.txt:17:MUD.TXT:5339:17	The tomb of Jock the Wizard rises before you, i
+search_out.txt:488:search_out.txt:253:search_out.txt:18:MUD.TXT:5341:18	A small rock to one side marks the grave of Fox
+search_out.txt:489:search_out.txt:254:search_out.txt:19:MUD.TXT:5343:where Egor the Wizard has danced.
+search_out.txt:490:search_out.txt:255:search_out.txt:20:MUD.TXT:5344:20	The headstone of Gorpli the Wizard stands here,
+search_out.txt:492:search_out.txt:257:search_out.txt:22:MUD.TXT:5347:22	The tomb before you bears the name, "Roddy the 
+search_out.txt:493:search_out.txt:258:search_out.txt:23:MUD.TXT:5351:24	Here stands the grave of Clive the Wizard, QED.
+search_out.txt:494:search_out.txt:259:search_out.txt:24:MUD.TXT:5356:27	Alan the wizard is virtually buried here.
+search_out.txt:495:search_out.txt:260:search_out.txt:25:MUD.TXT:5357:28	Christian the wizard is buried here, beneath a 
+search_out.txt:497:search_out.txt:262:search_out.txt:27:MUD.TXT:5363:31	Before you stands the grave of Balastor the wiz
+search_out.txt:498:search_out.txt:263:search_out.txt:28:MUD.TXT:5364:help whatsoever from Egor the Wizard...
+search_out.txt:499:search_out.txt:264:search_out.txt:29:MUD.TXT:5369:the Wizard, in his favourite position (horizontal)
+search_out.txt:500:search_out.txt:265:search_out.txt:30:MUD.TXT:5370:34	Gripper the wizard's aerial-bearing tombstone n
+search_out.txt:501:search_out.txt:266:search_out.txt:31:MUD.TXT:5372:35	The tomb of Mugsanon the wizard stands before y
+search_out.txt:502:search_out.txt:267:search_out.txt:32:MUD.TXT:5382:words, "Jon the wizard".
+search_out.txt:503:search_out.txt:268:search_out.txt:33:MUD.TXT:5383:41	This is the tombstone of Achetus the wizard, bu
+search_out.txt:504:search_out.txt:269:search_out.txt:34:MUD.TXT:5398:8	The grave of Nic the Wizard is eventually here.
+search_out.txt:505:search_out.txt:270:search_out.txt:35:MUD.TXT:5399:9	The grave of Andy the Wizard is somehow here.
+search_out.txt:506:search_out.txt:271:search_out.txt:36:MUD.TXT:5400:10	The grave of Eric the Wizard was here until you
+search_out.txt:507:search_out.txt:272:search_out.txt:37:MUD.TXT:5401:11	The tomb of Ridicule the Wizard has been gradua
+search_out.txt:508:search_out.txt:273:search_out.txt:38:MUD.TXT:5404:13	The grave of Zardoz the Wizard is here - "Forgo
+search_out.txt:509:search_out.txt:274:search_out.txt:39:MUD.TXT:5407:15	You smell the grave of Conn the Wizard some way
+search_out.txt:510:search_out.txt:275:search_out.txt:40:MUD.TXT:5409:17	The tomb of Zaphod the Wizard is here, marked "
+search_out.txt:511:search_out.txt:276:search_out.txt:41:MUD.TXT:5412:19	The grave of the unknown wizard stands before y
+search_out.txt:512:search_out.txt:277:search_out.txt:42:MUD.TXT:5413:entombed Egor the Wizard.
+search_out.txt:514:search_out.txt:279:search_out.txt:44:MUD.TXT:5416:22	The grave of Tremble the Wizard is here, made a
+search_out.txt:515:search_out.txt:280:search_out.txt:45:MUD.TXT:5418:23	Before you stands the grave of Thor the wizard,
+search_out.txt:516:search_out.txt:281:search_out.txt:46:MUD.TXT:5420:25	The tombstone of Rudy the wizard stands here, m
+search_out.txt:517:search_out.txt:282:search_out.txt:47:MUD.TXT:5422:26	Nick the wizard is buried here. The tombstone h
+search_out.txt:518:search_out.txt:283:search_out.txt:48:MUD.TXT:5424:27	Elric the wizard is buried here beneath a tomb 
+search_out.txt:519:search_out.txt:284:search_out.txt:49:MUD.TXT:5426:28	A headstone before you reads, "Azax the wizard 
+search_out.txt:520:search_out.txt:285:search_out.txt:50:MUD.TXT:5432:31	Six feet below you lie the remains of Happy the
+search_out.txt:521:search_out.txt:286:search_out.txt:51:MUD.TXT:5434:32	Far to the east is the grave of Limhongch the W
+search_out.txt:522:search_out.txt:287:search_out.txt:52:MUD.TXT:5435:33	A black monolith before you encases the body of
+search_out.txt:523:search_out.txt:288:search_out.txt:53:MUD.TXT:5436:34	The grave of Jason the whinging Wizard stands h
+search_out.txt:524:search_out.txt:289:search_out.txt:54:MUD.TXT:5439:Chester the Wizard.
+search_out.txt:525:search_out.txt:290:search_out.txt:55:MUD.TXT:5441:37	Etched onto the grave of Dan the Wizard here ar
+search_out.txt:526:search_out.txt:291:search_out.txt:56:MUD.TXT:5443:38	The double-size grave of Fazz the Wizard here b
+search_out.txt:527:search_out.txt:292:search_out.txt:57:MUD.TXT:5447:40	Here stands the tomb of Vivian the Wizard, "A s
+search_out.txt:528:search_out.txt:293:search_out.txt:58:MUD.TXT:5449:41	The proud marble headstone of Tixy the Wizard s
+search_out.txt:529:search_out.txt:294:search_out.txt:59:MUD.TXT:8228:get to be a wizard or witch, of course! In the mea
+search_out.txt:530:search_out.txt:295:search_out.txt:60:MUD1.BCL:72:(WIZARD of LH from player.names!i)=1->(bit bitand p
+search_out.txt:531:search_out.txt:296:search_out.txt:61:MUD1.BCL:132:if WIZARD of profile writes(tty,"----")
+search_out.txt:532:search_out.txt:297:search_out.txt:62:MUD1.BCL:282:unless WIZARD of profile error()
+search_out.txt:533:search_out.txt:298:search_out.txt:63:MUD2.BCL:169:if WIZARD of profile ne 0 return
+search_out.txt:534:search_out.txt:299:search_out.txt:64:MUD2.BCL:192:test WIZARD of profile Describe(newrm,true) or
+search_out.txt:535:search_out.txt:301:search_out.txt:66:MUD2.BCL:229:if (A.SMALL bitand ATTRIB of newrm)/\(wizard of pr
+search_out.txt:536:search_out.txt:302:search_out.txt:67:MUD2.BCL:233:if (bit bitand who.cpy) /\(WIZARD of LH from playe
+search_out.txt:537:search_out.txt:303:search_out.txt:68:MUD3.BCL:46:if SCORE of prof ge sm\/WIZARD of prof=1 resultis t
+search_out.txt:538:search_out.txt:304:search_out.txt:69:MUD3.BCL:57:unless asking if (WIZARD of profile)=1 return
+search_out.txt:539:search_out.txt:305:search_out.txt:70:MUD3.BCL:171:if WIZARD of profile=1/\instrmnt
+search_out.txt:540:search_out.txt:306:search_out.txt:71:MUD3.BCL:207:unless WIZARD of profile resultis true
+search_out.txt:541:search_out.txt:307:search_out.txt:72:MUD3.BCL:212:if WIZARD of profile resultis true
+search_out.txt:542:search_out.txt:308:search_out.txt:73:MUD3.BCL:225:if WIZARD of nd resultis true
+search_out.txt:543:search_out.txt:309:search_out.txt:74:MUD3.BCL:272:(WIZARD of profile=1\/flipping -> false, A.HIDE bi
+search_out.txt:544:search_out.txt:310:search_out.txt:75:MUD3.BCL:307:test us(me)\/(WIZARD of profile ne 0/\realwiz(me))
+search_out.txt:545:search_out.txt:311:search_out.txt:76:MUD4.BCL:125:if l=max.level unless WIZARD of profile
+search_out.txt:546:search_out.txt:312:search_out.txt:77:MUD4.BCL:138:if (l=max.level-1/\(WIZARD of pr ne 0\/SCORE of pr
+search_out.txt:547:search_out.txt:313:search_out.txt:78:MUD4.BCL:152:if ~wizonly \/ WIZARD of p ne 0
+search_out.txt:548:search_out.txt:314:search_out.txt:79:MUD5.BCL:49:test RELAXED/\WIZARD of profile=1/\(spectacular=0\/
+search_out.txt:549:search_out.txt:315:search_out.txt:80:MUD5.BCL:50:test spectacular/\(WIZARD of profile=0) then Error(
+search_out.txt:550:search_out.txt:316:search_out.txt:81:MUD5.BCL:114:test RELAXED/\WIZARD of profile=1/\(spectacular=0\
+search_out.txt:551:search_out.txt:317:search_out.txt:82:MUD5.BCL:151:unless WIZARD of profile Error()
+search_out.txt:552:search_out.txt:318:search_out.txt:83:MUD5.BCL:184:for i=0 to 35 if player.names!i/\WIZARD of LH from
+search_out.txt:553:search_out.txt:319:search_out.txt:84:MUD5.BCL:187:send(player.no, 0, WIZARD of profile->K.ISAHM,
+search_out.txt:554:search_out.txt:320:search_out.txt:85:MUD5.BCL:188:DEXTERITY of profile gr 60->K.ISAHM, K.ISAMM, WIZA
+search_out.txt:555:search_out.txt:321:search_out.txt:86:MUD5.BCL:189:or send(player.no, 0,WIZARD of profile\/random(100
+search_out.txt:556:search_out.txt:322:search_out.txt:87:MUD5.BCL:205:=0, 0, WIZARD of profile=1/\find.room(objname), (r
+search_out.txt:557:search_out.txt:323:search_out.txt:88:MUD5.BCL:232:unless WIZARD of profile if ~(visible(rm))\/((A.DE
+search_out.txt:558:search_out.txt:324:search_out.txt:89:MUD5.BCL:234:if WIZARD of profile out(":6*T", !rm)
+search_out.txt:559:search_out.txt:325:search_out.txt:90:MUD5.BCL:267:unless WIZARD of profile if savescr=SCORE of profi
+search_out.txt:560:search_out.txt:326:search_out.txt:91:MUD5.BCL:274:if WIZARD of profile=1/\PTYPE of objct=S.PLAYER
+search_out.txt:561:search_out.txt:327:search_out.txt:92:MUD5.BCL:292:test (WIZARD of profile=1)\/random(player.level()+
+search_out.txt:562:search_out.txt:328:search_out.txt:93:MUD5.BCL:298:if WIZARD of profile
+search_out.txt:563:search_out.txt:329:search_out.txt:94:MUD5.BCL:310:$(	let rm,old=WIZARD of profile=1/\find.room(objna
+search_out.txt:564:search_out.txt:330:search_out.txt:95:MUD5.BCL:331:unless WIZARD of profile error()
+search_out.txt:565:search_out.txt:331:search_out.txt:96:MUD5.BCL:346:if WIZARD of profile=1/\there out("there*T:F*C*L",
+search_out.txt:566:search_out.txt:332:search_out.txt:97:MUD5.BCL:359:test WIZARD of profile then
+search_out.txt:567:search_out.txt:333:search_out.txt:98:MUD5.BCL:375:if WIZARD of profile pl_max.level
+search_out.txt:568:search_out.txt:334:search_out.txt:99:MUD5.BCL:478:$(	unless WIZARD of profile=1/\maint error()
+search_out.txt:569:search_out.txt:335:search_out.txt:100:MUD5.BCL:517:for i=0 to 35 if player.names!i unless WIZARD of 
+search_out.txt:570:search_out.txt:336:search_out.txt:101:MUD5.BCL:544:send(i,nd,((who.copy bitand (1<<i))\/(WIZARD of p
+search_out.txt:571:search_out.txt:337:search_out.txt:102:MUD5.BCL:593:if seq(objname, "lock") test WIZARD of profile/\(
+search_out.txt:572:search_out.txt:338:search_out.txt:103:MUD5.BCL:598:if seq(objname, "unlock") test WIZARD of profile/
+search_out.txt:573:search_out.txt:339:search_out.txt:104:MUD5.BCL:612:test WIZARD of profile then
+search_out.txt:574:search_out.txt:340:search_out.txt:105:MUD5.BCL:613:$(	WIZARD of profile_false
+search_out.txt:575:search_out.txt:341:search_out.txt:106:MUD5.BCL:616:$(	WIZARD of profile_true
+search_out.txt:576:search_out.txt:342:search_out.txt:107:MUD5.BCL:721:$(	let ok=maint/\WIZARD of profile ne 0
+search_out.txt:577:search_out.txt:343:search_out.txt:108:MUD5.BCL:739:unless WIZARD of profile Error()
+search_out.txt:578:search_out.txt:344:search_out.txt:109:MUD5.BCL:807:WIZARD of profile_true
+search_out.txt:579:search_out.txt:345:search_out.txt:110:MUD5.BCL:815:unless WIZARD of profile reset()<>error()
+search_out.txt:580:search_out.txt:346:search_out.txt:111:MUD5.BCL:838:unless WIZARD of profile error()
+search_out.txt:581:search_out.txt:347:search_out.txt:112:MUD5.BCL:855:case SF.RESURRECT:
+search_out.txt:582:search_out.txt:348:search_out.txt:113:MUD5.BCL:856:unless WIZARD of profile reset()<>error()
+search_out.txt:583:search_out.txt:349:search_out.txt:114:MUD5.BCL:877:Out(":P now :s.*C*L", objname, \val->"resurrected
+search_out.txt:584:search_out.txt:350:search_out.txt:115:MUD5.BCL:885:$(	unless WIZARD of profile error()
+search_out.txt:585:search_out.txt:351:search_out.txt:116:MUD5.BCL:902:test spectacular/\WIZARD of profile=0 then Error(
+search_out.txt:586:search_out.txt:352:search_out.txt:117:MUD5.BCL:917:unless WIZARD of profile if A.SMALL bitand ATTRIB
+search_out.txt:587:search_out.txt:353:search_out.txt:118:MUD5.BCL:931:case SF.GO://Go (check if wizard otherwise ignore
+search_out.txt:588:search_out.txt:354:search_out.txt:119:MUD5.BCL:932:if WIZARD of profile then
+search_out.txt:589:search_out.txt:355:search_out.txt:120:MUD5.BCL:967:unless WIZARD of profile
+search_out.txt:590:search_out.txt:356:search_out.txt:121:MUD5.BCL:1001:if WIZARD of profile then
+search_out.txt:591:search_out.txt:357:search_out.txt:122:MUD5.BCL:1016:unless WIZARD of profile=1 | maint error("You ca
+search_out.txt:592:search_out.txt:358:search_out.txt:123:MUD5.BCL:1079:if WIZARD of profile out(":6 - ", !rm)
+search_out.txt:593:search_out.txt:359:search_out.txt:124:MUD5.BCL:1105:unless (ATTRIB of rm bitand (A.DEATH bitor A.HID
+search_out.txt:594:search_out.txt:360:search_out.txt:125:MUD5.BCL:1108:if cn(l,ob) test WIZARD of profile then
+search_out.txt:595:search_out.txt:361:search_out.txt:126:MUD5.BCL:1157:$(	unless WIZARD of profile error("You have to b
+search_out.txt:596:search_out.txt:362:search_out.txt:127:MUD5.BCL:1180:$(	unless WIZARD of profile error("Wait until yo
+search_out.txt:597:search_out.txt:363:search_out.txt:128:MUD5.BCL:1222:unless WIZARD of profile error("You have to be a
+search_out.txt:598:search_out.txt:364:search_out.txt:129:MUD5.BCL:1224:unless WIZARD of profile Error()
+search_out.txt:599:search_out.txt:365:search_out.txt:130:MUD5.BCL:1238:if WIZARD of nm out(" in wiz mode")
+search_out.txt:600:search_out.txt:366:search_out.txt:131:MUD5.BCL:1251:unless WIZARD of profile error()
+search_out.txt:601:search_out.txt:367:search_out.txt:132:MUD5.BCL:1292:unless WIZARD of profile out("You've got to be a
+search_out.txt:602:search_out.txt:368:search_out.txt:133:MUD5.BCL:1371:unless function=F.SSENDEMON\/(WIZARD of profile=
+search_out.txt:603:search_out.txt:369:search_out.txt:134:MUD5.BCL:1391:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD o
+search_out.txt:604:search_out.txt:370:search_out.txt:135:MUD5.BCL:1392:while nd do test obj=nd /\(WIZARD of profile=1 \
+search_out.txt:605:search_out.txt:371:search_out.txt:136:MUD5.BCL:1447:if WIZARD of profile endcase
+search_out.txt:606:search_out.txt:372:search_out.txt:137:MUD5.BCL:1450:unless WIZARD of profile endcase
+search_out.txt:607:search_out.txt:373:search_out.txt:138:MUD5.BCL:1496:case F.IFLEVEL:	if player.level()<sm-1 /\(WIZARD
+search_out.txt:608:search_out.txt:374:search_out.txt:139:MUD5.BCL:1534:test Random(100) ls (1+player.level())*sm\/(WIZA
+search_out.txt:610:search_out.txt:376:search_out.txt:141:MUD5.BCL:1545:test Random(100) ls (1+player.level())*sm\/(WIZA
+search_out.txt:612:search_out.txt:378:search_out.txt:143:MUD5.BCL:1558:case F.UNLESSLEVEL:	if player.level()>=sm-1 \/(W
+search_out.txt:613:search_out.txt:379:search_out.txt:144:MUD5.BCL:1568:if ifr/\(WIZARD of profile)=0 verb_0<>objct_fake
+search_out.txt:614:search_out.txt:380:search_out.txt:145:MUD5.BCL:1769:unless (ATTRIB of rm bitand (A.DEATH bitor A.HID
+search_out.txt:615:search_out.txt:381:search_out.txt:146:MUD5.BCL:1851:unless RELAXED\/us(me) if WIZARD of profile erro
+search_out.txt:616:search_out.txt:382:search_out.txt:147:MUD5.BCL:1929:unless WIZARD of profile stamina of profile_-1
+search_out.txt:617:search_out.txt:383:search_out.txt:148:MUD5.BCL:1945:unless WIZARD of profile ne 0 test spectacular t
+search_out.txt:618:search_out.txt:384:search_out.txt:149:MUD5.BCL:1972:unless WIZARD of profile STAMINA of profile-_sm
+search_out.txt:620:search_out.txt:386:search_out.txt:151:MUD6.BCL:25:if WIZARD of profile out("(:6) ",!rm)
+search_out.txt:621:search_out.txt:387:search_out.txt:152:MUD6.BCL:26:test (A.DEATH bitand ATTRIB of rm)/\(WIZARD of pro
+search_out.txt:622:search_out.txt:388:search_out.txt:153:MUD6.BCL:31:if WIZARD of profile out("(:6) ",!rm)<>!lvfound_tr
+search_out.txt:623:search_out.txt:389:search_out.txt:154:MUD6.BCL:38:test CONTENTS of nd ne 0 /\ (WIZARD of profile ne 
+search_out.txt:624:search_out.txt:390:search_out.txt:155:MUD6.BCL:42:if cn(l,n)/\(WIZARD of profile=1\/DESTROYED of n g
+search_out.txt:625:search_out.txt:391:search_out.txt:156:MUD6.BCL:74:unless insides /\ (DISGUISED of insides=0 \/ WIZAR
+search_out.txt:627:search_out.txt:393:search_out.txt:158:MUD6.BCL:93:unless WIZARD of profile=1 \/ here(obj) then
+search_out.txt:628:search_out.txt:394:search_out.txt:159:MUD6.BCL:96:until LH of nd=obj /\(WIZARD of profile=1 \/ (DEST
+search_out.txt:629:search_out.txt:395:search_out.txt:160:MUD6.BCL:101:if FIXED of nd\/NOGET of nd test WIZARD of profil
+search_out.txt:630:search_out.txt:396:search_out.txt:161:MUD6.BCL:110:if WEIGHT of nd+CARRY.COUNT of profile>max.wt()/\
+search_out.txt:631:search_out.txt:397:search_out.txt:162:MUD6.BCL:129:unless WIZARD of profile=1\/here.class(cl) error(
+search_out.txt:632:search_out.txt:398:search_out.txt:163:MUD6.BCL:134:(WIZARD of profile=1/\(RELAXED\/us(me))/\(spectac
+search_out.txt:633:search_out.txt:399:search_out.txt:164:MUD6.BCL:139:if WEIGHT of nd+carry.count of profile>max.wt()/\
+search_out.txt:634:search_out.txt:400:search_out.txt:165:MUD6.BCL:173:and full.up()=(max.obj()<=OBJ.CARRIED of profile)
+search_out.txt:635:search_out.txt:401:search_out.txt:166:MUD6.BCL:278:rm_WIZARD of profile=0/\(A.DEATH bitand ATTRIB of
+search_out.txt:636:search_out.txt:402:search_out.txt:167:MUD6.BCL:279:rm_WIZARD of profile=0/\(A.DMOVE bitand ATTRIB of
+search_out.txt:637:search_out.txt:403:search_out.txt:168:MUD6.BCL:334:if (WTUSED of insides)+(WEIGHT of nd)>MAXWT of in
+search_out.txt:638:search_out.txt:404:search_out.txt:169:MUD6.BCL:370:$(	if (WEIGHT of nd)+(CARRY.COUNT of profile)>max
+search_out.txt:639:search_out.txt:405:search_out.txt:170:MUD6.BCL:423:if A.HIDEAWAY bitand ATTRIB of rm unless WIZARD o
+search_out.txt:640:search_out.txt:406:search_out.txt:171:MUD6.BCL:433:if WIZARD of profile=1/\(brief ne -1\/long)
+search_out.txt:641:search_out.txt:407:search_out.txt:172:MUD6.BCL:443:if (A.DEATH bitand ATTRIB of room)/\(WIZARD of pr
+search_out.txt:642:search_out.txt:408:search_out.txt:173:MUD6.BCL:458:if (A.HIDE bitand ATTRIB of room)/\(WIZARD of pro
+search_out.txt:643:search_out.txt:409:search_out.txt:174:MUD6.BCL:459:unless (A.HIDEAWAY bitand ATTRIB of room)/\(WIZAR
+search_out.txt:644:search_out.txt:410:search_out.txt:175:MUD6.BCL:526:if WIZARD of profile=1/\(brief ne -1\/long)
+search_out.txt:645:search_out.txt:411:search_out.txt:176:MUD6.BCL:530:if WIZARD of profile=1
+search_out.txt:646:search_out.txt:412:search_out.txt:177:MUD6.BCL:532:unless (DESTROYED of obj ls 0 /\(WIZARD of profil
+search_out.txt:647:search_out.txt:413:search_out.txt:178:MUD6.BCL:610:$(	if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD
+search_out.txt:648:search_out.txt:414:search_out.txt:179:MUD6.BCL:613:while nd do test obj=LH of nd /\(WIZARD of profil
+search_out.txt:649:search_out.txt:415:search_out.txt:180:MUD6.BCL:628:if (A.HIDEAWAY bitand ATTRIB of room)/\(WIZARD of
+search_out.txt:650:search_out.txt:416:search_out.txt:181:MUD6.BCL:667:$) ge 0 ))/\(WIZARD of profile=1 \/ (DESTROYED of
+search_out.txt:651:search_out.txt:417:search_out.txt:182:MUD7.BCL:60:$(	unless WIZARD of profile resultis true
+search_out.txt:652:search_out.txt:418:search_out.txt:183:MUD7.BCL:161:unless (RELAXED\/us(me)\/us(objname))/\(flipping\
+search_out.txt:653:search_out.txt:419:search_out.txt:184:MUD7.BCL:257:if us(objname) WIZARD of profile_true
+search_out.txt:654:search_out.txt:420:search_out.txt:185:MUD7.BCL:270:$(	unless (RELAXED\/us(me))/\(WIZARD of profile=1
+search_out.txt:655:search_out.txt:421:search_out.txt:186:MUD7.BCL:290:unless (RELAXED\/us(me))/\WIZARD of profile error
+search_out.txt:656:search_out.txt:422:search_out.txt:187:MUD7.BCL:337:for i=0 to 35 if wizard of LH from player.names!i
+search_out.txt:657:search_out.txt:423:search_out.txt:188:MUD8.BCL:32:if WIZARD of profile
+search_out.txt:658:search_out.txt:424:search_out.txt:189:MUD8.BCL:33:unless ~WIZVWIZ/\WIZARD of pp ne 0
+search_out.txt:659:search_out.txt:425:search_out.txt:190:MUD8.BCL:39:unless WIZARD of profile unless bit bitand who.cop
+search_out.txt:660:search_out.txt:426:search_out.txt:191:MUD8.BCL:59:unless WIZARD of profile unless (1<<snd) bitand wh
+search_out.txt:661:search_out.txt:427:search_out.txt:192:MUD8.BCL:65:unless WIZARD of profile if WIZARD of pp
+search_out.txt:662:search_out.txt:428:search_out.txt:193:MUD8.BCL:75:WIZARD of LH from player.names!i then
+search_out.txt:663:search_out.txt:429:search_out.txt:194:MUD8.BCL:84:unless RELAXED\/us(me)\/(WIZARD of pp ne 0) error(
+search_out.txt:664:search_out.txt:430:search_out.txt:195:MUD8.BCL:91:unless WIZARD of profile unless bit bitand who.cop
+search_out.txt:665:search_out.txt:431:search_out.txt:196:MUD8.BCL:114:unless WIZARD of profile unless bit bitand who.co
+search_out.txt:666:search_out.txt:432:search_out.txt:197:MUD8.BCL:138:unless WIZARD of profile unless who.copy bitand (
+search_out.txt:667:search_out.txt:433:search_out.txt:198:MUD8.BCL:156:unless WIZARD of profile unless who.copy bitand (
+search_out.txt:668:search_out.txt:434:search_out.txt:199:MUD8.BCL:175:unless us(me)\/snd=player.no if WIZARD of pp
+search_out.txt:669:search_out.txt:435:search_out.txt:200:MUD8.BCL:186:unless WIZARD of profile unless (1<<snd)bitand wh
+search_out.txt:670:search_out.txt:436:search_out.txt:201:MUD8.BCL:188:if WIZARD of pp
+search_out.txt:671:search_out.txt:437:search_out.txt:202:MUD8.BCL:206:WIZVWIZ/\WIZARD of profile ne 0 -> 0, LH from inf
+search_out.txt:672:search_out.txt:438:search_out.txt:203:MUD8.BCL:221:send(snd,block,K.IACPT,WIZVWIZ/\WIZARD of profile
+search_out.txt:673:search_out.txt:439:search_out.txt:204:MUD8.BCL:229:if WIZARD of p ne 0\/(who.copy bitand (1<<i))
+search_out.txt:674:search_out.txt:440:search_out.txt:205:MUD8.BCL:242:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(
+search_out.txt:675:search_out.txt:441:search_out.txt:206:MUD8.BCL:244:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->100000
+search_out.txt:676:search_out.txt:442:search_out.txt:207:MUD8.BCL:260:damage_WIZVWIZ/\WIZARD of profile ne 0->0,random(
+search_out.txt:677:search_out.txt:443:search_out.txt:208:MUD8.BCL:262:$(	damage_WIZVWIZ/\WIZARD of profile ne 0->100000
+search_out.txt:678:search_out.txt:444:search_out.txt:209:MUD8.BCL:331:$(	damage_WIZARD of profile->0,random((WEIGHT of 
+search_out.txt:679:search_out.txt:445:search_out.txt:210:MUD8.BCL:383:test WIZARD of profile then
+search_out.txt:680:search_out.txt:446:search_out.txt:211:MUD8.BCL:425:test WIZARD of profile=1\/FUNC of block ne K.DIST
+search_out.txt:681:search_out.txt:447:search_out.txt:212:MUD8.BCL:444:damage_WIZARD of profile->102,ASLEEP of profile->
+search_out.txt:682:search_out.txt:448:search_out.txt:213:MUD8.BCL:476:full.up())/\(WIZARD of profile)=0 then
+search_out.txt:683:search_out.txt:449:search_out.txt:214:MUD8.BCL:504:full.up())/\(WIZARD of profile)=0 then
+search_out.txt:684:search_out.txt:450:search_out.txt:215:MUD8.BCL:523:if WIZARD of profile unless inv out("*C*L:p has s
+search_out.txt:685:search_out.txt:451:search_out.txt:216:MUD8.BCL:536:if WIZARD of profile unless inv out("*C*L:p has s
+search_out.txt:686:search_out.txt:452:search_out.txt:217:MUD8.BCL:567:unless us(pn) if (WIZARD of profile ne 0) \/snoop
+search_out.txt:687:search_out.txt:453:search_out.txt:218:MUD8.BCL:578:unless us(pn) if WIZARD of profile out("*C*L:p ha
+search_out.txt:688:search_out.txt:454:search_out.txt:219:MUD8.BCL:613:WIZARD of profile_false
+search_out.txt:689:search_out.txt:456:search_out.txt:221:MUD8.BCL:687:$(	let dropsy, sumnd=WIZARD of pp, LH from INF
+search_out.txt:690:search_out.txt:457:search_out.txt:222:MUD8.BCL:688:if sumnd if WIZARD of profile=1 \/ valof
+search_out.txt:691:search_out.txt:458:search_out.txt:223:MUD8.BCL:719:if WIZARD of profile
+search_out.txt:692:search_out.txt:459:search_out.txt:224:MUD8.BCL:788:WIZARD of theirp->""," not",SEX of theirp->female
+search_out.txt:693:search_out.txt:460:search_out.txt:225:MUD8.BCL:789:WIZARD of theirp->"...",".")
+search_out.txt:694:search_out.txt:461:search_out.txt:226:MUD8.BCL:811:if WIZARD of profile
+search_out.txt:695:search_out.txt:462:search_out.txt:227:MUD8.BCL:813:WIZARD of profile_false
+search_out.txt:696:search_out.txt:463:search_out.txt:228:MUD8.BCL:831:$(	if WIZARD of profile Out(" in :6",!(CROOM of p
+search_out.txt:697:search_out.txt:464:search_out.txt:229:MUDLIB.BCL:940:unless WIZARD of profile cccnt_CCTRIP*10
+search_out.txt:698:search_out.txt:465:search_out.txt:230:MUDLIB.BCL:1135:unless ISWIZ of profile ne 0/\ps.word WIZARD o
+search_out.txt:699:search_out.txt:466:search_out.txt:231:MUDLIB.BCL:1136:if us(name) WIZARD of profile_true<>maint_true
+search_out.txt:700:search_out.txt:467:search_out.txt:232:MUDLIB.BCL:1163:if us(name) WIZARD of profile_true
+search_out.txt:701:search_out.txt:468:search_out.txt:233:MUDLIB.BCL:1386:unless WIZARD of profile WIZD of place bitand_
+search_out.txt:702:search_out.txt:469:search_out.txt:234:MUDLIB.BCL:1436:outz($az"eg hero/heroine, witch/wizard")
+search_out.txt:703:search_out.txt:470:search_out.txt:235:MUDLIB.BCL:1485:test WIZARD of prof then write(s, " the :s:s",
+search_out.txt:704:search_out.txt:471:search_out.txt:236:search_out.txt:1:DBASE.BCL:205:".resurrect",	S.SFUNC,	SF.RESUR
+search_out.txt:705:search_out.txt:472:search_out.txt:237:search_out.txt:2:MUD.TXT:874:Hello wizard, guess what mortals 
+search_out.txt:706:search_out.txt:473:search_out.txt:238:search_out.txt:3:MUD.TXT:917:Hi wizards! Try n or sw.
+search_out.txt:707:search_out.txt:474:search_out.txt:239:search_out.txt:4:MUD.TXT:920:Hi wizards! Try e or ne.
+search_out.txt:708:search_out.txt:475:search_out.txt:240:search_out.txt:5:MUD.TXT:923:Hi wizards! Try nw or sw.
+search_out.txt:709:search_out.txt:476:search_out.txt:241:search_out.txt:6:MUD.TXT:926:Hi wizards! Try nw or s.
+search_out.txt:710:search_out.txt:477:search_out.txt:242:search_out.txt:7:MUD.TXT:929:Hi wizards! Try n or s.
+search_out.txt:713:search_out.txt:480:search_out.txt:245:search_out.txt:10:MUD.TXT:4095:witches	wizards
+search_out.txt:714:search_out.txt:481:search_out.txt:246:search_out.txt:11:MUD.TXT:5322:3	On a huge grave is the name, 
+search_out.txt:715:search_out.txt:482:search_out.txt:247:search_out.txt:12:MUD.TXT:5327:the Wizard".
+search_out.txt:716:search_out.txt:483:search_out.txt:248:search_out.txt:13:MUD.TXT:5331:11	On a grave close by reads, "
+search_out.txt:720:search_out.txt:487:search_out.txt:252:search_out.txt:17:MUD.TXT:5339:17	The tomb of Jock the Wizard 
+search_out.txt:722:search_out.txt:489:search_out.txt:254:search_out.txt:19:MUD.TXT:5343:where Egor the Wizard has dance
+search_out.txt:723:search_out.txt:490:search_out.txt:255:search_out.txt:20:MUD.TXT:5344:20	The headstone of Gorpli the 
+search_out.txt:725:search_out.txt:493:search_out.txt:258:search_out.txt:23:MUD.TXT:5351:24	Here stands the grave of Cli
+search_out.txt:726:search_out.txt:494:search_out.txt:259:search_out.txt:24:MUD.TXT:5356:27	Alan the wizard is virtually
+search_out.txt:727:search_out.txt:495:search_out.txt:260:search_out.txt:25:MUD.TXT:5357:28	Christian the wizard is buri
+search_out.txt:729:search_out.txt:498:search_out.txt:263:search_out.txt:28:MUD.TXT:5364:help whatsoever from Egor the W
+search_out.txt:730:search_out.txt:499:search_out.txt:264:search_out.txt:29:MUD.TXT:5369:the Wizard, in his favourite po
+search_out.txt:731:search_out.txt:500:search_out.txt:265:search_out.txt:30:MUD.TXT:5370:34	Gripper the wizard's aerial-
+search_out.txt:732:search_out.txt:501:search_out.txt:266:search_out.txt:31:MUD.TXT:5372:35	The tomb of Mugsanon the wiz
+search_out.txt:733:search_out.txt:502:search_out.txt:267:search_out.txt:32:MUD.TXT:5382:words, "Jon the wizard".
+search_out.txt:734:search_out.txt:503:search_out.txt:268:search_out.txt:33:MUD.TXT:5383:41	This is the tombstone of Ach
+search_out.txt:735:search_out.txt:504:search_out.txt:269:search_out.txt:34:MUD.TXT:5398:8	The grave of Nic the Wizard i
+search_out.txt:736:search_out.txt:505:search_out.txt:270:search_out.txt:35:MUD.TXT:5399:9	The grave of Andy the Wizard 
+search_out.txt:737:search_out.txt:506:search_out.txt:271:search_out.txt:36:MUD.TXT:5400:10	The grave of Eric the Wizard
+search_out.txt:738:search_out.txt:507:search_out.txt:272:search_out.txt:37:MUD.TXT:5401:11	The tomb of Ridicule the Wiz
+search_out.txt:739:search_out.txt:508:search_out.txt:273:search_out.txt:38:MUD.TXT:5404:13	The grave of Zardoz the Wiza
+search_out.txt:740:search_out.txt:509:search_out.txt:274:search_out.txt:39:MUD.TXT:5407:15	You smell the grave of Conn 
+search_out.txt:741:search_out.txt:510:search_out.txt:275:search_out.txt:40:MUD.TXT:5409:17	The tomb of Zaphod the Wizar
+search_out.txt:742:search_out.txt:511:search_out.txt:276:search_out.txt:41:MUD.TXT:5412:19	The grave of the unknown wiz
+search_out.txt:743:search_out.txt:512:search_out.txt:277:search_out.txt:42:MUD.TXT:5413:entombed Egor the Wizard.
+search_out.txt:744:search_out.txt:514:search_out.txt:279:search_out.txt:44:MUD.TXT:5416:22	The grave of Tremble the Wiz
+search_out.txt:745:search_out.txt:515:search_out.txt:280:search_out.txt:45:MUD.TXT:5418:23	Before you stands the grave 
+search_out.txt:746:search_out.txt:516:search_out.txt:281:search_out.txt:46:MUD.TXT:5420:25	The tombstone of Rudy the wi
+search_out.txt:747:search_out.txt:517:search_out.txt:282:search_out.txt:47:MUD.TXT:5422:26	Nick the wizard is buried he
+search_out.txt:748:search_out.txt:518:search_out.txt:283:search_out.txt:48:MUD.TXT:5424:27	Elric the wizard is buried h
+search_out.txt:749:search_out.txt:519:search_out.txt:284:search_out.txt:49:MUD.TXT:5426:28	A headstone before you reads
+search_out.txt:753:search_out.txt:523:search_out.txt:288:search_out.txt:53:MUD.TXT:5436:34	The grave of Jason the whing
+search_out.txt:754:search_out.txt:524:search_out.txt:289:search_out.txt:54:MUD.TXT:5439:Chester the Wizard.
+search_out.txt:755:search_out.txt:525:search_out.txt:290:search_out.txt:55:MUD.TXT:5441:37	Etched onto the grave of Dan
+search_out.txt:756:search_out.txt:526:search_out.txt:291:search_out.txt:56:MUD.TXT:5443:38	The double-size grave of Faz
+search_out.txt:757:search_out.txt:527:search_out.txt:292:search_out.txt:57:MUD.TXT:5447:40	Here stands the tomb of Vivi
+search_out.txt:758:search_out.txt:528:search_out.txt:293:search_out.txt:58:MUD.TXT:5449:41	The proud marble headstone o
+search_out.txt:759:search_out.txt:529:search_out.txt:294:search_out.txt:59:MUD.TXT:8228:get to be a wizard or witch, of
+search_out.txt:760:search_out.txt:530:search_out.txt:295:search_out.txt:60:MUD1.BCL:72:(WIZARD of LH from player.names!
+search_out.txt:761:search_out.txt:531:search_out.txt:296:search_out.txt:61:MUD1.BCL:132:if WIZARD of profile writes(tty
+search_out.txt:762:search_out.txt:532:search_out.txt:297:search_out.txt:62:MUD1.BCL:282:unless WIZARD of profile error(
+search_out.txt:763:search_out.txt:533:search_out.txt:298:search_out.txt:63:MUD2.BCL:169:if WIZARD of profile ne 0 retur
+search_out.txt:764:search_out.txt:534:search_out.txt:299:search_out.txt:64:MUD2.BCL:192:test WIZARD of profile Describe
+search_out.txt:765:search_out.txt:535:search_out.txt:301:search_out.txt:66:MUD2.BCL:229:if (A.SMALL bitand ATTRIB of ne
+search_out.txt:766:search_out.txt:536:search_out.txt:302:search_out.txt:67:MUD2.BCL:233:if (bit bitand who.cpy) /\(WIZA
+search_out.txt:767:search_out.txt:537:search_out.txt:303:search_out.txt:68:MUD3.BCL:46:if SCORE of prof ge sm\/WIZARD o
+search_out.txt:768:search_out.txt:538:search_out.txt:304:search_out.txt:69:MUD3.BCL:57:unless asking if (WIZARD of prof
+search_out.txt:769:search_out.txt:539:search_out.txt:305:search_out.txt:70:MUD3.BCL:171:if WIZARD of profile=1/\instrmn
+search_out.txt:770:search_out.txt:540:search_out.txt:306:search_out.txt:71:MUD3.BCL:207:unless WIZARD of profile result
+search_out.txt:771:search_out.txt:541:search_out.txt:307:search_out.txt:72:MUD3.BCL:212:if WIZARD of profile resultis t
+search_out.txt:772:search_out.txt:542:search_out.txt:308:search_out.txt:73:MUD3.BCL:225:if WIZARD of nd resultis true
+search_out.txt:773:search_out.txt:543:search_out.txt:309:search_out.txt:74:MUD3.BCL:272:(WIZARD of profile=1\/flipping 
+search_out.txt:774:search_out.txt:544:search_out.txt:310:search_out.txt:75:MUD3.BCL:307:test us(me)\/(WIZARD of profile
+search_out.txt:775:search_out.txt:545:search_out.txt:311:search_out.txt:76:MUD4.BCL:125:if l=max.level unless WIZARD of
+search_out.txt:776:search_out.txt:546:search_out.txt:312:search_out.txt:77:MUD4.BCL:138:if (l=max.level-1/\(WIZARD of p
+search_out.txt:777:search_out.txt:547:search_out.txt:313:search_out.txt:78:MUD4.BCL:152:if ~wizonly \/ WIZARD of p ne 0
+search_out.txt:778:search_out.txt:548:search_out.txt:314:search_out.txt:79:MUD5.BCL:49:test RELAXED/\WIZARD of profile=
+search_out.txt:779:search_out.txt:549:search_out.txt:315:search_out.txt:80:MUD5.BCL:50:test spectacular/\(WIZARD of pro
+search_out.txt:780:search_out.txt:550:search_out.txt:316:search_out.txt:81:MUD5.BCL:114:test RELAXED/\WIZARD of profile
+search_out.txt:781:search_out.txt:551:search_out.txt:317:search_out.txt:82:MUD5.BCL:151:unless WIZARD of profile Error(
+search_out.txt:782:search_out.txt:552:search_out.txt:318:search_out.txt:83:MUD5.BCL:184:for i=0 to 35 if player.names!i
+search_out.txt:783:search_out.txt:553:search_out.txt:319:search_out.txt:84:MUD5.BCL:187:send(player.no, 0, WIZARD of pr
+search_out.txt:785:search_out.txt:555:search_out.txt:321:search_out.txt:86:MUD5.BCL:189:or send(player.no, 0,WIZARD of 
+search_out.txt:786:search_out.txt:556:search_out.txt:322:search_out.txt:87:MUD5.BCL:205:=0, 0, WIZARD of profile=1/\fin
+search_out.txt:787:search_out.txt:557:search_out.txt:323:search_out.txt:88:MUD5.BCL:232:unless WIZARD of profile if ~(v
+search_out.txt:788:search_out.txt:558:search_out.txt:324:search_out.txt:89:MUD5.BCL:234:if WIZARD of profile out(":6*T"
+search_out.txt:789:search_out.txt:559:search_out.txt:325:search_out.txt:90:MUD5.BCL:267:unless WIZARD of profile if sav
+search_out.txt:790:search_out.txt:560:search_out.txt:326:search_out.txt:91:MUD5.BCL:274:if WIZARD of profile=1/\PTYPE o
+search_out.txt:791:search_out.txt:561:search_out.txt:327:search_out.txt:92:MUD5.BCL:292:test (WIZARD of profile=1)\/ran
+search_out.txt:792:search_out.txt:562:search_out.txt:328:search_out.txt:93:MUD5.BCL:298:if WIZARD of profile
+search_out.txt:793:search_out.txt:563:search_out.txt:329:search_out.txt:94:MUD5.BCL:310:$(	let rm,old=WIZARD of profile
+search_out.txt:794:search_out.txt:564:search_out.txt:330:search_out.txt:95:MUD5.BCL:331:unless WIZARD of profile error(
+search_out.txt:795:search_out.txt:565:search_out.txt:331:search_out.txt:96:MUD5.BCL:346:if WIZARD of profile=1/\there o
+search_out.txt:796:search_out.txt:566:search_out.txt:332:search_out.txt:97:MUD5.BCL:359:test WIZARD of profile then
+search_out.txt:797:search_out.txt:567:search_out.txt:333:search_out.txt:98:MUD5.BCL:375:if WIZARD of profile pl_max.lev
+search_out.txt:798:search_out.txt:568:search_out.txt:334:search_out.txt:99:MUD5.BCL:478:$(	unless WIZARD of profile=1/\
+search_out.txt:799:search_out.txt:569:search_out.txt:335:search_out.txt:100:MUD5.BCL:517:for i=0 to 35 if player.names!
+search_out.txt:800:search_out.txt:570:search_out.txt:336:search_out.txt:101:MUD5.BCL:544:send(i,nd,((who.copy bitand (1
+search_out.txt:801:search_out.txt:571:search_out.txt:337:search_out.txt:102:MUD5.BCL:593:if seq(objname, "lock") test W
+search_out.txt:802:search_out.txt:572:search_out.txt:338:search_out.txt:103:MUD5.BCL:598:if seq(objname, "unlock") test
+search_out.txt:803:search_out.txt:573:search_out.txt:339:search_out.txt:104:MUD5.BCL:612:test WIZARD of profile then
+search_out.txt:804:search_out.txt:574:search_out.txt:340:search_out.txt:105:MUD5.BCL:613:$(	WIZARD of profile_false
+search_out.txt:805:search_out.txt:575:search_out.txt:341:search_out.txt:106:MUD5.BCL:616:$(	WIZARD of profile_true
+search_out.txt:806:search_out.txt:576:search_out.txt:342:search_out.txt:107:MUD5.BCL:721:$(	let ok=maint/\WIZARD of pro
+search_out.txt:807:search_out.txt:577:search_out.txt:343:search_out.txt:108:MUD5.BCL:739:unless WIZARD of profile Error
+search_out.txt:808:search_out.txt:578:search_out.txt:344:search_out.txt:109:MUD5.BCL:807:WIZARD of profile_true
+search_out.txt:809:search_out.txt:579:search_out.txt:345:search_out.txt:110:MUD5.BCL:815:unless WIZARD of profile reset
+search_out.txt:810:search_out.txt:580:search_out.txt:346:search_out.txt:111:MUD5.BCL:838:unless WIZARD of profile error
+search_out.txt:811:search_out.txt:581:search_out.txt:347:search_out.txt:112:MUD5.BCL:855:case SF.RESURRECT:
+search_out.txt:812:search_out.txt:582:search_out.txt:348:search_out.txt:113:MUD5.BCL:856:unless WIZARD of profile reset
+search_out.txt:813:search_out.txt:583:search_out.txt:349:search_out.txt:114:MUD5.BCL:877:Out(":P now :s.*C*L", objname,
+search_out.txt:814:search_out.txt:584:search_out.txt:350:search_out.txt:115:MUD5.BCL:885:$(	unless WIZARD of profile er
+search_out.txt:815:search_out.txt:585:search_out.txt:351:search_out.txt:116:MUD5.BCL:902:test spectacular/\WIZARD of pr
+search_out.txt:816:search_out.txt:586:search_out.txt:352:search_out.txt:117:MUD5.BCL:917:unless WIZARD of profile if A.
+search_out.txt:817:search_out.txt:587:search_out.txt:353:search_out.txt:118:MUD5.BCL:931:case SF.GO://Go (check if wiza
+search_out.txt:818:search_out.txt:588:search_out.txt:354:search_out.txt:119:MUD5.BCL:932:if WIZARD of profile then
+search_out.txt:819:search_out.txt:589:search_out.txt:355:search_out.txt:120:MUD5.BCL:967:unless WIZARD of profile
+search_out.txt:820:search_out.txt:590:search_out.txt:356:search_out.txt:121:MUD5.BCL:1001:if WIZARD of profile then
+search_out.txt:821:search_out.txt:591:search_out.txt:357:search_out.txt:122:MUD5.BCL:1016:unless WIZARD of profile=1 | 
+search_out.txt:822:search_out.txt:592:search_out.txt:358:search_out.txt:123:MUD5.BCL:1079:if WIZARD of profile out(":6 
+search_out.txt:824:search_out.txt:594:search_out.txt:360:search_out.txt:125:MUD5.BCL:1108:if cn(l,ob) test WIZARD of pr
+search_out.txt:825:search_out.txt:595:search_out.txt:361:search_out.txt:126:MUD5.BCL:1157:$(	unless WIZARD of profile e
+search_out.txt:826:search_out.txt:596:search_out.txt:362:search_out.txt:127:MUD5.BCL:1180:$(	unless WIZARD of profile e
+search_out.txt:827:search_out.txt:597:search_out.txt:363:search_out.txt:128:MUD5.BCL:1222:unless WIZARD of profile erro
+search_out.txt:828:search_out.txt:598:search_out.txt:364:search_out.txt:129:MUD5.BCL:1224:unless WIZARD of profile Erro
+search_out.txt:829:search_out.txt:599:search_out.txt:365:search_out.txt:130:MUD5.BCL:1238:if WIZARD of nm out(" in wiz 
+search_out.txt:830:search_out.txt:600:search_out.txt:366:search_out.txt:131:MUD5.BCL:1251:unless WIZARD of profile erro
+search_out.txt:831:search_out.txt:601:search_out.txt:367:search_out.txt:132:MUD5.BCL:1292:unless WIZARD of profile out(
+search_out.txt:832:search_out.txt:602:search_out.txt:368:search_out.txt:133:MUD5.BCL:1371:unless function=F.SSENDEMON\/
+search_out.txt:833:search_out.txt:603:search_out.txt:369:search_out.txt:134:MUD5.BCL:1391:if (A.HIDEAWAY bitand ATTRIB 
+search_out.txt:834:search_out.txt:604:search_out.txt:370:search_out.txt:135:MUD5.BCL:1392:while nd do test obj=nd /\(WI
+search_out.txt:835:search_out.txt:605:search_out.txt:371:search_out.txt:136:MUD5.BCL:1447:if WIZARD of profile endcase
+search_out.txt:836:search_out.txt:606:search_out.txt:372:search_out.txt:137:MUD5.BCL:1450:unless WIZARD of profile endc
+search_out.txt:837:search_out.txt:607:search_out.txt:373:search_out.txt:138:MUD5.BCL:1496:case F.IFLEVEL:	if player.lev
+search_out.txt:841:search_out.txt:613:search_out.txt:379:search_out.txt:144:MUD5.BCL:1568:if ifr/\(WIZARD of profile)=0
+search_out.txt:843:search_out.txt:615:search_out.txt:381:search_out.txt:146:MUD5.BCL:1851:unless RELAXED\/us(me) if WIZ
+search_out.txt:844:search_out.txt:616:search_out.txt:382:search_out.txt:147:MUD5.BCL:1929:unless WIZARD of profile stam
+search_out.txt:845:search_out.txt:617:search_out.txt:383:search_out.txt:148:MUD5.BCL:1945:unless WIZARD of profile ne 0
+search_out.txt:846:search_out.txt:618:search_out.txt:384:search_out.txt:149:MUD5.BCL:1972:unless WIZARD of profile STAM
+search_out.txt:847:search_out.txt:620:search_out.txt:386:search_out.txt:151:MUD6.BCL:25:if WIZARD of profile out("(:6) 
+search_out.txt:848:search_out.txt:621:search_out.txt:387:search_out.txt:152:MUD6.BCL:26:test (A.DEATH bitand ATTRIB of 
+search_out.txt:849:search_out.txt:622:search_out.txt:388:search_out.txt:153:MUD6.BCL:31:if WIZARD of profile out("(:6) 
+search_out.txt:850:search_out.txt:623:search_out.txt:389:search_out.txt:154:MUD6.BCL:38:test CONTENTS of nd ne 0 /\ (WI
+search_out.txt:851:search_out.txt:624:search_out.txt:390:search_out.txt:155:MUD6.BCL:42:if cn(l,n)/\(WIZARD of profile=
+search_out.txt:853:search_out.txt:627:search_out.txt:393:search_out.txt:158:MUD6.BCL:93:unless WIZARD of profile=1 \/ h
+search_out.txt:854:search_out.txt:628:search_out.txt:394:search_out.txt:159:MUD6.BCL:96:until LH of nd=obj /\(WIZARD of
+search_out.txt:855:search_out.txt:629:search_out.txt:395:search_out.txt:160:MUD6.BCL:101:if FIXED of nd\/NOGET of nd te
+search_out.txt:857:search_out.txt:631:search_out.txt:397:search_out.txt:162:MUD6.BCL:129:unless WIZARD of profile=1\/he
+search_out.txt:858:search_out.txt:632:search_out.txt:398:search_out.txt:163:MUD6.BCL:134:(WIZARD of profile=1/\(RELAXED
+search_out.txt:861:search_out.txt:635:search_out.txt:401:search_out.txt:166:MUD6.BCL:278:rm_WIZARD of profile=0/\(A.DEA
+search_out.txt:862:search_out.txt:636:search_out.txt:402:search_out.txt:167:MUD6.BCL:279:rm_WIZARD of profile=0/\(A.DMO
+search_out.txt:865:search_out.txt:639:search_out.txt:405:search_out.txt:170:MUD6.BCL:423:if A.HIDEAWAY bitand ATTRIB of
+search_out.txt:866:search_out.txt:640:search_out.txt:406:search_out.txt:171:MUD6.BCL:433:if WIZARD of profile=1/\(brief
+search_out.txt:867:search_out.txt:641:search_out.txt:407:search_out.txt:172:MUD6.BCL:443:if (A.DEATH bitand ATTRIB of r
+search_out.txt:868:search_out.txt:642:search_out.txt:408:search_out.txt:173:MUD6.BCL:458:if (A.HIDE bitand ATTRIB of ro
+search_out.txt:870:search_out.txt:644:search_out.txt:410:search_out.txt:175:MUD6.BCL:526:if WIZARD of profile=1/\(brief
+search_out.txt:871:search_out.txt:645:search_out.txt:411:search_out.txt:176:MUD6.BCL:530:if WIZARD of profile=1
+search_out.txt:872:search_out.txt:646:search_out.txt:412:search_out.txt:177:MUD6.BCL:532:unless (DESTROYED of obj ls 0 
+search_out.txt:873:search_out.txt:647:search_out.txt:413:search_out.txt:178:MUD6.BCL:610:$(	if (A.HIDEAWAY bitand ATTRI
+search_out.txt:874:search_out.txt:648:search_out.txt:414:search_out.txt:179:MUD6.BCL:613:while nd do test obj=LH of nd 
+search_out.txt:875:search_out.txt:649:search_out.txt:415:search_out.txt:180:MUD6.BCL:628:if (A.HIDEAWAY bitand ATTRIB o
+search_out.txt:876:search_out.txt:650:search_out.txt:416:search_out.txt:181:MUD6.BCL:667:$) ge 0 ))/\(WIZARD of profile
+search_out.txt:877:search_out.txt:651:search_out.txt:417:search_out.txt:182:MUD7.BCL:60:$(	unless WIZARD of profile res
+search_out.txt:879:search_out.txt:653:search_out.txt:419:search_out.txt:184:MUD7.BCL:257:if us(objname) WIZARD of profi
+search_out.txt:880:search_out.txt:654:search_out.txt:420:search_out.txt:185:MUD7.BCL:270:$(	unless (RELAXED\/us(me))/\(
+search_out.txt:881:search_out.txt:655:search_out.txt:421:search_out.txt:186:MUD7.BCL:290:unless (RELAXED\/us(me))/\WIZA
+search_out.txt:882:search_out.txt:656:search_out.txt:422:search_out.txt:187:MUD7.BCL:337:for i=0 to 35 if wizard of LH 
+search_out.txt:883:search_out.txt:657:search_out.txt:423:search_out.txt:188:MUD8.BCL:32:if WIZARD of profile
+search_out.txt:884:search_out.txt:658:search_out.txt:424:search_out.txt:189:MUD8.BCL:33:unless ~WIZVWIZ/\WIZARD of pp n
+search_out.txt:885:search_out.txt:659:search_out.txt:425:search_out.txt:190:MUD8.BCL:39:unless WIZARD of profile unless
+search_out.txt:886:search_out.txt:660:search_out.txt:426:search_out.txt:191:MUD8.BCL:59:unless WIZARD of profile unless
+search_out.txt:887:search_out.txt:661:search_out.txt:427:search_out.txt:192:MUD8.BCL:65:unless WIZARD of profile if WIZ
+search_out.txt:888:search_out.txt:662:search_out.txt:428:search_out.txt:193:MUD8.BCL:75:WIZARD of LH from player.names!
+search_out.txt:889:search_out.txt:663:search_out.txt:429:search_out.txt:194:MUD8.BCL:84:unless RELAXED\/us(me)\/(WIZARD
+search_out.txt:890:search_out.txt:664:search_out.txt:430:search_out.txt:195:MUD8.BCL:91:unless WIZARD of profile unless
+search_out.txt:891:search_out.txt:665:search_out.txt:431:search_out.txt:196:MUD8.BCL:114:unless WIZARD of profile unles
+search_out.txt:892:search_out.txt:666:search_out.txt:432:search_out.txt:197:MUD8.BCL:138:unless WIZARD of profile unles
+search_out.txt:893:search_out.txt:667:search_out.txt:433:search_out.txt:198:MUD8.BCL:156:unless WIZARD of profile unles
+search_out.txt:894:search_out.txt:668:search_out.txt:434:search_out.txt:199:MUD8.BCL:175:unless us(me)\/snd=player.no i
+search_out.txt:895:search_out.txt:669:search_out.txt:435:search_out.txt:200:MUD8.BCL:186:unless WIZARD of profile unles
+search_out.txt:896:search_out.txt:670:search_out.txt:436:search_out.txt:201:MUD8.BCL:188:if WIZARD of pp
+search_out.txt:897:search_out.txt:671:search_out.txt:437:search_out.txt:202:MUD8.BCL:206:WIZVWIZ/\WIZARD of profile ne 
+search_out.txt:898:search_out.txt:672:search_out.txt:438:search_out.txt:203:MUD8.BCL:221:send(snd,block,K.IACPT,WIZVWIZ
+search_out.txt:899:search_out.txt:673:search_out.txt:439:search_out.txt:204:MUD8.BCL:229:if WIZARD of p ne 0\/(who.copy
+search_out.txt:900:search_out.txt:674:search_out.txt:440:search_out.txt:205:MUD8.BCL:242:damage_WIZVWIZ/\WIZARD of prof
+search_out.txt:901:search_out.txt:675:search_out.txt:441:search_out.txt:206:MUD8.BCL:244:$(	damage_WIZVWIZ/\WIZARD of p
+search_out.txt:902:search_out.txt:676:search_out.txt:442:search_out.txt:207:MUD8.BCL:260:damage_WIZVWIZ/\WIZARD of prof
+search_out.txt:903:search_out.txt:677:search_out.txt:443:search_out.txt:208:MUD8.BCL:262:$(	damage_WIZVWIZ/\WIZARD of p
+search_out.txt:904:search_out.txt:678:search_out.txt:444:search_out.txt:209:MUD8.BCL:331:$(	damage_WIZARD of profile->0
+search_out.txt:905:search_out.txt:679:search_out.txt:445:search_out.txt:210:MUD8.BCL:383:test WIZARD of profile then
+search_out.txt:906:search_out.txt:680:search_out.txt:446:search_out.txt:211:MUD8.BCL:425:test WIZARD of profile=1\/FUNC
+search_out.txt:907:search_out.txt:681:search_out.txt:447:search_out.txt:212:MUD8.BCL:444:damage_WIZARD of profile->102,
+search_out.txt:908:search_out.txt:682:search_out.txt:448:search_out.txt:213:MUD8.BCL:476:full.up())/\(WIZARD of profile
+search_out.txt:909:search_out.txt:683:search_out.txt:449:search_out.txt:214:MUD8.BCL:504:full.up())/\(WIZARD of profile
+search_out.txt:910:search_out.txt:684:search_out.txt:450:search_out.txt:215:MUD8.BCL:523:if WIZARD of profile unless in
+search_out.txt:911:search_out.txt:685:search_out.txt:451:search_out.txt:216:MUD8.BCL:536:if WIZARD of profile unless in
+search_out.txt:912:search_out.txt:686:search_out.txt:452:search_out.txt:217:MUD8.BCL:567:unless us(pn) if (WIZARD of pr
+search_out.txt:913:search_out.txt:687:search_out.txt:453:search_out.txt:218:MUD8.BCL:578:unless us(pn) if WIZARD of pro
+search_out.txt:914:search_out.txt:688:search_out.txt:454:search_out.txt:219:MUD8.BCL:613:WIZARD of profile_false
+search_out.txt:915:search_out.txt:689:search_out.txt:456:search_out.txt:221:MUD8.BCL:687:$(	let dropsy, sumnd=WIZARD of
+search_out.txt:916:search_out.txt:690:search_out.txt:457:search_out.txt:222:MUD8.BCL:688:if sumnd if WIZARD of profile=
+search_out.txt:917:search_out.txt:691:search_out.txt:458:search_out.txt:223:MUD8.BCL:719:if WIZARD of profile
+search_out.txt:918:search_out.txt:692:search_out.txt:459:search_out.txt:224:MUD8.BCL:788:WIZARD of theirp->""," not",SE
+search_out.txt:919:search_out.txt:693:search_out.txt:460:search_out.txt:225:MUD8.BCL:789:WIZARD of theirp->"...",".")
+search_out.txt:920:search_out.txt:694:search_out.txt:461:search_out.txt:226:MUD8.BCL:811:if WIZARD of profile
+search_out.txt:921:search_out.txt:695:search_out.txt:462:search_out.txt:227:MUD8.BCL:813:WIZARD of profile_false
+search_out.txt:922:search_out.txt:696:search_out.txt:463:search_out.txt:228:MUD8.BCL:831:$(	if WIZARD of profile Out(" 
+search_out.txt:923:search_out.txt:697:search_out.txt:464:search_out.txt:229:MUDLIB.BCL:940:unless WIZARD of profile ccc
+search_out.txt:924:search_out.txt:698:search_out.txt:465:search_out.txt:230:MUDLIB.BCL:1135:unless ISWIZ of profile ne 
+search_out.txt:925:search_out.txt:699:search_out.txt:466:search_out.txt:231:MUDLIB.BCL:1136:if us(name) WIZARD of profi
+search_out.txt:926:search_out.txt:700:search_out.txt:467:search_out.txt:232:MUDLIB.BCL:1163:if us(name) WIZARD of profi
+search_out.txt:927:search_out.txt:701:search_out.txt:468:search_out.txt:233:MUDLIB.BCL:1386:unless WIZARD of profile WI
+search_out.txt:928:search_out.txt:702:search_out.txt:469:search_out.txt:234:MUDLIB.BCL:1436:outz($az"eg hero/heroine, w
+search_out.txt:929:search_out.txt:703:search_out.txt:470:search_out.txt:235:MUDLIB.BCL:1485:test WIZARD of prof then wr
+search_out.txt:930:search_out.txt:704:search_out.txt:471:search_out.txt:236:search_out.txt:1:DBASE.BCL:205:".resurrect"
+search_out.txt:931:search_out.txt:705:search_out.txt:472:search_out.txt:237:search_out.txt:2:MUD.TXT:874:Hello wizard, 
+search_out.txt:932:search_out.txt:706:search_out.txt:473:search_out.txt:238:search_out.txt:3:MUD.TXT:917:Hi wizards! Tr
+search_out.txt:933:search_out.txt:707:search_out.txt:474:search_out.txt:239:search_out.txt:4:MUD.TXT:920:Hi wizards! Tr
+search_out.txt:934:search_out.txt:708:search_out.txt:475:search_out.txt:240:search_out.txt:5:MUD.TXT:923:Hi wizards! Tr
+search_out.txt:935:search_out.txt:709:search_out.txt:476:search_out.txt:241:search_out.txt:6:MUD.TXT:926:Hi wizards! Tr
+search_out.txt:936:search_out.txt:710:search_out.txt:477:search_out.txt:242:search_out.txt:7:MUD.TXT:929:Hi wizards! Tr
+search_out.txt:937:search_out.txt:713:search_out.txt:480:search_out.txt:245:search_out.txt:10:MUD.TXT:4095:witches	wiza
+search_out.txt:939:search_out.txt:715:search_out.txt:482:search_out.txt:247:search_out.txt:12:MUD.TXT:5327:the Wizard".
+search_out.txt:941:search_out.txt:720:search_out.txt:487:search_out.txt:252:search_out.txt:17:MUD.TXT:5339:17	The tomb 
+search_out.txt:942:search_out.txt:722:search_out.txt:489:search_out.txt:254:search_out.txt:19:MUD.TXT:5343:where Egor t
+search_out.txt:945:search_out.txt:726:search_out.txt:494:search_out.txt:259:search_out.txt:24:MUD.TXT:5356:27	Alan the 
+search_out.txt:946:search_out.txt:727:search_out.txt:495:search_out.txt:260:search_out.txt:25:MUD.TXT:5357:28	Christian
+search_out.txt:948:search_out.txt:730:search_out.txt:499:search_out.txt:264:search_out.txt:29:MUD.TXT:5369:the Wizard, 
+search_out.txt:949:search_out.txt:731:search_out.txt:500:search_out.txt:265:search_out.txt:30:MUD.TXT:5370:34	Gripper t
+search_out.txt:951:search_out.txt:733:search_out.txt:502:search_out.txt:267:search_out.txt:32:MUD.TXT:5382:words, "Jon 
+search_out.txt:953:search_out.txt:735:search_out.txt:504:search_out.txt:269:search_out.txt:34:MUD.TXT:5398:8	The grave 
+search_out.txt:954:search_out.txt:736:search_out.txt:505:search_out.txt:270:search_out.txt:35:MUD.TXT:5399:9	The grave 
+search_out.txt:955:search_out.txt:737:search_out.txt:506:search_out.txt:271:search_out.txt:36:MUD.TXT:5400:10	The grave
+search_out.txt:961:search_out.txt:743:search_out.txt:512:search_out.txt:277:search_out.txt:42:MUD.TXT:5413:entombed Ego
+search_out.txt:965:search_out.txt:747:search_out.txt:517:search_out.txt:282:search_out.txt:47:MUD.TXT:5422:26	Nick the 
+search_out.txt:966:search_out.txt:748:search_out.txt:518:search_out.txt:283:search_out.txt:48:MUD.TXT:5424:27	Elric the
+search_out.txt:969:search_out.txt:754:search_out.txt:524:search_out.txt:289:search_out.txt:54:MUD.TXT:5439:Chester the 
+search_out.txt:974:search_out.txt:759:search_out.txt:529:search_out.txt:294:search_out.txt:59:MUD.TXT:8228:get to be a 
+search_out.txt:975:search_out.txt:760:search_out.txt:530:search_out.txt:295:search_out.txt:60:MUD1.BCL:72:(WIZARD of LH
+search_out.txt:976:search_out.txt:761:search_out.txt:531:search_out.txt:296:search_out.txt:61:MUD1.BCL:132:if WIZARD of
+search_out.txt:977:search_out.txt:762:search_out.txt:532:search_out.txt:297:search_out.txt:62:MUD1.BCL:282:unless WIZAR
+search_out.txt:978:search_out.txt:763:search_out.txt:533:search_out.txt:298:search_out.txt:63:MUD2.BCL:169:if WIZARD of
+search_out.txt:979:search_out.txt:764:search_out.txt:534:search_out.txt:299:search_out.txt:64:MUD2.BCL:192:test WIZARD 
+search_out.txt:982:search_out.txt:767:search_out.txt:537:search_out.txt:303:search_out.txt:68:MUD3.BCL:46:if SCORE of p
+search_out.txt:983:search_out.txt:768:search_out.txt:538:search_out.txt:304:search_out.txt:69:MUD3.BCL:57:unless asking
+search_out.txt:984:search_out.txt:769:search_out.txt:539:search_out.txt:305:search_out.txt:70:MUD3.BCL:171:if WIZARD of
+search_out.txt:985:search_out.txt:770:search_out.txt:540:search_out.txt:306:search_out.txt:71:MUD3.BCL:207:unless WIZAR
+search_out.txt:986:search_out.txt:771:search_out.txt:541:search_out.txt:307:search_out.txt:72:MUD3.BCL:212:if WIZARD of
+search_out.txt:987:search_out.txt:772:search_out.txt:542:search_out.txt:308:search_out.txt:73:MUD3.BCL:225:if WIZARD of
+search_out.txt:988:search_out.txt:773:search_out.txt:543:search_out.txt:309:search_out.txt:74:MUD3.BCL:272:(WIZARD of p
+search_out.txt:989:search_out.txt:774:search_out.txt:544:search_out.txt:310:search_out.txt:75:MUD3.BCL:307:test us(me)\
+search_out.txt:990:search_out.txt:775:search_out.txt:545:search_out.txt:311:search_out.txt:76:MUD4.BCL:125:if l=max.lev
+search_out.txt:991:search_out.txt:776:search_out.txt:546:search_out.txt:312:search_out.txt:77:MUD4.BCL:138:if (l=max.le
+search_out.txt:992:search_out.txt:777:search_out.txt:547:search_out.txt:313:search_out.txt:78:MUD4.BCL:152:if ~wizonly 
+search_out.txt:993:search_out.txt:778:search_out.txt:548:search_out.txt:314:search_out.txt:79:MUD5.BCL:49:test RELAXED/
+search_out.txt:994:search_out.txt:779:search_out.txt:549:search_out.txt:315:search_out.txt:80:MUD5.BCL:50:test spectacu
+search_out.txt:995:search_out.txt:780:search_out.txt:550:search_out.txt:316:search_out.txt:81:MUD5.BCL:114:test RELAXED
+search_out.txt:996:search_out.txt:781:search_out.txt:551:search_out.txt:317:search_out.txt:82:MUD5.BCL:151:unless WIZAR
+search_out.txt:998:search_out.txt:783:search_out.txt:553:search_out.txt:319:search_out.txt:84:MUD5.BCL:187:send(player.
+search_out.txt:999:search_out.txt:785:search_out.txt:555:search_out.txt:321:search_out.txt:86:MUD5.BCL:189:or send(play
+search_out.txt:1000:search_out.txt:786:search_out.txt:556:search_out.txt:322:search_out.txt:87:MUD5.BCL:205:=0, 0, WIZAR
+search_out.txt:1001:search_out.txt:787:search_out.txt:557:search_out.txt:323:search_out.txt:88:MUD5.BCL:232:unless WIZAR
+search_out.txt:1002:search_out.txt:788:search_out.txt:558:search_out.txt:324:search_out.txt:89:MUD5.BCL:234:if WIZARD of
+search_out.txt:1003:search_out.txt:789:search_out.txt:559:search_out.txt:325:search_out.txt:90:MUD5.BCL:267:unless WIZAR
+search_out.txt:1004:search_out.txt:790:search_out.txt:560:search_out.txt:326:search_out.txt:91:MUD5.BCL:274:if WIZARD of
+search_out.txt:1005:search_out.txt:791:search_out.txt:561:search_out.txt:327:search_out.txt:92:MUD5.BCL:292:test (WIZARD
+search_out.txt:1006:search_out.txt:792:search_out.txt:562:search_out.txt:328:search_out.txt:93:MUD5.BCL:298:if WIZARD of
+search_out.txt:1007:search_out.txt:793:search_out.txt:563:search_out.txt:329:search_out.txt:94:MUD5.BCL:310:$(	let rm,ol
+search_out.txt:1008:search_out.txt:794:search_out.txt:564:search_out.txt:330:search_out.txt:95:MUD5.BCL:331:unless WIZAR
+search_out.txt:1009:search_out.txt:795:search_out.txt:565:search_out.txt:331:search_out.txt:96:MUD5.BCL:346:if WIZARD of
+search_out.txt:1010:search_out.txt:796:search_out.txt:566:search_out.txt:332:search_out.txt:97:MUD5.BCL:359:test WIZARD 
+search_out.txt:1011:search_out.txt:797:search_out.txt:567:search_out.txt:333:search_out.txt:98:MUD5.BCL:375:if WIZARD of
+search_out.txt:1012:search_out.txt:798:search_out.txt:568:search_out.txt:334:search_out.txt:99:MUD5.BCL:478:$(	unless WI
+search_out.txt:1017:search_out.txt:803:search_out.txt:573:search_out.txt:339:search_out.txt:104:MUD5.BCL:612:test WIZARD
+search_out.txt:1018:search_out.txt:804:search_out.txt:574:search_out.txt:340:search_out.txt:105:MUD5.BCL:613:$(	WIZARD o
+search_out.txt:1019:search_out.txt:805:search_out.txt:575:search_out.txt:341:search_out.txt:106:MUD5.BCL:616:$(	WIZARD o
+search_out.txt:1020:search_out.txt:806:search_out.txt:576:search_out.txt:342:search_out.txt:107:MUD5.BCL:721:$(	let ok=m
+search_out.txt:1021:search_out.txt:807:search_out.txt:577:search_out.txt:343:search_out.txt:108:MUD5.BCL:739:unless WIZA
+search_out.txt:1022:search_out.txt:808:search_out.txt:578:search_out.txt:344:search_out.txt:109:MUD5.BCL:807:WIZARD of p
+search_out.txt:1023:search_out.txt:809:search_out.txt:579:search_out.txt:345:search_out.txt:110:MUD5.BCL:815:unless WIZA
+search_out.txt:1024:search_out.txt:810:search_out.txt:580:search_out.txt:346:search_out.txt:111:MUD5.BCL:838:unless WIZA
+search_out.txt:1025:search_out.txt:811:search_out.txt:581:search_out.txt:347:search_out.txt:112:MUD5.BCL:855:case SF.RES
+search_out.txt:1026:search_out.txt:812:search_out.txt:582:search_out.txt:348:search_out.txt:113:MUD5.BCL:856:unless WIZA
+search_out.txt:1028:search_out.txt:814:search_out.txt:584:search_out.txt:350:search_out.txt:115:MUD5.BCL:885:$(	unless W
+search_out.txt:1029:search_out.txt:815:search_out.txt:585:search_out.txt:351:search_out.txt:116:MUD5.BCL:902:test specta
+search_out.txt:1030:search_out.txt:816:search_out.txt:586:search_out.txt:352:search_out.txt:117:MUD5.BCL:917:unless WIZA
+search_out.txt:1032:search_out.txt:818:search_out.txt:588:search_out.txt:354:search_out.txt:119:MUD5.BCL:932:if WIZARD o
+search_out.txt:1033:search_out.txt:819:search_out.txt:589:search_out.txt:355:search_out.txt:120:MUD5.BCL:967:unless WIZA
+search_out.txt:1034:search_out.txt:820:search_out.txt:590:search_out.txt:356:search_out.txt:121:MUD5.BCL:1001:if WIZARD 
+search_out.txt:1035:search_out.txt:821:search_out.txt:591:search_out.txt:357:search_out.txt:122:MUD5.BCL:1016:unless WIZ
+search_out.txt:1036:search_out.txt:822:search_out.txt:592:search_out.txt:358:search_out.txt:123:MUD5.BCL:1079:if WIZARD 
+search_out.txt:1037:search_out.txt:824:search_out.txt:594:search_out.txt:360:search_out.txt:125:MUD5.BCL:1108:if cn(l,ob
+search_out.txt:1038:search_out.txt:825:search_out.txt:595:search_out.txt:361:search_out.txt:126:MUD5.BCL:1157:$(	unless 
+search_out.txt:1039:search_out.txt:826:search_out.txt:596:search_out.txt:362:search_out.txt:127:MUD5.BCL:1180:$(	unless 
+search_out.txt:1040:search_out.txt:827:search_out.txt:597:search_out.txt:363:search_out.txt:128:MUD5.BCL:1222:unless WIZ
+search_out.txt:1041:search_out.txt:828:search_out.txt:598:search_out.txt:364:search_out.txt:129:MUD5.BCL:1224:unless WIZ
+search_out.txt:1042:search_out.txt:829:search_out.txt:599:search_out.txt:365:search_out.txt:130:MUD5.BCL:1238:if WIZARD 
+search_out.txt:1043:search_out.txt:830:search_out.txt:600:search_out.txt:366:search_out.txt:131:MUD5.BCL:1251:unless WIZ
+search_out.txt:1044:search_out.txt:831:search_out.txt:601:search_out.txt:367:search_out.txt:132:MUD5.BCL:1292:unless WIZ
+search_out.txt:1048:search_out.txt:835:search_out.txt:605:search_out.txt:371:search_out.txt:136:MUD5.BCL:1447:if WIZARD 
+search_out.txt:1049:search_out.txt:836:search_out.txt:606:search_out.txt:372:search_out.txt:137:MUD5.BCL:1450:unless WIZ
+search_out.txt:1051:search_out.txt:841:search_out.txt:613:search_out.txt:379:search_out.txt:144:MUD5.BCL:1568:if ifr/\(W
+search_out.txt:1053:search_out.txt:844:search_out.txt:616:search_out.txt:382:search_out.txt:147:MUD5.BCL:1929:unless WIZ
+search_out.txt:1054:search_out.txt:845:search_out.txt:617:search_out.txt:383:search_out.txt:148:MUD5.BCL:1945:unless WIZ
+search_out.txt:1055:search_out.txt:846:search_out.txt:618:search_out.txt:384:search_out.txt:149:MUD5.BCL:1972:unless WIZ
+search_out.txt:1056:search_out.txt:847:search_out.txt:620:search_out.txt:386:search_out.txt:151:MUD6.BCL:25:if WIZARD of
+search_out.txt:1058:search_out.txt:849:search_out.txt:622:search_out.txt:388:search_out.txt:153:MUD6.BCL:31:if WIZARD of
+search_out.txt:1060:search_out.txt:851:search_out.txt:624:search_out.txt:390:search_out.txt:155:MUD6.BCL:42:if cn(l,n)/\
+search_out.txt:1061:search_out.txt:853:search_out.txt:627:search_out.txt:393:search_out.txt:158:MUD6.BCL:93:unless WIZAR
+search_out.txt:1062:search_out.txt:854:search_out.txt:628:search_out.txt:394:search_out.txt:159:MUD6.BCL:96:until LH of 
+search_out.txt:1064:search_out.txt:857:search_out.txt:631:search_out.txt:397:search_out.txt:162:MUD6.BCL:129:unless WIZA
+search_out.txt:1065:search_out.txt:858:search_out.txt:632:search_out.txt:398:search_out.txt:163:MUD6.BCL:134:(WIZARD of 
+search_out.txt:1066:search_out.txt:861:search_out.txt:635:search_out.txt:401:search_out.txt:166:MUD6.BCL:278:rm_WIZARD o
+search_out.txt:1067:search_out.txt:862:search_out.txt:636:search_out.txt:402:search_out.txt:167:MUD6.BCL:279:rm_WIZARD o
+search_out.txt:1069:search_out.txt:866:search_out.txt:640:search_out.txt:406:search_out.txt:171:MUD6.BCL:433:if WIZARD o
+search_out.txt:1072:search_out.txt:870:search_out.txt:644:search_out.txt:410:search_out.txt:175:MUD6.BCL:526:if WIZARD o
+search_out.txt:1073:search_out.txt:871:search_out.txt:645:search_out.txt:411:search_out.txt:176:MUD6.BCL:530:if WIZARD o
+search_out.txt:1078:search_out.txt:876:search_out.txt:650:search_out.txt:416:search_out.txt:181:MUD6.BCL:667:$) ge 0 ))/
+search_out.txt:1079:search_out.txt:877:search_out.txt:651:search_out.txt:417:search_out.txt:182:MUD7.BCL:60:$(	unless WI
+search_out.txt:1080:search_out.txt:879:search_out.txt:653:search_out.txt:419:search_out.txt:184:MUD7.BCL:257:if us(objna
+search_out.txt:1083:search_out.txt:882:search_out.txt:656:search_out.txt:422:search_out.txt:187:MUD7.BCL:337:for i=0 to 
+search_out.txt:1084:search_out.txt:883:search_out.txt:657:search_out.txt:423:search_out.txt:188:MUD8.BCL:32:if WIZARD of
+search_out.txt:1085:search_out.txt:884:search_out.txt:658:search_out.txt:424:search_out.txt:189:MUD8.BCL:33:unless ~WIZV
+search_out.txt:1086:search_out.txt:885:search_out.txt:659:search_out.txt:425:search_out.txt:190:MUD8.BCL:39:unless WIZAR
+search_out.txt:1087:search_out.txt:886:search_out.txt:660:search_out.txt:426:search_out.txt:191:MUD8.BCL:59:unless WIZAR
+search_out.txt:1088:search_out.txt:887:search_out.txt:661:search_out.txt:427:search_out.txt:192:MUD8.BCL:65:unless WIZAR
+search_out.txt:1089:search_out.txt:888:search_out.txt:662:search_out.txt:428:search_out.txt:193:MUD8.BCL:75:WIZARD of LH
+search_out.txt:1090:search_out.txt:889:search_out.txt:663:search_out.txt:429:search_out.txt:194:MUD8.BCL:84:unless RELAX
+search_out.txt:1091:search_out.txt:890:search_out.txt:664:search_out.txt:430:search_out.txt:195:MUD8.BCL:91:unless WIZAR
+search_out.txt:1092:search_out.txt:891:search_out.txt:665:search_out.txt:431:search_out.txt:196:MUD8.BCL:114:unless WIZA
+search_out.txt:1093:search_out.txt:892:search_out.txt:666:search_out.txt:432:search_out.txt:197:MUD8.BCL:138:unless WIZA
+search_out.txt:1094:search_out.txt:893:search_out.txt:667:search_out.txt:433:search_out.txt:198:MUD8.BCL:156:unless WIZA
+search_out.txt:1096:search_out.txt:895:search_out.txt:669:search_out.txt:435:search_out.txt:200:MUD8.BCL:186:unless WIZA
+search_out.txt:1097:search_out.txt:896:search_out.txt:670:search_out.txt:436:search_out.txt:201:MUD8.BCL:188:if WIZARD o
+search_out.txt:1098:search_out.txt:897:search_out.txt:671:search_out.txt:437:search_out.txt:202:MUD8.BCL:206:WIZVWIZ/\WI
+search_out.txt:1100:search_out.txt:899:search_out.txt:673:search_out.txt:439:search_out.txt:204:MUD8.BCL:229:if WIZARD o
+search_out.txt:1101:search_out.txt:900:search_out.txt:674:search_out.txt:440:search_out.txt:205:MUD8.BCL:242:damage_WIZV
+search_out.txt:1102:search_out.txt:901:search_out.txt:675:search_out.txt:441:search_out.txt:206:MUD8.BCL:244:$(	damage_W
+search_out.txt:1103:search_out.txt:902:search_out.txt:676:search_out.txt:442:search_out.txt:207:MUD8.BCL:260:damage_WIZV
+search_out.txt:1104:search_out.txt:903:search_out.txt:677:search_out.txt:443:search_out.txt:208:MUD8.BCL:262:$(	damage_W
+search_out.txt:1105:search_out.txt:904:search_out.txt:678:search_out.txt:444:search_out.txt:209:MUD8.BCL:331:$(	damage_W
+search_out.txt:1106:search_out.txt:905:search_out.txt:679:search_out.txt:445:search_out.txt:210:MUD8.BCL:383:test WIZARD
+search_out.txt:1107:search_out.txt:906:search_out.txt:680:search_out.txt:446:search_out.txt:211:MUD8.BCL:425:test WIZARD
+search_out.txt:1108:search_out.txt:907:search_out.txt:681:search_out.txt:447:search_out.txt:212:MUD8.BCL:444:damage_WIZA
+search_out.txt:1109:search_out.txt:908:search_out.txt:682:search_out.txt:448:search_out.txt:213:MUD8.BCL:476:full.up())/
+search_out.txt:1110:search_out.txt:909:search_out.txt:683:search_out.txt:449:search_out.txt:214:MUD8.BCL:504:full.up())/
+search_out.txt:1111:search_out.txt:910:search_out.txt:684:search_out.txt:450:search_out.txt:215:MUD8.BCL:523:if WIZARD o
+search_out.txt:1112:search_out.txt:911:search_out.txt:685:search_out.txt:451:search_out.txt:216:MUD8.BCL:536:if WIZARD o
+search_out.txt:1113:search_out.txt:912:search_out.txt:686:search_out.txt:452:search_out.txt:217:MUD8.BCL:567:unless us(p
+search_out.txt:1114:search_out.txt:913:search_out.txt:687:search_out.txt:453:search_out.txt:218:MUD8.BCL:578:unless us(p
+search_out.txt:1115:search_out.txt:914:search_out.txt:688:search_out.txt:454:search_out.txt:219:MUD8.BCL:613:WIZARD of p
+search_out.txt:1116:search_out.txt:915:search_out.txt:689:search_out.txt:456:search_out.txt:221:MUD8.BCL:687:$(	let drop
+search_out.txt:1117:search_out.txt:916:search_out.txt:690:search_out.txt:457:search_out.txt:222:MUD8.BCL:688:if sumnd if
+search_out.txt:1118:search_out.txt:917:search_out.txt:691:search_out.txt:458:search_out.txt:223:MUD8.BCL:719:if WIZARD o
+search_out.txt:1119:search_out.txt:918:search_out.txt:692:search_out.txt:459:search_out.txt:224:MUD8.BCL:788:WIZARD of t
+search_out.txt:1120:search_out.txt:919:search_out.txt:693:search_out.txt:460:search_out.txt:225:MUD8.BCL:789:WIZARD of t
+search_out.txt:1121:search_out.txt:920:search_out.txt:694:search_out.txt:461:search_out.txt:226:MUD8.BCL:811:if WIZARD o
+search_out.txt:1122:search_out.txt:921:search_out.txt:695:search_out.txt:462:search_out.txt:227:MUD8.BCL:813:WIZARD of p
+search_out.txt:1123:search_out.txt:922:search_out.txt:696:search_out.txt:463:search_out.txt:228:MUD8.BCL:831:$(	if WIZAR
+search_out.txt:1124:search_out.txt:923:search_out.txt:697:search_out.txt:464:search_out.txt:229:MUDLIB.BCL:940:unless WI
+search_out.txt:1126:search_out.txt:925:search_out.txt:699:search_out.txt:466:search_out.txt:231:MUDLIB.BCL:1136:if us(na
+search_out.txt:1127:search_out.txt:926:search_out.txt:700:search_out.txt:467:search_out.txt:232:MUDLIB.BCL:1163:if us(na
+search_out.txt:1128:search_out.txt:927:search_out.txt:701:search_out.txt:468:search_out.txt:233:MUDLIB.BCL:1386:unless W
+search_out.txt:1130:search_out.txt:929:search_out.txt:703:search_out.txt:470:search_out.txt:235:MUDLIB.BCL:1485:test WIZ
+search_out.txt:1131:search_out.txt:930:search_out.txt:704:search_out.txt:471:search_out.txt:236:search_out.txt:1:DBASE.B
+search_out.txt:1132:search_out.txt:931:search_out.txt:705:search_out.txt:472:search_out.txt:237:search_out.txt:2:MUD.TXT
+search_out.txt:1133:search_out.txt:932:search_out.txt:706:search_out.txt:473:search_out.txt:238:search_out.txt:3:MUD.TXT
+search_out.txt:1134:search_out.txt:933:search_out.txt:707:search_out.txt:474:search_out.txt:239:search_out.txt:4:MUD.TXT
+search_out.txt:1135:search_out.txt:934:search_out.txt:708:search_out.txt:475:search_out.txt:240:search_out.txt:5:MUD.TXT
+search_out.txt:1136:search_out.txt:935:search_out.txt:709:search_out.txt:476:search_out.txt:241:search_out.txt:6:MUD.TXT
+search_out.txt:1137:search_out.txt:936:search_out.txt:710:search_out.txt:477:search_out.txt:242:search_out.txt:7:MUD.TXT
+search_out.txt:1139:search_out.txt:939:search_out.txt:715:search_out.txt:482:search_out.txt:247:search_out.txt:12:MUD.TX
+search_out.txt:1144:search_out.txt:948:search_out.txt:730:search_out.txt:499:search_out.txt:264:search_out.txt:29:MUD.TX
+search_out.txt:1155:search_out.txt:975:search_out.txt:760:search_out.txt:530:search_out.txt:295:search_out.txt:60:MUD1.B
+search_out.txt:1156:search_out.txt:976:search_out.txt:761:search_out.txt:531:search_out.txt:296:search_out.txt:61:MUD1.B
+search_out.txt:1158:search_out.txt:978:search_out.txt:763:search_out.txt:533:search_out.txt:298:search_out.txt:63:MUD2.B
+search_out.txt:1159:search_out.txt:979:search_out.txt:764:search_out.txt:534:search_out.txt:299:search_out.txt:64:MUD2.B
+search_out.txt:1162:search_out.txt:984:search_out.txt:769:search_out.txt:539:search_out.txt:305:search_out.txt:70:MUD3.B
+search_out.txt:1164:search_out.txt:986:search_out.txt:771:search_out.txt:541:search_out.txt:307:search_out.txt:72:MUD3.B
+search_out.txt:1165:search_out.txt:987:search_out.txt:772:search_out.txt:542:search_out.txt:308:search_out.txt:73:MUD3.B
+search_out.txt:1166:search_out.txt:988:search_out.txt:773:search_out.txt:543:search_out.txt:309:search_out.txt:74:MUD3.B
+search_out.txt:1179:search_out.txt:1002:search_out.txt:788:search_out.txt:558:search_out.txt:324:search_out.txt:89:MUD5.
+search_out.txt:1181:search_out.txt:1004:search_out.txt:790:search_out.txt:560:search_out.txt:326:search_out.txt:91:MUD5.
+search_out.txt:1182:search_out.txt:1005:search_out.txt:791:search_out.txt:561:search_out.txt:327:search_out.txt:92:MUD5.
+search_out.txt:1183:search_out.txt:1006:search_out.txt:792:search_out.txt:562:search_out.txt:328:search_out.txt:93:MUD5.
+search_out.txt:1186:search_out.txt:1009:search_out.txt:795:search_out.txt:565:search_out.txt:331:search_out.txt:96:MUD5.
+search_out.txt:1187:search_out.txt:1010:search_out.txt:796:search_out.txt:566:search_out.txt:332:search_out.txt:97:MUD5.
+search_out.txt:1188:search_out.txt:1011:search_out.txt:797:search_out.txt:567:search_out.txt:333:search_out.txt:98:MUD5.
+search_out.txt:1190:search_out.txt:1017:search_out.txt:803:search_out.txt:573:search_out.txt:339:search_out.txt:104:MUD5
+search_out.txt:1191:search_out.txt:1018:search_out.txt:804:search_out.txt:574:search_out.txt:340:search_out.txt:105:MUD5
+search_out.txt:1192:search_out.txt:1019:search_out.txt:805:search_out.txt:575:search_out.txt:341:search_out.txt:106:MUD5
+search_out.txt:1195:search_out.txt:1022:search_out.txt:808:search_out.txt:578:search_out.txt:344:search_out.txt:109:MUD5
+search_out.txt:1203:search_out.txt:1032:search_out.txt:818:search_out.txt:588:search_out.txt:354:search_out.txt:119:MUD5
+search_out.txt:1205:search_out.txt:1034:search_out.txt:820:search_out.txt:590:search_out.txt:356:search_out.txt:121:MUD5
+search_out.txt:1207:search_out.txt:1036:search_out.txt:822:search_out.txt:592:search_out.txt:358:search_out.txt:123:MUD5
+search_out.txt:1213:search_out.txt:1042:search_out.txt:829:search_out.txt:599:search_out.txt:365:search_out.txt:130:MUD5
+search_out.txt:1216:search_out.txt:1048:search_out.txt:835:search_out.txt:605:search_out.txt:371:search_out.txt:136:MUD5
+search_out.txt:1222:search_out.txt:1056:search_out.txt:847:search_out.txt:620:search_out.txt:386:search_out.txt:151:MUD6
+search_out.txt:1223:search_out.txt:1058:search_out.txt:849:search_out.txt:622:search_out.txt:388:search_out.txt:153:MUD6
+search_out.txt:1228:search_out.txt:1065:search_out.txt:858:search_out.txt:632:search_out.txt:398:search_out.txt:163:MUD6
+search_out.txt:1229:search_out.txt:1066:search_out.txt:861:search_out.txt:635:search_out.txt:401:search_out.txt:166:MUD6
+search_out.txt:1230:search_out.txt:1067:search_out.txt:862:search_out.txt:636:search_out.txt:402:search_out.txt:167:MUD6
+search_out.txt:1231:search_out.txt:1069:search_out.txt:866:search_out.txt:640:search_out.txt:406:search_out.txt:171:MUD6
+search_out.txt:1232:search_out.txt:1072:search_out.txt:870:search_out.txt:644:search_out.txt:410:search_out.txt:175:MUD6
+search_out.txt:1233:search_out.txt:1073:search_out.txt:871:search_out.txt:645:search_out.txt:411:search_out.txt:176:MUD6
+search_out.txt:1238:search_out.txt:1084:search_out.txt:883:search_out.txt:657:search_out.txt:423:search_out.txt:188:MUD8
+search_out.txt:1243:search_out.txt:1089:search_out.txt:888:search_out.txt:662:search_out.txt:428:search_out.txt:193:MUD8
+search_out.txt:1250:search_out.txt:1097:search_out.txt:896:search_out.txt:670:search_out.txt:436:search_out.txt:201:MUD8
+search_out.txt:1252:search_out.txt:1100:search_out.txt:899:search_out.txt:673:search_out.txt:439:search_out.txt:204:MUD8
+search_out.txt:1258:search_out.txt:1106:search_out.txt:905:search_out.txt:679:search_out.txt:445:search_out.txt:210:MUD8
+search_out.txt:1259:search_out.txt:1107:search_out.txt:906:search_out.txt:680:search_out.txt:446:search_out.txt:211:MUD8
+search_out.txt:1263:search_out.txt:1111:search_out.txt:910:search_out.txt:684:search_out.txt:450:search_out.txt:215:MUD8
+search_out.txt:1264:search_out.txt:1112:search_out.txt:911:search_out.txt:685:search_out.txt:451:search_out.txt:216:MUD8
+search_out.txt:1267:search_out.txt:1115:search_out.txt:914:search_out.txt:688:search_out.txt:454:search_out.txt:219:MUD8
+search_out.txt:1270:search_out.txt:1118:search_out.txt:917:search_out.txt:691:search_out.txt:458:search_out.txt:223:MUD8
+search_out.txt:1271:search_out.txt:1119:search_out.txt:918:search_out.txt:692:search_out.txt:459:search_out.txt:224:MUD8
+search_out.txt:1272:search_out.txt:1120:search_out.txt:919:search_out.txt:693:search_out.txt:460:search_out.txt:225:MUD8
+search_out.txt:1273:search_out.txt:1121:search_out.txt:920:search_out.txt:694:search_out.txt:461:search_out.txt:226:MUD8
+search_out.txt:1274:search_out.txt:1122:search_out.txt:921:search_out.txt:695:search_out.txt:462:search_out.txt:227:MUD8

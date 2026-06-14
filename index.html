@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>British Legends Web UI Dashboard</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css?v=15">
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- Top Row: Header + Character (shared grid row for equal height) -->
+        <div class="top-row">
+            <header class="app-header">
+                <div class="logo-area">
+                    <span class="pulse-indicator connected"></span>
+                    <h1>British Legends <span>MUD1 Client</span></h1>
+                </div>
+                
+                <div class="system-status">
+                    <div class="status-item">
+                        <span class="label">Reset Age:</span>
+                        <span id="reset-age-val" class="value text-highlight">Loading...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Latency:</span>
+                        <span id="latency-val" class="value">~1ms</span>
+                    </div>
+                    <button id="reconnect-btn" class="glow-button secondary">Reconnect MUD</button>
+                </div>
+            </header>
+
+            <div class="side-card section-card top-character-card">
+                <h3 class="section-title">Character<span id="char-name-title"></span></h3>
+                <div id="sleep-overlay" class="sleep-overlay hidden" style="display: none;">
+                    <div class="sleep-icon">💤</div>
+                    <div class="sleep-text">Sleeping... Stamina Regenerating</div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-badge">
+                        <span class="stat-label">Level</span>
+                        <span id="stat-level" class="stat-value">Unknown</span>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="stat-label">Stamina</span>
+                        <span id="stat-stamina" class="stat-value">0/0</span>
+                        <div class="progress-bar-container">
+                            <div id="stamina-progress" class="progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Split Layout -->
+        <main class="app-body">
+            
+            <div class="left-column">
+                <div class="mockup-accent-plate"></div>
+                <!-- Terminal Column (Left) -->
+                <section class="console-panel">
+                <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="flex: 1;">
+                        <h2>Live MUD Terminal</h2>
+                        <span class="console-subtitle">Adventurer's Log</span>
+                    </div>
+                    <div style="flex: 1; display: flex; justify-content: center; gap: 12px;">
+                        <button id="guide-btn" class="glow-button secondary">How to Play</button>
+                        <button id="tips-btn" class="glow-button secondary">Tips for Players</button>
+                        <button id="faq-btn" class="glow-button secondary">FAQ</button>
+                        <button id="terms-btn" class="glow-button secondary">Terms & Conditions</button>
+                        <button id="tip-btn" class="glow-button secondary">Tip Jar</button>
+                    </div>
+                    <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 8px;">
+                        <span id="log-indicator" class="log-indicator hidden"></span>
+                        <button id="log-session-btn" class="glow-button secondary">Log Session</button>
+                    </div>
+                </div>
+                <!-- Terminal & Snoop Screens -->
+                <div class="screens-container">
+                    <!-- Terminal Output Screen -->
+                    <div id="terminal-screen" class="terminal-body">
+                        <div class="log-line system-msg">Welcome to British Legends Web Client dashboard. Logs will appear here...</div>
+                    </div>
+
+                    <div id="snoop-resizer" class="resizer"></div>
+
+                    <!-- Dedicated Snoop Panel -->
+                    <div id="snoop-screen" class="terminal-body snoop-panel">
+                        <div class="snoop-header">
+                            <div><span class="icon">👁️</span> <span id="snoop-title-text">SNOOP FEED</span></div>
+                            <button id="close-snoop-btn" class="close-snoop-btn" title="Close Snoop Feed">✖</button>
+                        </div>
+                        <div id="snoop-content">
+                            <div class="log-line system-msg">Waiting for snoop data... (Use '|' or the SNOOP command)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combat HUD Widget -->
+                <div id="combat-hud" class="combat-hud hidden" style="display: none;">
+                    <div class="combat-header"><span class="icon">⚔️</span> COMBAT ENGAGED</div>
+                    <ul id="combat-log-list" class="combat-log">
+                        <li>Waiting for combat data...</li>
+                    </ul>
+                </div>
+
+                <!-- Input area -->
+                <div class="cmd-bar">
+                    <div class="input-container">
+                        <span class="prompt-arrow">*</span>
+                        <div class="input-wrapper">
+                            <span id="ghost-text" class="ghost-text"></span>
+                            <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" placeholder="Enter command..." autofocus />
+                        </div>
+                    </div>
+                    <button id="send-cmd-btn" class="send-button">Send</button>
+                </div>
+            </section>
+            </div>
+
+            <!-- Sidebar (Right) -->
+            <aside class="sidebar-panel scrollable-column">
+                
+                <!-- Resizable Tell + Players area -->
+                <div class="sidebar-resizable-area">
+                    <!-- SECTION 2: TELLS -->
+                    <div id="tell-card" class="side-card section-card sidebar-flex-card">
+                        <div class="tell-title-bar">
+                            <h3 class="section-title">Tell Window</h3>
+                            <button id="clear-tells-btn" class="glow-button secondary" style="font-size: 10px; padding: 2px 8px; margin-left: 10px;">CLEAR TEXT</button>
+                        </div>
+                        <div class="tell-container">
+                            <ul id="tell-list" class="tell-list">
+                                <li class="empty-list">No tells received yet.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="sidebar-resizer" class="sidebar-resizer"></div>
+
+                    <!-- SECTION 4: PLAYERS -->
+                    <div id="players-card" class="side-card section-card players-card sidebar-flex-card">
+                        <h3 class="section-title">Players</h3>
+                        <div class="players-columns-container">
+                            <!-- Online Column -->
+                            <div class="player-column">
+                                <h4 class="column-title">Online (<span id="count-online">0</span>)</h4>
+                                <div class="player-lists-wrapper">
+                                    <ul id="online-players-list" class="player-list">
+                                        <li class="empty-list">No players detected yet. Type 'qu' to see who's online.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Logged Off Column -->
+                            <div class="player-column">
+                                <h4 class="column-title">Logged Off (<span id="count-offline">0</span>)</h4>
+                                <div class="player-lists-wrapper">
+                                    <ul id="offline-players-list" class="player-list">
+                                        <li class="empty-list">No logged off players recorded yet.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECTION 5: MACROS -->
+                <div class="side-card section-card">
+                    <div class="section-header-row">
+                        <h3 class="section-title">Macros</h3>
+                        <button id="edit-macros-btn" class="icon-button" title="Edit Macros">⚙️</button>
+                    </div>
+                    <div id="macros-grid" class="macros-grid">
+                        <!-- Macros injected by JS -->
+                    </div>
+                </div>
+
+            </aside>
+        </main>
+    </div>
+
+    <!-- Frontend logic -->
+    <script src="index.js"></script>
+
+    <!-- How to Play Guide Modal -->
+    <div id="guide-modal-overlay" class="hidden">
+        <div class="guide-modal-box">
+            <div class="guide-modal-header">
+                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">How to Play</h2>
+                <button id="close-guide-btn" class="close-btn" aria-label="Close Guide">✕</button>
+            </div>
+            <div class="guide-modal-content">
+                <p><i>by Nimue and Valentine</i></p>
+                
+                <h3 class="guide-h3">1. Connecting to MUD</h3>
+                <p>MUD is played through a telnet application, which is a standard utility that allows you to interact with a remote computer in text mode. You can connect to MUD directly from this page by using one of our telnet or java links below, or you can download MUD's dedicated client, WizTerm.</p>
+                
+                <h4 class="guide-h4">1.1. WizTerm, MUD's Dedicated Windows Client (Downloadable)</h4>
+                <p>WizTerm is a client program programmed especially* for MUD by Sirsloth the wizard. In addition to the standard enhancements offered by many commercial mud clients (an input line, macros, aliases, etc.), WizTerm provides MUD-specific features such as automatic player tracking to the F-keys, an auto-drink command, hit and sleep counters set especially to MUD's internal timers, special split-screen snoop windows, and auto-logging of your game sessions.</p>
+                <p>WizTerm is free, and is maintained by Sirsloth. Follow the link to Sirsloth's pages, below, to view the system requirements for WizTerm, read more about WizTerm, download a copy, or access the WizTerm manual.</p>
+                <p><i>*We used to say "officially endorsed" here, but some folks took this to mean that everything you can do with WizTerm is also officially endorsed! In any case, this is just a game, so who cares what's official and what isn't?</i></p>
+
+                <h4 class="guide-h4">1.2 Direct Connections</h4>
+                <p>You may connect directly to MUD from this page by following one of the links below.<br>
+                Plain Telnet: Quick and easy, but rather Spartan.<br>
+                Primary Connection: <code>host.british-legends.com</code> Port: <code>27750</code><br>
+                Alternate Connection: <code>host2.british-legends.com</code> Port: <code>27750</code></p>
+                <p>On a Windows PC, if neither of the above work, you can bring up the "built-in" Windows telnet by clicking Start, Run,... and typing <code>telnet host.british-legends.com 27750</code>.</p>
+                
+                <h4 class="guide-h4">1.3. Other Ways to Connect</h4>
+                <p>While the game administrators do not recommend or endorse any particular program, you may find the following links useful if you are unable to use either the direct telnet or java connections or WizTerm.</p>
+                <p>For Mac Users: Rapscallion, Savitar<br>
+                For Unix and Linux Users: TinTin++<br>
+                For Amiga Users: Amimud</p>
+                <p><i>An important note to non-WizTerm mud client users: Some mud clients provide a feature that allows you to automatically reconnect to the game. Some players occasionally leave this feature on when their computer is unattended. This causes problems for everyone. For this reason, if you connect to the game continuously without ever logging on with a persona, it may be necessary to disable incoming network connections from your computer altogether.</i></p>
+
+                <h4 class="guide-h4">1.4 MUD's IP Address</h4>
+                <p>The numeric IP address is subject to change without notice. You are urged to use the symbolic address <code>host.british-legends.com</code> whenever possible. Same thing goes for the alternate address, <code>host2.british-legends.com</code>.</p>
+                
+                <h3 class="guide-h3">2. The Basics</h3>
+                
+                <h4 class="guide-h4">2.1 Creating a Character</h4>
+                <p>The first time you sign into MUD, you will need to create a character. You will first see this message:</p>
+                <blockquote>Welcome! By what name shall I call you?</blockquote>
+                <p>Enter the name you would like to use. Your name will be limited to 9 characters. If you type in a longer name, your name will be truncated to the first 9 characters. Avoid selecting obscene names, since although the game may not catch the name and refuse its use, an immortal in the game may require you to change your name.</p>
+                <p>After you enter your name, you will be asked what sex you would like your character to be. Although, it may seem obvious, your only choices are male or female. You can type either f or m as appropriate.</p>
+                <p>After entering your sex, you will be asked for your email address. You must enter a valid email address to create a character. You will then be asked to type your email again to confirm your email address. After that, you enter the game and may go ahead and play.</p>
+                <p>The password for your character will be sent to the email address you entered upon registration. Use this password to connect the next time you play. You may change your password using the PASSWORD command and entering the information requested at each prompt. More complete instructions are below.</p>
+                
+                <h4 class="guide-h4">2.2 Signing In</h4>
+                <p>Signing in is an easy process. You need only enter two pieces of information: your character name and your password. If you are logging in for the first time after you created your character and have not changed your password, use the password which was sent to the email address you provided during character creation.</p>
+                
+                <h4 class="guide-h4">2.3 Changing your password</h4>
+                <p>You can change your password within the game using the PASSWORD command. You will be asked to enter your current password, the new password you would like to use, and the new password again for confirmation. No player, mortal or immortal, can see your password as you type it in.</p>
+                
+                <h4 class="guide-h4">2.4 Forgot your password?</h4>
+                <p>If you've forgotten your password, send an email to sysop@british-legends.com.</p>
+                
+                <h3 class="guide-h3">3. The Object of the Game</h3>
+                <p>The goal of MUD is become a wizard or witch, i.e. "make wiz". To make wiz, you must get 102,400 points. Points are earned in 2 basic ways:</p>
+                <ul>
+                    <li>"Swamping treasure", finding treasure and dropping it in the appropriate place.</li>
+                    <li>Killing the game's creatures ("mobiles") or other players.</li>
+                </ul>
+                <p>Points are also available in a variety of other ways, including completing some game actions.</p>
+                
+                <h3 class="guide-h3">4. Starting to Play</h3>
+                
+                <h4 class="guide-h4">4.1 The Tearoom</h4>
+                <p>Congratulations on finding the tearoom! The Elizabethan Tearoom is the only safe room for mortals. You cannot be attacked by other mortals here, so it's a popular place to come and chat. At least, until a wizard or witch boots you out of safety into the fray!</p>
+                
+                <h4 class="guide-h4">4.2 Entering the Land</h4>
+                <p>Now that you're here in the tearoom, you can type <code>EXITS</code> or <code>X</code> to see all the ways to enter into the Land where the real play begins. The exits release you into selected areas. A good first choice for newbies is to go <code>IN</code>.</p>
+                <p>The <code>IN</code> direction will take you into the Hall in the Gravedigger's Cottage. This is an especially good place for you to explore, since it has several useful tools (provided you beat the other players to them) plus some treasure. Swamping treasure, that is dropping your treasure in the swamp, is one of the main ways you'll gain points and levels.</p>
+                
+                <h4 class="guide-h4">4.3 Swamping Treasure</h4>
+                <p>To find the swamp, just type <code>SWAMP</code> until you get there. It's a good idea to make a paper and pencil map though since good navigation is essential! To convert your treasure to points once you find the swamp, type <code>DR T</code>, short for DROP TREASURE. If you'd like to find out how many points you're going to get for it, type <code>VAL &lt;item&gt;</code> where &lt;item&gt; is the name of the thing you're planning on dropping (e.g., <code>VAL CROWN</code>). The current value is how many points you'll rack up.</p>
+                <p>To check how many point you'll need to get to the next level, type <code>LEVELS</code>. Other useful commands include <code>HELP</code>, <code>INFO</code>, <code>COMMANDS</code>, <code>SPELLS</code>, and <code>HINTS</code>.</p>
+                <p>Now that you know how to swamp treasure, it's time to explore! Don't hesitate to try everything. MUD is a game where experimentation pays off. Some places to look for are the cottage, the attic, the mausoleum, the mine, and the cave.</p>
+                
+                <h4 class="guide-h4">4.4 Fighting and Killing</h4>
+                <p>Killing mobiles and even other players is quite a popular pastime in MUD! Of course, this makes dying very common. One of our most famous sayings here is <i>You haven't lived until you've died in MUD</i>.</p>
+                <p>Plan on dying a lot. Player-to-player combat is encouraged. Although it's disheartening to lose that first persona, you'll soon find you're fighting and killing with the best of them. Try to learn from your early fights, even those with mobiles, and do chat with killers. Most are more than willing to brag about their prowess, giving away valuable info in the process.</p>
+                <p>Killing, in addition to giving that thrill of victory, is also a popular way to gain points. The rewards are big for killing other players, which may partially explain its popularity!</p>
+                <p>It is often said that survival is the hardest puzzle in the game.</p>
+                
+                <h4 class="guide-h4">4.5 Talking to Players</h4>
+                <p>Talking to other players is encouraged. While MUD doesn't allow outright disclosure of puzzle secrets among players either in or out of the game, we do encourage hints and trades. Talking to other players is an excellent way to gain some info for yourself as well as make friends!</p>
+                <p>There are 4 basic ways to talk to others in the game:</p>
+                
+                <p><b>Talking directly to another person</b><br>
+                To talk directly to another person, type their name and your message.</p>
+                <blockquote>> Viktor hi!</blockquote>
+                
+                <p><b>Talking to everyone in your room</b><br>
+                To talk all players in your location, type <code>"</code> and your message.</p>
+                <blockquote>> "hi everyone!</blockquote>
+                <p>You must use a " (double quote). Single quote will not work, nor will using the SAY command.</p>
+                
+                <p><b>Talking to everyone of a particular level</b><br>
+                If you'd like to speak to everyone who is at a particular experience level in the game, type <code>&lt;level&gt;,&lt;message&gt;</code>.</p>
+                <blockquote>> sorcerer,hi</blockquote>
+                <p>This works regardless of your own level, except that you cannot address wizzes this way. (Use the WISH spell for that purpose, e.g., <code>WISH,I am new and I need help!</code> Be careful not to overuse this command, though; wizzes can get pretty annoyed if they are bothered often. You have been warned!)</p>
+                
+                <p><b>Talking to everyone in the game</b><br>
+                You may shout a message to everyone in the game. Quite a lot of shouting occurs in MUD from time to time, so don't be shy about it!</p>
+                <blockquote>> sh hi everyone!</blockquote>
+                
+                <p style="margin-top: 30px;"><i>We hope you've enjoyed our brief description of MUD and find this information useful. See you in The Land!</i></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips for Players Modal -->
+    <div id="tips-modal-overlay" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(4px); transition: opacity 0.3s ease;">
+        <div class="guide-modal-box">
+            <div class="guide-modal-header">
+                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">Tips for Players</h2>
+                <button id="close-tips-btn" class="close-btn" aria-label="Close Tips">✕</button>
+            </div>
+            <div class="guide-modal-content">
+                <p><i>by Spirogyra the wizard</i></p>
+
+                <h3 class="guide-h3">Introduction</h3>
+                <p>Welcome to the world of MUD1/British Legends, or BL for short. You've finally found your way to the best (not to mention oldest) multi-player game on the Internet. If you haven't tried any other multi-player games....don't bother... because you have arrived! If you have, well congratulations... you've finally made the right choice! &lt;grin&gt;</p>
+                <p>As you will soon discover, MUD1/British Legends is a game of exciting and intense inter-player competition and cooperation set within a mystical world where magic is real and death is common. Here, you will meet many good, friendly people. You will also meet many scoundrels and evildoers...Which will you be?</p>
+                
+                <h3 class="guide-h3">I. The Object</h3>
+                <p>One of the nicest things about BL is that it actually has an object...a goal...something which all players strive to reach: immortality. In a nutshell, you start out as a lowly mortal novice. You've got zero points, but that's just a temporary condition. Your job is now to score points and move up the levels. With each level comes new power and respect...and dangers. Score a whopping 102,400 points without dying and you win! How? Well that's a secret...but let's just say you will be transformed into an incredibly powerful being (within the game of course... no, I'm afraid you'll still be your boring self outside &lt;smile&gt;). You will be granted tremendous powers and will become a game-operator of sorts... and then the second phase of the game will just be beginning. But you'll have to score 102,400 points to find out about that!</p>
+
+                <h3 class="guide-h3">II. Starting Out</h3>
+                <p>Well you've taken the first step -- you've entered the Land! It's no small step because there'll be no going back now! But right now all you've pretty much done is stumble around in the dark without a light; gotten a good look at most of the game's error messages; let's face it, you're frustrated. Well, take a deep breath, stand up and take a stretch, and prepare for a big surprise. By the time you finish reading this document, you will be ready to go out there and start chopping up zombies! You're about to find out there is no game easier to pick up and start playing than BL.</p>
+
+                <h3 class="guide-h3">III. Commands</h3>
+                <p>If you've been in the game already, you've seen the * prompt. When you see this, the game is waiting for a command. All commands are entered at this prompt and terminated with a carriage return (&lt;cr&gt;). After you enter a command, your command will be carried out, you'll probably be given some sort of a message, and you'll be faced with another * prompt...The game's ready for your next move.</p>
+                <p>Commands in BL are very easy. For those of you who have ever played a text adventure, you will have no problem getting going. For those of you who haven't...no sweat...it's easy! The great majority of commands are just plain, simple English. For example, you'd probably like to get a look at your surroundings...type <code>look&lt;cr&gt;</code>. You see a stick on the floor, and you want to pick it up? Just type <code>get stick&lt;cr&gt;</code>. That door blocking your way? <code>open door&lt;cr&gt;</code> should do the trick! It's locked? No problem! Find yourself a key and <code>unlock door with key&lt;cr&gt;</code>. When in doubt, just type in simple English... it'll work more often than not!</p>
+                <p>Many commands require that you supply objects and prepositions with the command. <code>open</code> isn't much good unless you tell the game what you want to open... and with what if need be! If you want to put your key in your sack, well, you had best tell the game to <code>put key in sack</code>. If you want to take it back out again, <code>get key from sack</code> will do it.</p>
+                
+                <h4 class="guide-h4">Useful commands (capital letters indicate useful abbreviations)</h4>
+                <p><code>Look</code> <code>QuickLook</code> <code>who</code> <code>QuickWho</code> <code>Get</code> <code>DRop</code> <code>put</code> <code>open</code> <code>close</code> <code>lock</code> <code>unlock</code> <code>Kill</code> <code>FLee</code> <code>RETaliate</code> <code>Inventory</code> <code>keep</code> <code>hug</code> <code>kiss</code> <code>light</code> <code>douse</code> <code>sleep</code> <code>laugh</code> <code>drink</code> <code>assist</code> <code>steal</code> <code>eXits</code> <code>VALue</code> <code>SCore</code> <code>QuickScore</code></p>
+                <p>For a more complete listing of commands, just type <code>commands</code> at the * prompt in the game!</p>
+                
+                <p>Perhaps the most important commands for you now are the motion commands; you won't be able to explore your new surroundings unless you can move to the next room. The following list summarizes all of the possible directional commands...Again, capitalized letters indicate a possible abbreviation which you may want to use!</p>
+                <ul>
+                    <li><code>North</code> - self-explanatory, I hope &lt;grin&gt;</li>
+                    <li><code>NorthEast</code></li>
+                    <li><code>East</code></li>
+                    <li><code>SouthEast</code></li>
+                    <li><code>South</code></li>
+                    <li><code>SouthWest</code></li>
+                    <li><code>West</code></li>
+                    <li><code>NorthWest</code></li>
+                    <li><code>Up</code></li>
+                    <li><code>Down</code></li>
+                    <li><code>IN</code> - good for moving into strange openings and deeper into peril</li>
+                    <li><code>Out</code> - opposite of in, will move you towards the "narrow gap" at the Narrow Road Between the Lands</li>
+                    <li><code>JUMP</code> - good for certain rooms</li>
+                    <li><code>SWAMP</code> - moves you towards the swamp</li>
+                    <li><code>Back</code> - opposite of last direction moved</li>
+                </ul>
+                <p>To move in the desired direction, just type the direction in, or the correct abbreviation. As you walk about, keep in mind that the reverse direction will not always bring you back where you started...If you go east, west will not always bring you back where you came from. If you wander into a room where you can't see, I suggest you type <code>o</code> (out!) repeatedly until you get out and find yourself a nice stick to make yourself a torch (called a brand in BL). Of course, you'll have to find a nice fire to light your stick on...</p>
+
+                <p>To see where the various directions will take you from a particular room, type <code>exits</code>. <code>exits</code> doesn't work in all rooms.</p>
+                
+                <p>Object manipulation is also important, as you're going to want to pick things up, drop them, insert them into things, etc etc...To pick an object up, type <code>get &lt;object&gt;&lt;cr&gt;</code> at the * prompt. To drop an object type <code>drop &lt;object&gt;&lt;cr&gt;</code>. You can see what you're carrying at any time using the <code>Inventory</code> command (<code>i</code> for short).</p>
+                
+                <p>As you explore, you may happen upon a container. Containers are objects which you can use to expand your carrying capacity by inserting objects into them. To insert an object into a container, type <code>put &lt;object&gt; in &lt;container&gt;&lt;cr&gt;</code> (You can also put objects into other things... like holes, for instance). To get the object out of the container, just type <code>get &lt;object&gt; from &lt;container&gt;&lt;cr&gt;</code>. To see what's in a container, type <code>look in &lt;container&gt;&lt;cr&gt;</code>. The standard inventory command (<code>i</code>) will also list the contents of your containers. You can quickly drop all the objects in a container by using the <code>empty</code> command. Typing <code>empty bag&lt;cr&gt;</code> will drop everything out of the bag.</p>
+
+                <p>The game also recognizes the special words <code>all</code> and <code>Treasure</code>. If you wander into a room and find a bunch of objects on the ground, you don't have to waste time picking things up individually; <code>g all</code> will grab everything in the room. <code>Treasure</code>, or <code>t</code> for short can be used to refer to just objects with a positive value. When you go to the swamp, you can type <code>dr t&lt;cr&gt;</code> to drop all your treasure at once. To avoid dropping a particular piece of treasure when you drop t, you can use the <code>keep</code> command. If you are holding a sword which has a positive value and you wish to drop the other six pieces of treasure you're carrying quickly, you can type <code>keep sword&lt;cr&gt;</code>. Then you can type <code>dr t&lt;cr&gt;</code> and you will drop all your treasure, except the sword. You can only keep one object at a time!</p>
+
+                <h4 class="guide-h4">Another very important aspect of the game is Communication.</h4>
+                <p>As you will come to learn, BL is a multi-player game where the multi in multi-player really means something. BL is a very social game. While playing you will come into contact with many different people some nice; some not-so-nice - you will need to talk to them.</p>
+                <p>There are four distinct types of communication available to you:</p>
+
+                <p><b>1. Player-to-Player</b><br>
+                To send a private message to any player playing, regardless of their location, type <code>&lt;receiving player's name&gt; &lt;message&gt;&lt;cr&gt;</code>.</p>
+                <p>To see who is playing, type <code>who</code> or <code>qw</code> (QuickWho). For example, if Eddie the enchanter is playing and you want to say hello to him, at the * prompt, you'd type <code>eddie Hello &lt;cr&gt;</code>.</p>
+                <p>When someone sends you a direct message this way, you will see <code>&lt;Name&gt; the &lt;level&gt; tells you "&lt;message&gt;"</code>. If Eddie tells you Hello, you'll see <code>Eddie the enchanter tells you "Hello"</code>.</p>
+
+                <p><b>2. Player-to-Room</b><br>
+                It is also possible to send a message to everyone who happens to be in your room. To see who's in your room, type <code>l</code> (Look) or <code>ql</code> (QuickLook). To say something to everyone in your room, you must use the <code>"</code> command. At the * prompt, type <code>"&lt;message&gt; &lt;cr&gt;</code>.</p>
+                <p>To say hello to everyone in your room, you'd type <code>"Hello&lt;cr&gt;</code>. You only need a set of quotes at the very beginning; you don't need any at the end of your message.</p>
+                <p>If you happen to be in Eddie's room, and he says hello in this manner, you would see <code>Eddie the enchanter says "Hello"</code>.</p>
+                <p><i>If you do use quotes at the end of a message sent this way, or any other way for that matter, people receiving that message will see "double-quotes" at the end of your message. Something that beginning players often have trouble understanding is that quotes are not used to mark off a string of characters to be used in a message, but are used as commands in and of themselves. The <code>"</code> command causes all characters that follow it to be issued as a message to everyone in your room and automatically surrounds this message with quotes. Thus, the only time you should ever use a set of quotes in your commands is when you are talking to everyone in your room, and then you should only put them at the very beginning of your message. If you are sending messages using any of the other methods, you should not use any quotes anywhere in your messages, unless you want those quotes to appear within those messages between the quotes that the game automatically surrounds your messages with.</i></p>
+
+                <p><b>3. Player-to-Game</b><br>
+                It is possible to send a message to everyone playing in the game, by shouting. To shout a message, you must type <code>SHout &lt;message&gt;&lt;cr&gt;</code>. To shout Hello, you would type <code>shout Hello&lt;cr&gt;</code> at the * prompt.</p>
+                <p>When you shout, most people will not know that you shouted. Your shout will be seen by most people as <code>A male (or female) voice in the distance shouts "Hello"</code>.</p>
+                <p>Note that <code>SHout</code> can be abbreviated as <code>sh</code>.</p>
+
+                <p><b>4. Person-to-Level</b><br>
+                This method of communication is not used as much as the others, but as you get better, you will use it. This method allows you to send a message to all players of a particular level. The general form of the command is <code>&lt;level&gt;,&lt;message&gt;&lt;cr&gt;</code>. Note the comma after the level. You must include this comma; the command will not work otherwise.</p>
+                <p>To say hello to all of the enchanters, you would type <code>enchanter,Hello&lt;cr&gt;</code> at the * prompt.</p>
+                <p>If you were an enchanter and Eddie typed the above command, you would see this: <code>Eddie (enchanter): "Hello"</code>.</p>
+                <p>NOTE: You cannot send messages to wizards and witches this way...you will have to resort to wishing (discussed in the Magic section later).</p>
+
+                <h4 class="guide-h4">BL-SPEAK</h4>
+                <p>As you play, you will undoubtedly run into a few bizarre terms as you talk to people. The two most prevalent ones are <code>&lt;g&gt;</code> and <code>rofl</code>. In BL-speak, <code>&lt;g&gt;</code> means a grin. <code>rofl</code> means rolling on the floor laughing. There are others, but if you understand these two, you're ready to talk to any BLer!</p>
+
+                <h4 class="guide-h4">Special Notes</h4>
+                <p>As you type commands, often a message will flash across your screen, interrupting your command and causing you to be presented with a brand new * prompt. Don't start your command over...just keep on typing. The game will get the whole command when you hit &lt;cr&gt;.</p>
+                <p>If you type a long command and you discover that you've made an error, Ctrl-K will erase your entire command. After hitting Ctrl-K, retype in your command.</p>
+                <p>Remember to type <code>commands</code> at the * prompt for a more complete listing of all the useful game commands!</p>
+
+                <h3 class="guide-h3">IV. Scoring, Resets, Fighting & Dying</h3>
+                <p>When you get to the very bottom of it, this game's about getting points. You need to get points to progress up the levels and make it to immortality (wizdom). Points can be scored in three different ways:</p>
+                <ul>
+                    <li>by dropping valuable items in the swamp</li>
+                    <li>by performing certain actions</li>
+                    <li>by killing and/or defeating other players or 'mobiles' in combat</li>
+                </ul>
+                <p>When you find an object laying around, you will want to value it (<code>val</code> for short). Let's say you find a widget laying around. While holding it or while standing in the same room as it is, type <code>val widget&lt;cr&gt;</code>. You will be given two values, the object's base value and the object's current value. You will want to focus on the latter value, the current value, as it tells you exactly how many points you will get if you drop that object in the swamp. The significance of the base value is beyond the scope of this reading. For our purposes, the base value is important for one thing: if you value an object and see that it has a positive base value, but a zero current value, it's a good bet that you must do something special with or to the object to make it worth something. As you play, you will undoubtedly notice that the values of objects are not static, but change over the course of the game. The object values are dependent on a few factors, including the number of mortal players currently playing and how much remaining treasure (often referred to as t) is out there.</p>
+
+                <p>The swamp is where you'll want to drop valuable objects to increase your score. The swamp is very accessible and can be reached from anywhere on the mainland by simply typing <code>swamp</code> over and over until you arrive. Once in the swamp, just drop (<code>dr</code> for short) any objects you want to convert to points and you should see your score go up. Players refer to dropping an item in the swamp as swamping the item. Be careful not to swamp something you might need later! Once an object is swamped, it is gone for good (unless a wizard or witch decides to unswamp it). So you probably won't want to go swamping your keys right away!</p>
+
+                <p>When a game is emptied of most of its treasure, a reset will often occur. Normally this will occur with the help of a wizard or witch. When a reset occurs, a new game will be initialized and you will be told to quit the current game and reenter. When you reenter, you will be put in the new game. BL is unlike many other similar games in that you don't get to keep items indefinitely. You only can have any items you happen to find and then only for as long as you stay in the game...when you quit, you will drop everything you are carrying, and will return empty-handed.</p>
+
+                <h4 class="guide-h4">Fighting/Stats/Death</h4>
+                <p>As you wander about, you will bump into two types of creatures: other real-live players, and computer-controlled monsters referred to as mobiles. It is possible to fight with either variety... you will have to fight sooner or later. To initiate combat with a mobile or another player, you must use the <code>kill</code> (abbreviated <code>k</code>) command. The correct syntax for the kill command is <code>kill &lt;player name/mobile&gt; [with &lt;weapon&gt;]</code>. The second half of the command is placed in parentheses because it is not necessary. <code>kill &lt;player/mobile&gt;&lt;cr&gt;</code> will start a fight just fine, but it will be a bare-handed fight. But if you happen to find an axe laying around, and you wish to use it (generally a good idea &lt;g&gt;), you'll have to include that second half of the command. To kill that annoying zombie which is always blocking your way with your trusty axe, you should type <code>kill zombie with axe&lt;cr&gt;</code> (or <code>k z w ax&lt;cr&gt;</code> if you really want to be slick!). This attack will be much more effective than the regular barehanded attack. Similarly, if you grow tired of Eddie the enchanter's annoying greetings you could always track him down and type <code>kill eddie with axe&lt;cr&gt;</code>. Eddie probably won't appreciate it, but Eddie deserves to die anyway!</p>
+
+                <p>While we're on the topic of fighting, it's a good time to bring up your stats. If you type <code>SCore</code> or <code>QuickScore</code>, you will be shown several special numbers which are of importance. First, your score of course...but your stamina, strength, and dexterity are also important, especially while fighting. They are fairly self-explanatory. The mechanics of a fight are fairly simple. Basically, one party initiates the fight with the other, and in so doing gains a certain advantage as the aggressor (especially if the fight is initiated with a weapon). Once the fight begins, each participant takes turns taking swipes at the other, trading blows until one guy runs away or dies (this is an oversimplified description of fighting, and in actuality fighting is a very complex affair). Your three main stats play very important roles in the outcome of a fight. Your dex determines whether you will hit your opponent or not, and how well you will dodge his/her blows; your str determines how much damage you will do to your opponent when you hit him/her; and finally, your sta determines how much life you have left. Every time your opponent lands a blow, your stamina will be reduced - when it expires, so do you (it's a good idea to monitor your stamina closely with liberal use of the QuickScore, <code>qs</code> for short, command).</p>
+
+                <p>But what do you do when you're on the defensive? How can you respond if Eddie, the blood-thirsty cur, decides to attack you? Two commands are of particular interest here: <code>RETaliate</code> and <code>Flee</code>. The correct syntax for these commands is <code>retaliate with &lt;weapon&gt;&lt;cr&gt;</code> and <code>flee &lt;direction&gt;&lt;cr&gt;</code> (<code>ret w &lt;weapon&gt;&lt;cr&gt;</code> or <code>f &lt;direction&gt;&lt;cr&gt;</code> for short). If you're fortunate enough to be carrying that axe around with you when Eddie launches his attack, you'll probably want to bring it into play: <code>ret w axe&lt;cr&gt;</code> will do that. If you decide that you'd rather run away and live to fight another day, <code>f &lt;direction to run&gt;&lt;cr&gt;</code> will get you out of the fight.</p>
+
+                <p>The victor of a fight will receive points for their effort! The loser will lose points... if you die, you'll lose them all, if you flee you'll lose a few. If you successfully kill someone, you will receive more points than if your opponent flees. You will also receive points for killing mobiles.</p>
+
+                <p>If you successfully escape a fight and your stamina is diminished, it can be recovered in two ways. You can remain in the game and sleep until your stamina reaches its peak...or you can leave the game for a while, and let your stamina regenerate at a rate of one stamina per minute that you are outside the game. Sleeping will work faster, but if you are being hunted you will be very vulnerable while you sleep (being attacked while you are asleep puts you at a severe disadvantage).</p>
+
+                <p>This brings us to death. Death is a fundamental part of this game, and you will probably be experiencing it often at first. There are two types of death, temporary and permanent. Temporary deaths include doing stupid things, like jumping from high places or setting off a booby trap. When this happens, you will be booted from the game and you'll drop everything you were carrying. You'll then have to reenter and recover your stuff, if you can, but other than that you'll be fine. Permanent deaths are a much more nasty variety...any time your stamina drops to 0 or below (almost always from a fight), you will suffer a permanent death. Permanent deaths are exactly what they sound like...permanent. You will lose all your points and you will have to rebuild a whole new persona. One should always try to view permanent deaths as learning experiences - try to learn from them and figure out how you could have survived. If you do this, you'll find your characters living longer and longer, before they are mercilessly cut down.</p>
+
+                <h3 class="guide-h3">V. Levels</h3>
+                <p>Depending on your score, you will be assigned one of 10 levels, listed below (this table can be recreated by typing <code>LEVELS</code> in the game):</p>
+                <ul>
+                    <li>0: novice / novice</li>
+                    <li>400: warrior / warrior</li>
+                    <li>800: hero / heroine</li>
+                    <li>1600: champion / champion</li>
+                    <li>3200: superhero / superheroine</li>
+                    <li>6400: enchanter / enchantress</li>
+                    <li>12800: sorcerer / sorceress</li>
+                    <li>25600: necromancer / necromancess</li>
+                    <li>51200: legend / legend</li>
+                    <li>102400: wizard / witch</li>
+                </ul>
+                <p>As you progress up the levels, you will find your character will grow stronger and will possess certain advantages over lower players. Your magic will work better and physically, you'll be more powerful. All the levels are similar, with the exception of wizard and witch, in that they have the same magic at their disposal...the only difference between them magically is that the higher levels will successfully cast their magic more often. Higher levels also come to possess certain other advantages which I will not reveal.</p>
+
+                <h4 class="guide-h4">Wizzes</h4>
+                <p>Wizards and witches are the immortals...they are The Powers That Be. They possess tremendous powers. They can kill you instantly. Wizzes (the generic term used to refer to wizards and witches) function much like game-operators. They make sure that things run well. But at the same time they are players, and they will take an active role in the game. As a mortal, you are expected to always obey an immortal. Disobedience will often mean harsh penalties. While wizzes may sound dangerous, they are really helpful in most cases. They are accomplished players who know the ins and outs of the game. They can help you when you are experiencing difficulties. They may also test you as you progress to gauge your skill. They will only become angry if you flout their authority or do certain no-no's, like shout obscenities. While this authority may seem overwhelming at times, you should always remember that that power is available to anyone who can beat the game! If you do it, you will be granted the same awesome powers! Because all wizzes are individuals who struggled up the ranks, they understand what being a mortal is like...they have experienced all of the difficulties you will have as you get better. They enjoy this game and they want you to enjoy it too.</p>
+
+                <h4 class="guide-h4">Arch-Wizzes</h4>
+                <p>There are a few singularly powerful individuals in the game called arch-wizzes. You will not see them often, but they are there. Arch-wizzes are owners or operators assigned to oversee the game. If you have any major problems concerning the game, they are the people to contact.</p>
+
+                <h3 class="guide-h3">VI. Magic</h3>
+                <p>This is a realm of mystery and magic plays a large role here. All players are capable of casting magic, but higher levels are better at it than lower levels. To get a detailed listing of the spells available to you, their syntax, and explanations of their success rates, type <code>spells&lt;cr&gt;</code> at the * prompt in the game. Magic is very important and you should become acquainted with all of the spells... there aren't that many, and they are very simple. Magic can be especially useful in fights!</p>
+
+                <p>The wish spell is a spell you will want to learn how to use early. With it, you can communicate with the wizzes, even if they are invisible. To use the wish spell, you just type <code>wish,&lt;message&gt;&lt;cr&gt;</code>. This syntax is very similar to the syntax used in player-to-level communications. A comma is necessary between wish and your message. If you should run into difficulties, or you have an important question, you can use wish to get help from the wizzes. You should be careful not to overuse it though as many wizzes will find that annoying. wish should not be used to ask for treasure or ask for the answer to a puzzle, as this will really irritate the wizzes. All players can successfully cast the wish spell all the time.</p>
+
+                <h3 class="guide-h3">VII. Verbose/Brief Modes and Mapping</h3>
+                <p>Room descriptions come in two flavors, long and short. When you first start out, the game will automatically set you up so that you get the long descriptions. This is verbose mode. When you get a little better and start to learn your way around, you'll want to get into brief mode so you see the short descriptions. In brief mode, you'll be able to move around a lot faster. To move from verbose to brief, at the * prompt, type <code>brief&lt;cr&gt;</code>. To move from brief to verbose, type <code>verbose&lt;cr&gt;</code>.</p>
+
+                <p>One thing that most beginning players will want to do is make maps of the Land to help them find ther way around. Something you will want to keep in mind, if you decide to map, is that the Land isn't laid out in a perfect grid, and going east and then west will not always bring you back to the room where you started. Rather than try to map the entire mainland, I would recommend mapping areas of special interest. Like the mine or the goblin tunnels. Personally, I don't feel that a comprehensive map of the entire game is necessary. But as with many things, this is a question of personal preference. I know several people who have mapped the game completely and they claim this has helped them greatly. I know of other people who didn't map at all, but rather recorded sequences of directions to get them to special rooms. Everyone has their own system, and if you feel like mapping every room, Godspeed to you! In actuality, though, the Land is quite small, relative to other similar games, and is quite memorizable. All the really good players have the whole Land memorized.</p>
+
+                <h3 class="guide-h3">VIII. In-Game Help</h3>
+                <p>For further information, type the following commands at the * prompt: <code>commands</code>, <code>help</code>, <code>info</code>, <code>spells</code>.</p>
+
+                <p>If you still need help, try talking to a more experienced player on with you at the time. If they can't help, try wishing... the wizzes will be happy to help with any confusion you may be experiencing.</p>
+
+                <h3 class="guide-h3">IX. Quests</h3>
+                <p>What follows is a listing of suggested 'quests' you may want to attempt as a new player. All are designed to encourage initial exploration and some may lead to other secrets. See what you know... see if you can do them all! And don't stop exploring after that!</p>
+                <ul>
+                    <li>Find a stick, find a fire, and make a fire brand</li>
+                    <li>Find the mausoleum</li>
+                    <li>Find the portcullis and open it</li>
+                    <li>Find the golden apple</li>
+                    <li>Find the mine entrance</li>
+                    <li>Flood the mine</li>
+                    <li>Find the jetty</li>
+                    <li>Find the sorcerer's room</li>
+                    <li>Find the attic</li>
+                    <li>Find a light source other than a fire brand</li>
+                    <li>Get into the badger's sett</li>
+                    <li>Find the magic spring</li>
+                </ul>
+
+                <h3 class="guide-h3">X. Author's Note</h3>
+                <p>I hope this helps you to become more comfortable within the BL environment. I am confident that once you play a while, you will become as hooked on BL as I am. If you have any questions/comments about what I've written here, please email me. If you see me in the Land, please say hello!</p>
+                <p>Spiro</p>
+
+                <p style="margin-top: 30px; font-size: 13px; color: var(--color-text-muted);"><i>This document is based (with mainly typographical changes) on the September 30, 1995 version of the file newbie.txt, which was located in the British Legends section of the library of CompuServe's now defunct MPGAMES forum.</i></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div id="faq-modal-overlay" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(4px); transition: opacity 0.3s ease;">
+        <div class="guide-modal-box">
+            <div class="guide-modal-header">
+                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">FAQ</h2>
+                <button id="close-faq-btn" class="close-btn" aria-label="Close FAQ">✕</button>
+            </div>
+            <div class="guide-modal-content">
+                <p>Here are the answers to a few questions players brought up repeatedly. NOTE: Some of this information may no longer be in effect as it is just passed through "as is" from the British-Legends site.</p>
+
+                <h3 class="guide-h3">E-mail Addresses</h3>
+                <h4 class="guide-h4">When I sign on to the game, why does it require an e-mail address?</h4>
+                <p>To help keep track of players, including (sadly) those who behave in an abusive manner. Also, to provide a means to contact you if something important needs to be announced (e.g., an important change, extended downtime, or a significant game-related event.) Specifically, your e-mail address will never be used to send you unsolicited commercial e-mail (also known as spam) nor will it be disclosed to a third party (sold or otherwise transferred) who may use it for such a purpose. E-mail addresses (along with any other personal information that you may provide) will also never be disclosed to other players in the game, be they 'wizzes' or 'mortals'.</p>
+
+                <h4 class="guide-h4">Can I use an invalid e-mail address?</h4>
+                <p>Please don't. The error messages I get when you do that are annoying, and you won't really be able to use your account afterwards, because you'll never receive the password to go with it.</p>
+
+                <h4 class="guide-h4">Do other players (including wizzes) ever see my e-mail address?</h4>
+                <p>No. Only game operators (arch-wizards) do.</p>
+
+                <h4 class="guide-h4">I accidentally used the wrong e-mail address. Can you resend my password please?</h4>
+                <p>Sorry, no can do. In these days, it is way too easy for an impostor to create an e-mail address that differs from yours in only one or two letters, and then steal your passwords. For this reason, it is our standing policy to send passwords only to the e-mail address under which the account is registered. If you used the wrong e-mail address with a persona name that you're rather attached to, don't worry: after approximately 60 days, your persona will be erased due to inactivity, and you'll be able to reclaim the name.</p>
+
+                <h4 class="guide-h4">Does Free Mean Free?</h4>
+                <p>You can't be giving away this game for free. There must be a catch. What is it? Are you using our e-mail address for some commercial purpose?</p>
+                <p>Yeah, right. Sure, I have acquired my 20+ years of programming experience for one single purpose: so that finally, I can write 14,000 lines of C++ code with which to harvest a few hundred e-mail addresses that I can then use to sell you a psychic reading, a multi-level marketing franchise, a weight-loss pill, hot virgins or images of same, a hair-growth formula, useless plans for illegal pay-TV decoders, or some equally desirable quality product or service. I mean... come on, people. Never mind any claims I can make as to my integrity and whatnot, but have you any idea as to the cost of 14,000 lines of code? Using this very crude measure of software productivity and a rough estimate of $10/line, that'd mean that I spent $140,000 worth of work to collect, what... perhaps a thousand e-mail addresses? Now if you can tell me how I can make more than $140 per address in order to recoup my investment, I am all ears... for now, though, the game remains free and if I really want to stop making money as an expert programmer and become a scumbag junk-mailer instead, I'll just buy a million addresses and some mass-mailing software from another scumbag for a couple of hundred dollars. Or, to put it in other words, the game exists because it's a labor of love for me, and it remains free, if for no other reason, then because I have no idea how to make money out of it and keep it viable at the same time, while I can make a comfortable living from other projects as a professional programmer.</p>
+
+                <h4 class="guide-h4">So why did you do it?</h4>
+                <p>I think I can tell the story now. Let the dirty secret be known to all. You see, it's all the cat's fault. Despite years of repeated promises, Richard never put this sleek, black cat back into MUD2. So when British Legends was terminated on CompuServe, MUD's cat ceased to exist. I'm sure you agree that this was intolerable, and something had to be done.</p>
+
+                <h4 class="guide-h4">OK, so the game is free but I have too much money and I want to contribute. How?</h4>
+                <p>First of all, the game is free, no questions asked and no strings attached. You are neither encouraged, nor expected to contribute; those who do contribute will receive no preferential treatment in the game. So how can you contribute? The easiest is via the PAYPAL online payment service; just send money to sysop@british-legends.com. If you cannot use PAYPAL, please send an e-mail and ask for a postal mailing address. And thanks to those who contributed already!</p>
+
+                <h3 class="guide-h3">My Account</h3>
+                <h4 class="guide-h4">Can I have more than one account in the game?</h4>
+                <p>Yes, absolutely so.</p>
+
+                <h4 class="guide-h4">I can't remember my password. Can you resend it please?</h4>
+                <p>I can't, but you can. Try to log on to the game a few times using the wrong password, and it will eventually offer to resend the correct password to you (using the e-mail address with which you signed up when you created your persona.)</p>
+
+                <h4 class="guide-h4">I no longer want to play your stupid game. Shall I tell you that you can erase my persona?</h4>
+                <p>Please don't punish me with even more mail, just go away if you don't like our game. Your persona will be automatically erased anyway after more than 60 days of inactivity.</p>
+
+                <h4 class="guide-h4">What happens if I 'make wiz' in the game?</h4>
+                <p>Should such an unfortunate thing happen to you (well, you may not consider it unfortunate yourself, but it's unfortunate to a poor, overworked arch-wizard!) you're requested to send e-mail at your earliest convenience to gameop@british-legends.com (e-mail advertisers: see disclaimer.) Until you hear from an arch-wizard, you're requested to remain invisible and refrain from interacting with your mortal friends (or your mortal enemies, for that matter.)</p>
+
+                <h4 class="guide-h4">I am a wiz from British Legends and I cannot use my name. Why?</h4>
+                <p>The names of 'permed wizzes' from British Legends have been reserved. If you can be verified as the 'rightful owner' of a name, you'll be permitted to use it. Note that this doesn't mean that BL wizzes enjoy any special privileges here other than the protection of their (often, very well established) names and (if they had such a thing) their tombstones.</p>
+
+                <h3 class="guide-h3">Game Features and Authenticity</h3>
+                <h4 class="guide-h4">Where can I chat with my fellow players?</h4>
+                <p>An on-line discussion forum is soon to come.</p>
+
+                <h4 class="guide-h4">I cannot find feature X in the game. I thought this version is supposed to be 100% compatible with British Legends?</h4>
+                <p>Well, yes, but... Richard Bartle reports that the British Legends code base, which resided on CompuServe's computers, is lost for good. This version is based on a version of the code that actually predates British Legends. Features that have been added to British Legends after the game was installed at CompuServe needed to be reconstructed on the basis of saved game logs and our (often imperfect) memories. Many important features have been reconstructed successfully; some are works in progress, some are put on hold pending reliable logs that can be used to aid in their reconstruction.</p>
+
+                <h4 class="guide-h4">I would like to see feature X in the game. Would you consider adding it?</h4>
+                <p>No. If you want to see a new and improved MUD, visit MUD2.COM; MUD2 is the latest version of Richard Bartle's game, continuously upgraded and updated with new features. MUD1 exists for another reason: many of us believe that in its original form, despite (or perhaps because) of its simplicity, MUD1 represents a uniquely well balanced, highly enjoyable on-line game. For this reason, apart from bug fixes and maintenance, it is doubtful that any new features will be added to this game.</p>
+
+                <h4 class="guide-h4">This can't be British Legends, this game is much faster!</h4>
+                <p>The slowness of British Legends was a consequence of a CompuServe requirement. Originally, MUD ran at whatever speed the computer that it was hosted on permitted. Even I am not that much of a purist (not even after reverse engineering all those thousands of lines of BCPL code and faithfully porting it to the Windows server platform) so as to insist that we artificially slow down the game. (Actually, it is slowed down a little, just not to the same extent that it was slowed down on CompuServe. Other measures were also incorporated into the game code in order to prevent the higher speed from compromising the game's balance.)</p>
+
+                <h4 class="guide-h4">I can't stand it, RESTORE THE DELAY!</h4>
+                <p>Trust me, we tried. The response was overwhelmingly negative. Of course I realize that no solution will make everybody happy, but the general concensus is that the faster game is more enjoyable, and also (very important!), it will make the game more attractive to new players.</p>
+
+                <h4 class="guide-h4">I want color!</h4>
+                <p>No. MUD2 has color if that's what you really want.</p>
+
+                <h4 class="guide-h4">What's this VALLEY area? Are you turning this game into MUD2?</h4>
+                <p>Not at all! The VALLEY area (that you reach when you go EAST from the Narrow Road Between Lands) actually existed before British Legends was ever installed at CompuServe. For some reason, this area was never installed by CompuServe, but that's no reason for us to not use it here.</p>
+
+                <h4 class="guide-h4">Why is VALLEY not integrated into the main game? Why do I have to drop everything to go there?</h4>
+                <p>The MUD engine has the ability to run more than one game (database). MUD is one such database, VALLEY is another; there were other legendary games in times past that used the same engine, for instance the infamous MIST. But these are really separate games and should be viewed as such.</p>
+
+                <h4 class="guide-h4">So whatever happened to VALLEY anyway? When I go east from NRBL, it's no longer there.</h4>
+                <p>VALLEY has been (temporarily? permanently?) removed because it was grossly abused.</p>
+
+                <h3 class="guide-h3">Rules and Cheating</h3>
+                <h4 class="guide-h4">What are the rules of the game?</h4>
+                <p>Short version: there aren't many.</p>
+                <p>Longer version: Please read or Terms & Conditions. If there are any rules you disagree with, please feel free to comment on them; the purpose is not to offend players but to provide a consistent, manageable playing environment, and this is no large corporation with an army of lawyers, so the rules can be changed if necessary!</p>
+
+                <h4 class="guide-h4">What is multilining?</h4>
+                <p>Multilining is the use of two (or more) personae at the same time in such a way that they can communicate outside the game. Examples include roommates playing MUD and talking at the same time, or a single person using multiple personae. Multilining is unfair to other players: for instance, if another player dumbs your persona, he can reasonably expect that you wouldn't be able to call for assistance. For this reason, multilining is considered a form of cheating; if wizzes detect signs of multilining, they will likely intervene.</p>
+
+                <h4 class="guide-h4">What is looby-loo?</h4>
+                <p>Looby-loo (the phrase has its obscure origins in a British children's television series) is the use of multiple personae (not necessarily at the same time) in such a way that one takes the risks, while another enjoys the results. For instance, collecting and stashing treasure using a one persona and then scoring points for it using another would qualify as looby-loo. This is considered cheating.</p>
+
+                <h4 class="guide-h4">Can I use macros and triggers?</h4>
+                <p>Macro use is not exactly welcome, but it is acceptable; we recognize that not every MUD player is a ten-fingered typist and a keyboard macro can be a life-saver. Trigger use is strongly discouraged. If I wanted to run a game in which moronic scripts compete each other, I would just cut the Internet connection and let the scripts run on a local computer instead; much cheaper, and hassle-free, too. MUD IS A GAME FOR PEOPLE, NOT SCRIPTS. If you are a trigger user, please don't complain if wizzes treat you unfairly, or worse.</p>
+
+                <h4 class="guide-h4">What are triggers?</h4>
+                <p>You don't want to know.</p>
+
+                <h3 class="guide-h3">Miscellaneous Topics</h3>
+                <h4 class="guide-h4">What's the issue with these confusing names? Is the game called MUD, MUD1, or British Legends?</h4>
+                <p>The original name of this game was Multi-User Dungeon (derived from the name of the single-user Dungeon game, predecessor of the classic Zork series), or MUD for short. When CompuServe obtained the rights to run the game, it began marketing it under the name British Legends (players usually referred to the game by its abbreviated name, BL.) The author in the meantime developed a new version of the game, MUD2; to distinguish the original version from the new one, many began to call the old name MUD1. As a matter of curiosity, the actual version number of MUD1 is version 3, whereas MUD2 is version 4 (versions 1 and 2 were experimental versions with limited playability.)</p>
+
+                <h4 class="guide-h4">So what's this Goat Cup thingie that I've been hearing about?</h4>
+                <p>The Goat Cup is an annual tournament of the Land's wizzes. The tradition started many years ago on CompuServe, and by popular demand, it's been reintroduced here. The Goat Cup tournament is usually held in February each year.</p>
+
+                <h3 class="guide-h3">A brief history</h3>
+                <p>MUD (also referred to as MUD1, to distinguish from its successor, MUD2) is the oldest virtual world<sup>1</sup> in existence. Originally developed in and around 1978 at Essex University, England, MUD ran for many years on the University's computers.</p>
+
+                <p>Due in part to a fortuitous coincidence (MUD was written for the same DECSystem-10 computing platform that CompuServe used for its information service) MUD was licensed by CompuServe in the mid-1980s where it ran as a popular game until late 1999. It was eventually retired along with other software during CompuServe's Y2K cleanup efforts. (For a retrospective, please see Memory Lane, by Veni the former BL wizard.)</p>
+
+                <p>The version you see here is a straightforward port of the original MUD code base (1985 version) to modern 32-bit platforms (the server runs on both Windows and Linux.) The author of this port<sup>2</sup> is Viktor Toth (also known as MrSpock the wizard to players of British Legends, or Viktor the arch-wizard at MUD2.COM.) The original code<sup>3</sup> remains the copyrighted property of Roy Trubshaw and Richard Bartle, and is used with permission.</p>
+
+                <p style="margin-top: 24px; font-size: 13px; color: var(--color-text-muted);"><i><sup>1</sup>I used to call MUD "the oldest multi-user game" but, as a critical reader of this Web page pointed out, that is simply not true. Multi-user games have been around for nearly two decades by the time MUD was born. (That is, multi-user computer games. Other multi-user games have been around a lot longer, if Egyptian tomb paintings are to be believed!)<br>
+                <sup>2</sup>This MUD1 implementation has been deposited with the Stanford library for historical purposes (reading-room access only)<br>
+                <sup>3</sup>The original MUD1 source code is now available on GitHub</i></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="terms-modal-overlay" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(4px); transition: opacity 0.3s ease;">
+        <div class="guide-modal-box">
+            <div class="guide-modal-header">
+                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">Terms and Conditions</h2>
+                <button id="close-terms-btn" class="close-btn" aria-label="Close Terms">✕</button>
+            </div>
+            <div class="guide-modal-content">
+                <p><i>This is the legalese section, in case the title does not make it obvious.</i></p>
+
+                <h3 class="guide-h3">Short Version</h3>
+                <ul>
+                    <li>Access to the game does not guarantee points or levels.</li>
+                    <li>Unruly behavior or cheating will result in punishment (e.g., loss of points or prolonged bouts in LIMBO) or banning.</li>
+                    <li>MUD1/BL is not a democracy. Wizzes are absolute rulers. If you don’t like that, you have two choices: become a wiz yourself, or find another game.</li>
+                    <li>Connecting via the Internet means suffering through the occasional (or chronic) lousy connection. I may help you find a decent provider, I may even restore some of your points under exceptional circumstances, but generally, you play at your own risk. If you have a problem, mail me about it.</li>
+                    <li>I provide a service; but I am not liable as to what happens on the service. If you die to the dragon, that’s your problem. If another player calls you names or issues a real life threat, all I can do is to try and remove the offender from the game; otherwise, it is an issue between the two of you. I am not liable for the actions of others. If you don’t like the game or the players who inhabit it, you can leave, but no million-dollar lawsuits because you are allergic to dragon breath, please!</li>
+                    <li>The rules are mine to make and mine to change. You are under no obligation to play here. Needless to say, I do not plan to make any rules offensive or unacceptable, because it is in my interest to see happy players, not grumbling ones. So if you see an obvious problem or unacceptable passage here, do let me know.</li>
+                    <li>Privacy is not guaranteed. Ask the wizzes about the SNOOP spell.</li>
+                    <li>MUD is copyrighted, so are all the pages published here.</li>
+                </ul>
+
+                <h3 class="guide-h3">The Fine Print</h3>
+                <h4 class="guide-h4">A. THE SERVICE</h4>
+                <p>BRITISH-LEGENDS.COM is a free online service (the "Service") operated by Mr. Viktor T. Toth of Ottawa, Ontario, Canada ("Mr. Toth"). The Service exists for the sole purpose of providing access to the multi-user role-playing text adventure game MUD to its players. By accessing and using the Service, you indicate acceptance of these Terms and Conditions. If you do not agree with any of the terms and conditions presented here, please discontinue use of the Service immediately.</p>
+                <p>The Service is managed by Mr. Toth, or persons designated as managers of the Service ("Managers") by, and at the sole discretion of, Mr. Toth.</p>
+                <p>Mr. Toth may discontinue, add to or revise any or all aspects of the Service in his sole discretion and without notice, including access to support services, publications and other products or services ancillary to the Service or subscribership. In particular, Mr. Toth specifically reserves the right in his sole discretion to modify, supplement, delete, discontinue or remove any software, file, publications, information, communication or other content appearing on or transmitted through the Service; to modify the means and characteristics of the Internet connection of the service or any of the hardware components used to operate the service; or to modify the Service's operating hours and maximum number of players.</p>
+                <p>MUD is a constantly developing project. All users should therefore understand and accept that aspects of the Service will change regularly without prior warning or notice.</p>
+
+                <h4 class="guide-h4">B. SUBSCRIBERS AND ACCOUNTS</h4>
+                <p>Using the Service requires that you be a subscriber of the Service.</p>
+                <p>A subscriber to the Service is one who holds a MUD account. A MUD account is a means of accessing the Service using a 9-character alphabetic identifier ("persona name"), and it is protected by a password. An account holder is responsible for all access and use of the Service on that account, regardless of the identity or actions of the person who actually uses the account. Mr. Toth cannot be held liable for unauthorized access to the service if a subscriber's password security is compromised for any reason, including, but not limited to, subscriber's disclosure of the password to third parties.</p>
+                <p>Unless otherwise agreed in writing, a subscriber's right to use the Service, or to designate other users of its account, is not transferable and is subject to any limits established by Mr. Toth.</p>
+
+                <h4 class="guide-h4">C. PRICING</h4>
+                <p>The MUD gaming service is provided to subscribers free of charge. Subscribers are encouraged, but not required, to contribute to the operating costs of the service. No preferential treatment is afforded to contributing subscribers.</p>
+
+                <h4 class="guide-h4">D. RIGHT TO CANCEL, REFUNDS</h4>
+                <p>Mr. Toth reserves the right to cancel subscriptions at any time without prior notification and is under no obligation to provide an explanation. It is understood that while it is Mr. Toth's purpose to see as many players on the Service as possible, subscribers whose conduct is detrimental to the game or is deemed otherwise unacceptable will be removed. The decision to remove a subscriber can be made by Mr. Toth or by persons designated by Mr. Toth as Managers of the Service.</p>
+                <p>Subscribers have the right to cancel subscriptions at any time.</p>
+                <p>Subscribers whose subscription has been cancelled are not entitled to any refunds of monies they contributed to the operating costs of the service.</p>
+
+                <h4 class="guide-h4">E. PRIVACY</h4>
+                <p>It is understood that due to the nature of the game MUD, any and all activities that subscribers undertake while using the Service have the potential to be recorded and observed by other subscribers of the Service without notice or indication. Mr. Toth reserves the right to monitor all activities on the system without notice or indication and to do with the results of such monitoring as he sees fit. Recordings of such monitoring become the property of Mr. Toth.</p>
+                <p>Personal information stored on the MUD computer system is limited to the e-mail address and access identification information ("IP number") of subscribers. During normal operation, this information is available only to Mr. Toth, or to persons designated by Mr. Toth as Managers and given appropriate privileges on the Service.</p>
+                <p>All other personal information, including, but not limited to, subscriber names or mailing addresses, are stored elsewhere and every reasonable precaution is taken to ensure their confidentiality. However, Mr. Toth cannot be held liable if such information becomes accessible to unauthorized third parties due to theft, sabotage, or malicious access to Mr. Toth's computer systems. If Mr. Toth becomes aware of an occurrence involving theft, sabotage, or malicious access that may compromise the confidentiality of personal information, he will make an effort to notify every affected subscriber as soon as possible.</p>
+                <p>No subscriber information whatsoever will be disclosed to third parties for profit, or for marketing purposes.</p>
+
+                <h4 class="guide-h4">F. RULES OF CONDUCT</h4>
+                <p>The MUD service operated by Mr. Toth is a family gaming service. While every attempt is made to keep the activities, communications and display free from offensive and/or libelous material, Mr. Toth accepts no responsibility if offense is caused or taken from an aspect of the game.</p>
+                <p>Accessing the Service is subject to acceptable conduct. In particular, the following forms of conduct are not acceptable:</p>
+                <ul>
+                    <li>Conduct that violates or infringes upon the rights of any other subscriber of the Service;</li>
+                    <li>Conduct that, under the circumstances and in Mr. Toth's good faith judgment, or the good faith judgement of persons designated by Mr. Toth as Managers, is, or is likely to be perceived by an intended recipient or target as, defamatory, deceptive, misleading, abusive, profane, offensive or inappropriate;</li>
+                    <li>conduct that constitutes a threat to, harassment of, or stalking of another;</li>
+                    <li>conduct that adversely affects the performance or availability of the Service or its resources;</li>
+                    <li>the use of the Service for the solicitation or conduct of any business or activity that is prohibited or would violate any applicable law, rule, or regulation or legal obligation;</li>
+                    <li>the use of the Service for the purpose of soliciting others to subscribe to, or use, competitive services;</li>
+                    <li>the use of the Service for the purposes of advertising, promotion, or solicitation of goods or services for commercial purposes;</li>
+                    <li>the use of the Service in a form that is considered cheating in Mr. Toth's good faith judgement, or the good faith judgement of persons designated by Mr. Toth as Managers. Cheating includes, but is not limited to, the following activities:
+                        <ul>
+                            <li>a. Multilining: using multiple accounts simultaneously, either by the same person, or by two or more persons who are communicating outside of the Service for the purposes of playing MUD. Note that the simultaneous use of multiple accounts from the same household is permissible, as long as players do not communicate game information outside of the game;</li>
+                            <li>b. "Looby-looing": the use of one account or persona for the express purpose of benefiting another account or persona operated by the same subscriber;</li>
+                            <li>c. The intentional use of software or system errors ("bugs") for the purposes of gaining an advantage in the game.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Any and all of these forms of conduct can be subject to disciplinary action. Disciplinary action can be in, but not limited to the form of the loss of points in the game, the temporary suspension of access to the game, or cancellation of subscriptions.</p>
+                <p>It is an essential element of MUD that some of the game's players attain the position of Wizard or Witch ("Wiz"). Wizzes of the game have special privileges and responsibilities. Subscribers accept that Wizzes hold extraordinary powers within the MUD game and may exercise this power at will. In particular, Wizzes shall be viewed as designated by Mr. Toth to carry out some of the management functions of the game, including, but not limited to, the disciplining of subscribers who violate the rules of conduct.</p>
+                <p>In case of a dispute with another subscriber, the subscriber's sole recourse is to notify Mr. Toth, or a Manager designated by Mr. Toth, for the purposes of requesting resolution. However, neither Mr. Toth, nor persons designated by Mr. Toth are under any obligation to provide a resolution that the subscriber finds satisfactory. In particular, it is understood that MUD provides a gaming facility in which player vs. player combat is possible, and that as a consequence of this capability, subscribers may conduct themselves in a way that other subscribers find unfair or offensive. However, as long as none of the rules of conduct as spelled out in these Terms and Conditions are violated, such conduct, and the consequences of such conduct, will be deemed acceptable.</p>
+
+                <h4 class="guide-h4">G. COPYRIGHT</h4>
+                <p>The MUD game is the product of MUSE Ltd. The 32-bit reimplementation of MUD is the product of Mr. Toth. MUD is protected by international copyright conventions and treaties. MUD, its packaging, language, machine-generated characters, etc. are the property of MUSE Ltd. and/or Mr. Toth, and may not be used, published, copied, or diffused without the prior written permission of MUSE Ltd. and/or Mr. Toth.</p>
+                <p>Unless otherwise indicated, material may be downloaded from the MUD system for the subscriber's own use. Except as expressly provided for by copyright law, copying, distribution, display, performance, modification and publication of copyrighted material must be with the express permission of Mr. Toth and the owner(s) or authorized person(s), if the owner is other than Mr. Toth. Permission must be specified in a document or on the Service, and must be obtained directly from Mr. Toth and the owner(s) or authorized person(s), if the owner is other than Mr. Toth. In any use of copyrighted material, any changes to or deletion of author attribution or copyright notice are prohibited. Software or tools downloaded or otherwise available through access to or use of the Service may not be reverse engineered or otherwise tampered with unless specifically authorized by the owner of the rights in the software or tools.</p>
+                <p>Except as expressly permitted in these Terms and Conditions, no subscriber may reproduce, distribute, transmit, publish or otherwise transfer, or commercially exploit, any software, file, information, communication or other content received or accessed through the Service.</p>
+
+                <h4 class="guide-h4">H. LIMITATIONS OF LIABILITY</h4>
+                <p>It is understood that physical access to the MUD system is provided via the world-wide Internet, which is not an error-free communication facility. Mr. Toth cannot be held responsible for any problems arising from the use of the Internet, including, but not limited to, failure to access the Service, intermittent access to the service, transmission errors and delays, sudden disconnections. The subscriber accepts responsibility for any loss that occurs within the game (including, but not limited to, the loss of points or personae) due to communication problems. Mr. Toth reserves the right to compensate members for any such loss under exceptional circumstances, but normally, no such compensation shall be expected or will be awarded. The form of compensation is at the sole discretion of Mr. Toth.</p>
+                <p>SUBSCRIBER EXPRESSLY AGREES THAT USE OF THE SERVICE IS AT SUBSCRIBER'S SOLE RISK. NEITHER MR. TOTH NOR ANY PERSONS DESIGNATED AS MANAGERS OF THE SERVICE, NOR ANY OTHER SUBSCRIBERS TO THE SERVICE WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED OR ERROR FREE; NOR DOES MR. TOTH OR ANY PERSONS DESIGNATED AS MANAGERS OF THE SERVICE OR ANY OTHER SUBSCRIBERS TO THE SERVICE MAKE ANY WARRANTY AS TO THE RESULTS TO BE OBTAINED FROM USE OF THE SERVICE. THE SERVICE IS DISTRIBUTED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF TITLE OR IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR OTHERWISE, EXCEPT FOR THOSE WARRANTIES, IF ANY, WHICH ARE IMPLIED BY, AND INCAPABLE OF EXCLUSION, RESTRICTION OR MODIFICATION UNDER, THE LAWS APPLICABLE TO THESE TERMS AND CONDITIONS.</p>
+                <p>NEITHER MR. TOTH NOR ANY PERSONS DESIGNATED AS MANAGERS OF THE SERVICE, NOR ANY OTHER SUBSCRIBERS SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF USE OF THE SERVICE OR INABILITY TO USE THE SERVICE OR OUT OF ANY BREACH OF ANY REPRESENTATION OR WARRANTY.</p>
+                <p>SUBSCRIBER EXPRESSLY ACKNOWLEDGES THAT THE PROVISIONS OF THIS SECTION H. SHALL ALSO APPLY TO ANY AND ALL CLAIMS RELATING TO "ACQUIRED MATERIAL" AND ANY OTHER CONTENT AVAILABLE THROUGH THE SERVICE. SUBSCRIBER AGREES THAT IT WILL NOT IN ANY WAY HOLD MR. TOTH RESPONSIBLE FOR ANY SELECTION OR RETENTION OF, OR THE ACTS OR OMISSIONS OF, THIRD PARTIES IN CONNECTION WITH THE SERVICE (INCLUDING THOSE WITH WHOM MR. TOTH CONTRACTS TO OPERATE VARIOUS AREAS ON OR FEATURES OF THE SERVICE).</p>
+                <p>THE FOREGOING EXCLUSIONS OR LIMITATIONS OF LIABILITY APPLY REGARDLESS OF ANY ALLEGATION OR FINDING THAT A REMEDY FAILED OF ITS ESSENTIAL PURPOSE, REGARDLESS OF THE FORM OF ACTION OR THEORY OF LIABILITY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) AND EVEN IF MR. TOTH OR OTHERS WERE ADVISED OR AWARE OF THE POSSIBILITY OR LIKELIHOOD OF SUCH DAMAGES OR LIABILITY.</p>
+
+                <h4 class="guide-h4">I. INDEMNITY</h4>
+                <p>Subscriber agrees to indemnify Mr. Toth against all claims, liability, damages, costs and expenses, including but not limited to reasonable attorneys fees, arising out of or related to any and all use of Subscriber's account. This includes, without limitation, responsibility for all such consequences of Subscribers (or that of any user of Subscriber's account) violation of these Terms and Conditions or placement on or over, or retrieval from or through, the Service of any software, file, information, communication or other content.</p>
+
+                <h4 class="guide-h4">J. TERMS</h4>
+                <p>These terms and conditions are subject to the laws of the Province of Ontario, Canada, and both Mr. Toth and subscribers of the Service hereby submit to the jurisdiction of the Provincial Courts of Ontario, located in the city of Ottawa. The United Nations Convention on Contracts for the International Sale of Goods does not apply to these Terms and Conditions and it is acknowledged that these Terms and Conditions govern the sale of a service and not the sale of goods. Subscriber agrees that these Terms and Conditions are set forth in the English language for the mutual convenience and benefit of the parties.</p>
+
+                <p style="margin-top: 24px; font-size: 13px; color: var(--color-text-muted);"><i>Ottawa, Ontario, November 30, 2003.</i></p>
+
+                <h3 class="guide-h3">About MUD1/British Legends</h3>
+                <p>MUD is the work of Richard Bartle and others, and it is owned by MUSE, Ltd. This implementation was developed and is operated by Viktor T. Toth.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tip Jar Modal -->
+    <div id="tip-modal-overlay" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(4px); transition: opacity 0.3s ease;">
+        <div class="guide-modal-box">
+            <div class="guide-modal-header">
+                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">Tip Jar</h2>
+                <button id="close-tip-btn" class="close-btn" aria-label="Close Tip Jar">✕</button>
+            </div>
+            <div class="guide-modal-content" style="text-align: center;">
+                <p>MUD is free to players. However, that doesn't mean that MUD is free to operate. If you would like to help with these operating costs, your financial contribution is most welcome. One way to contribute is via the PayPal online payment service:</p>
+                <div style="margin-top: 30px; display: inline-block; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--gold-dim); padding: 20px; border-radius: 8px;">
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                        <input name="business" type="hidden" value="sysop@british-legends.com" />
+                        <input name="cancel_return" type="hidden" value="https://www.british-legends.com/" />
+                        <input name="cmd" type="hidden" value="_xclick" />
+                        <input name="custom" type="hidden" value="BL_DONATE" />
+                        <input name="item_name" type="hidden" value="Donation to MUD1/British Legends" />
+                        <input name="no_shipping" type="hidden" value="1" />
+                        <input name="return" type="hidden" value="https://www.british-legends.com/" />
+                        
+                        <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                            <label style="color: var(--gold-accent); font-weight: bold;">Dollar amount: $</label>
+                            <input name="amount" size="8" type="text" value="20.00" style="background: var(--bg-main); color: var(--terminal-text); border: 1px solid var(--gold-dim); padding: 5px; font-family: 'JetBrains Mono', monospace;" />
+                            <input type="submit" value="Donate Now" class="glow-button secondary" style="cursor: pointer;" />
+                        </div>
+                        
+                        <div>
+                            <a title="PayPal Acceptance Mark" href="https://www.paypal.com/c2/webapps/mpp/home?locale.x=en_C2" target="_blank">
+                                <img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/C2/logos-buttons/optimize/Full_Online_Tray_RGB.png" alt="PayPal Acceptance Mark" width="314" height="80" border="0" />
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

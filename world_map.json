@@ -1,0 +1,956 @@
+{
+  "look": {
+    "description": "Study.\nThis is the old study used by the gravedigger who once owned this cottage,\nwhere he read up his craft. It is decorated in sombre colours, and the\nwindows are small and dirty. On the south wall is a large bookcase reaching\nup to the ceiling, made of an enchanted oak.\nThe bookcase has been shifted aside to allow passage behind it.\n*",
+    "exits": {
+      "in": "in",
+      "s": "s",
+      "nw": "nw",
+      "n": "n",
+      "e": "e",
+      "ne": "ne"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "IN": {
+    "description": "Hall.\nYou are standing in an oddly shaped hall. To the south is a doorway, the east\nis an archway, and some dark forbidding stairs lead upwards to the southeast.\nImmediately to the west is a fitted wardrobe, and some eerie, granite steps\nto the southwest lead downwards to the cellar.\nThe kitchen door is locked shut.\n*",
+    "exits": {
+      "out": "look"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "open wardrobe": {
+    "description": "It's all double dutch to me mate!\n*",
+    "exits": {
+      "w": "w",
+      "e": "e"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "w": {
+    "description": "Fitted wardrobe.\n*",
+    "exits": {
+      "e": "open wardrobe",
+      "s": "s"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "g all": {
+    "description": "Nothing taken.\n*",
+    "exits": {
+      "e": "e",
+      "w": "w",
+      "out": "out"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "e": {
+    "description": "Study.\nThis is the old study used by the gravedigger who once owned this cottage,\nwhere he read up his craft. It is decorated in sombre colours, and the\nwindows are small and dirty. On the south wall is a large bookcase reaching\nup to the ceiling, made of an enchanted oak.\nThe bookcase stands flush against the wall.\n*",
+    "exits": {
+      "w": "qs",
+      "e": "g all"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "i": {
+    "description": "You aren't carrying anything!\n*",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "s": {
+    "description": "The room is too dark to see anything.\n*",
+    "exits": {
+      "n": "n",
+      "ne": "ne"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "open door": {
+    "description": "The door is locked shut, and needs keys to open it.\n*",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "val libram": {
+    "description": "The base value of the Libram is 10, and the current value is 17.\n*",
+    "exits": {
+      "w": "w"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "get keys": {
+    "description": "Key taken.\n*",
+    "exits": {
+      "s": "s"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "ne": {
+    "description": "Forest near mountains.\n*",
+    "exits": {
+      "sw": "look"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "sw": {
+    "description": "In front of hut.\nYou are standing in front of a ramshackle hut. Behind you is a field of gorse.\nFurther on to the south you can see a fast flowing river. To the east you can\nsee a range of mountains wreathed in mist and to the west is a small cottage.\n*",
+    "exits": {
+      "ne": "ne",
+      "in": "in"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "in": {
+    "description": "Hall.\nYou are standing in an oddly shaped hall. To the south is a doorway, the east\nis an archway, and some dark forbidding stairs lead upwards to the southeast.\nImmediately to the west is a fitted wardrobe, and some eerie, granite steps\nto the southwest lead downwards to the cellar.\nThe kitchen door is locked shut.\n*",
+    "exits": {
+      "out": "look"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "out": {
+    "description": "In front of hut.\nIt is raining.\n*",
+    "exits": {
+      "in": "get all",
+      "w": "w"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "nw": {
+    "description": "Dining area.\n*",
+    "exits": {
+      "se": "look"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "n": {
+    "description": "Study.\nThe bookcase has been shifted aside to allow passage behind it.\n*",
+    "exits": {
+      "s": "s"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "look bookcase": {
+    "description": "Study.\nThis is the old study used by the gravedigger who once owned this cottage,\nwhere he read up his craft. It is decorated in sombre colours, and the\nwindows are small and dirty. On the south wall is a large bookcase reaching\nup to the ceiling, made of an enchanted oak.\nThe bookcase stands flush against the wall.\n*",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "exits": {
+    "description": "swamp\t\tLounge.\nout\t\tLounge.\nwest\t\tLounge.\n*",
+    "exits": {
+      "in": "in",
+      "out": "out",
+      "s": "s"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "qs": {
+    "description": "Score: 0, sta: 18/48, str: 62, dex: 40.\n*",
+    "exits": {
+      "e": "e"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "val fur": {
+    "description": "The base value of the Fur is 7, and the current value is 12.\n*",
+    "exits": {
+      "swamp": "A deaf, dumb, blind, lame beggar sits despondently nearby"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "A deaf, dumb, blind, lame beggar sits despondently nearby": {
+    "description": "You are attacked by the beggar!\n*The violence of a cross from the beggar sends you sideways.\nYet you compose, and stagger forward into the melee.\n*swamp\nYou can't leave in the middle of a fight unless you flee in some direction!\n*Your feeble retaliatory swing at the beggar is easily dodged.\n*You narrowly shrug off a pathetic cross from the beggar.\n*Your weak swing is parried effortlessly by the beggar.\n*You simply side-step a limp forehand by the beggar.\n*You hit out at the beggar with a powerful clout!\n*You effortlessly evade a tame slash by the beggar.\n*You take aim at the beggar with a fierce whack!\n*You simply parry a dreadful lunge by the beggar.\n*",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "flee w": {
+    "description": "Gorse.\nYou are in a tangled mass of prickly gorse.\nA mighty woodsman's axe lies on the ground here.\n*",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "south": {
+    "description": "In front of hut.\n*",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "get all": {
+    "description": "Nothing taken.\n*",
+    "exits": {
+      "out": "out",
+      "e": "e"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "move bookcase": {
+    "description": "The bookcase slides aside easily revealing an opening.\n*",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "Elizabethan tearoom": {
+    "description": "This cosy, Tudor room is where all British Legends adventures start. Its\nexposed oak beams and soft, velvet-covered furnishings provide it with the\nideal atmosphere in which to relax before venturing out into that strange,\ntimeless realm. A sense of decency and decorum prevails, and a feeling of\nkinship with those who, like you, seek their destiny in The Land. There are\nexits in all directions, each of which leads into a wisping, magical mist of\nobvious teleportative properties...\n*",
+    "exits": {
+      "in": "Hall",
+      "w": "Beaten track near cliff"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Hall": {
+    "description": "The kitchen door is open.\n*",
+    "exits": {
+      "out": "Elizabethan tearoom",
+      "w": "Fitted wardrobe",
+      "e": "Lounge",
+      "n": "Path",
+      "swamp": "Path",
+      "s": "Kitchen"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Fitted wardrobe": {
+    "description": "You are inside the fitted wardrobe. The only apparent exit is to the east,\ninto a hallway.\n*",
+    "exits": {
+      "e": "Hall"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Lounge": {
+    "description": "There is a fire burning merrily in the grate, its cheerful glare spreads a\ndelightful air of homeliness.\n*",
+    "exits": {
+      "w": "Hall",
+      "e": "Study",
+      "s": "Dining area",
+      "swamp": "Dining area"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Study": {
+    "description": "On the bookcase lies a single tome: \"Articles of magic\".\nThe bookcase stands flush against the wall.\n*",
+    "exits": {
+      "w": "Lounge",
+      "out": "Pine forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Beaten track near cliff": {
+    "description": "*",
+    "exits": {
+      "e": "Ruin",
+      "s": "Cliff",
+      "n": "Dense forest",
+      "ne": "Dense forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Cliff": {
+    "description": "*",
+    "exits": {
+      "n": "Beaten track near cliff",
+      "s": "Waterfall",
+      "e": "West pasture"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Waterfall": {
+    "description": "*",
+    "exits": {
+      "n": "Cliff",
+      "e": "River",
+      "w": "Pine forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "River": {
+    "description": "*",
+    "exits": {
+      "w": "Waterfall",
+      "s": "South pasture",
+      "n": "West pasture",
+      "swamp": "Rapids",
+      "e": "Rapids"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "South pasture": {
+    "description": "All about you is a pleasant pasture. To the north is a fast-flowing stream,\nand to the south is forest. Westwards is a thundering waterfall.\nA deaf, dumb, blind, lame beggar sits despondently nearby.\n*",
+    "exits": {
+      "n": "River",
+      "s": "Dense forest",
+      "e": "Dense forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Dense forest": {
+    "description": "In amongst the trees is an evil-looking dryad, scowling menacingly.\n*",
+    "exits": {
+      "n": "Forest on steep slope",
+      "s": "Narrow road between lands",
+      "e": "Ruin",
+      "sw": "Beaten track near cliff",
+      "w": "South pasture",
+      "u": "Magical glade",
+      "in": "Blot"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Magical glade": {
+    "description": "It is raining.\n*",
+    "exits": {
+      "n": "Dense forest",
+      "s": "Pine forest",
+      "sw": "Sundial in pine forest",
+      "d": "Dense forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Pine forest": {
+    "description": "A white, winged stallion stands majestically before you.\n*",
+    "exits": {
+      "n": "Magical glade",
+      "in": "Study",
+      "ne": "Bandstand",
+      "sw": "Bandstand",
+      "e": "Bandstand",
+      "w": "Waterfall"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Beaten track": {
+    "description": "*",
+    "exits": {
+      "n": "Dense forest",
+      "s": "West pasture",
+      "w": "Beaten track near cliff",
+      "e": "Road opposite cottage"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "West pasture": {
+    "description": "*",
+    "exits": {
+      "n": "Beaten track",
+      "s": "River",
+      "swamp": "River",
+      "w": "Cliff",
+      "e": "East pasture"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Bandstand": {
+    "description": "You are standing in a bandstand in the midst of the pine forest. All around\nyou are trees, denser in the easterly directions than in the westerly ones.\nThe bandstand hasn't been used for some time, obviously with it being in the\nmiddle of a forest, and in places its paint is peeling, but it is\nnevertheless a surprisingly fine example.\n*",
+    "exits": {
+      "sw": "Pine forest",
+      "ne": "Pine forest",
+      "w": "Pine forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Entrance to badger's sett": {
+    "description": "*",
+    "exits": {
+      "w": "Pine forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Rapids": {
+    "description": "|It is raining.",
+    "exits": {
+      "s": "You're already keeping umbrella",
+      "n": "East pasture",
+      "w": "River",
+      "swamp": "Dense forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "East pasture": {
+    "description": "*",
+    "exits": {
+      "s": "Rapids",
+      "e": "Cave",
+      "n": "In front of hut",
+      "nw": "Dining area",
+      "swamp": "Rapids",
+      "in": "Dining area",
+      "w": "West pasture"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Cave": {
+    "description": "*",
+    "exits": {
+      "w": "East pasture",
+      "e": "Before Gate",
+      "n": "Foothills"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Before Gate": {
+    "description": "*",
+    "exits": {
+      "w": "Cave"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Forest near mountains": {
+    "description": "*",
+    "exits": {
+      "s": "Cave",
+      "w": "Gorse",
+      "n": "Narrow road between lands"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Gorse": {
+    "description": "*",
+    "exits": {
+      "e": "Forest near mountains",
+      "w": "Vegetable garden",
+      "s": "In front of hut",
+      "n": "Narrow road"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Vegetable garden": {
+    "description": "There are some potatoes here.\n*",
+    "exits": {
+      "e": "Gorse",
+      "w": "Path",
+      "swamp": "Gorse",
+      "n": "Road opposite cottage"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Path": {
+    "description": "*",
+    "exits": {
+      "e": "Vegetable garden",
+      "w": "Flower garden",
+      "n": "Road opposite cottage",
+      "s": "Hall",
+      "swamp": "Vegetable garden"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Flower garden": {
+    "description": "A gorgeous hyacinth has been picked and left here.\nA curious herb gives off a sweet odour nearby.\n*",
+    "exits": {
+      "e": "Path",
+      "w": "Cliff"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Road opposite cottage": {
+    "description": "*",
+    "exits": {
+      "w": "Beaten track",
+      "e": "Narrow road",
+      "n": "Dense forest",
+      "s": "Path",
+      "swamp": "Vegetable garden"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Pond in swamp": {
+    "description": "A bloated toad croaks incessantly by the side of the water.\n*",
+    "exits": {
+      "w": "Dense forest",
+      "n": "Rapids"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "In front of hut": {
+    "description": "*",
+    "exits": {
+      "s": "Woodsman's hut",
+      "n": "Gorse",
+      "e": "Forest near mountains",
+      "w": "East pasture",
+      "swamp": "Pond in swamp"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Narrow road": {
+    "description": "*",
+    "exits": {
+      "s": "Gorse",
+      "n": "Dense forest",
+      "w": "Road opposite cottage",
+      "swamp": "Gorse"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Forest on steep slope": {
+    "description": "*",
+    "exits": {
+      "s": "Dense forest",
+      "n": "Overgrown grounds of mausoleum"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "South dale": {
+    "description": "*",
+    "exits": {
+      "s": "Forest on steep slope",
+      "n": "Dense forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Railway cutting": {
+    "description": "*",
+    "exits": {
+      "w": "Dense forest",
+      "e": "Forest at base of cliff"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Forest at base of cliff": {
+    "description": "*",
+    "exits": {
+      "w": "Railway cutting",
+      "n": "Railway track",
+      "s": "Overgrown grounds of mausoleum"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Railway track": {
+    "description": "*",
+    "exits": {
+      "s": "Forest at base of cliff",
+      "e": "Entrance to mine",
+      "n": "Entrance to mine",
+      "w": "Stony beach"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Entrance to mine": {
+    "description": "*",
+    "exits": {
+      "w": "Railway track",
+      "e": "Main passage",
+      "n": "Main passage",
+      "s": "Railway track"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Main passage": {
+    "description": "*",
+    "exits": {
+      "w": "Entrance to mine",
+      "e": "Valve on staircase",
+      "u": "Valve on staircase",
+      "s": "Entrance to mine"
+    },
+    "items": [],
+    "locked_exits": [
+      "d"
+    ]
+  },
+  "Paddock": {
+    "description": "*",
+    "exits": {
+      "s": "Railway track",
+      "n": "Ruin"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Ruin": {
+    "description": "*",
+    "exits": {
+      "w": "Dense forest",
+      "n": "Dense forest",
+      "s": "Paddock"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Scrub slope": {
+    "description": "*",
+    "exits": {
+      "s": "Forest on steep slope",
+      "n": "Railway track"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Stony beach": {
+    "description": "*",
+    "exits": {
+      "e": "Railway track",
+      "n": "Dense forest",
+      "w": "Jetty"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Bird bath in pine forest": {
+    "description": "*",
+    "exits": {
+      "s": "Pine forest",
+      "e": "Pine forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Sundial in pine forest": {
+    "description": "This is part of a large pine forest. To the northeast, the forest opens up\nonto a magical glade, but in other directions is more forest, some of it too\ndense to allow passage. Before you stands an old, stone sundial, overgrown\nwith ivy.\nThe sundial has no gnomon, so cannot tell the time.\n*",
+    "exits": {
+      "w": "Bird bath in pine forest",
+      "ne": "Magical glade",
+      "s": "Pine forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Rocky Beach": {
+    "description": "A seagull flutters about you, aimlessly.\n*",
+    "exits": {
+      "e": "Forbidding tunnel",
+      "s": "Bottom of waterfall",
+      "n": "Forbidding tunnel",
+      "in": "Forbidding tunnel",
+      "w": "Sea"
+    },
+    "items": [],
+    "locked_exits": [
+      "e",
+      "in"
+    ]
+  },
+  "Blot": {
+    "description": "*",
+    "exits": {
+      "w": "Dense forest",
+      "s": "Road opposite cottage",
+      "out": "Dense forest",
+      "n": "Dense forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Keeping umbrella": {
+    "description": "*",
+    "exits": {
+      "swamp": "East pasture",
+      "n": "Path",
+      "e": "Hall"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Dining area": {
+    "description": "*",
+    "exits": {
+      "se": "East pasture",
+      "out": "East pasture",
+      "n": "Lounge",
+      "swamp": "East pasture",
+      "s": "East pasture"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Narrow road between lands": {
+    "description": "*",
+    "exits": {
+      "s": "Foothills",
+      "n": "Dense forest"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Foothills": {
+    "description": "There is a small hole in the ground, about 5 inches across. It bends too\nsharply for you to see anything down it.\n*",
+    "exits": {
+      "s": "Cave",
+      "w": "Dense forest",
+      "n": "Narrow road between lands"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Woodsman's hut": {
+    "description": "An empty space on the wall is marked, in an unsteady but loving hand, by the\nword \"MOOSE\".\n*",
+    "exits": {
+      "n": "In front of hut",
+      "s": "In front of hut"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "You're already keeping axe": {
+    "description": "*",
+    "exits": {
+      "swamp": "West pasture"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "You're already keeping umbrella": {
+    "description": "*",
+    "exits": {
+      "n": "Rapids"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "You're already keeping key": {
+    "description": "*\nA seagull flutters about you, aimlessly.\n*\nThe Gull has just left.\n*",
+    "exits": {
+      "swamp": "Lounge",
+      "s": "Bottom of waterfall",
+      "in": "Forbidding tunnel"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Slippery rocks": {
+    "description": "*",
+    "exits": {
+      "n": "Bottom of waterfall"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Bottom of waterfall": {
+    "description": "A seagull flutters about you, aimlessly.\n*",
+    "exits": {
+      "s": "Slippery rocks",
+      "n": "Rocky Beach",
+      "w": "Sea"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Forbidding tunnel": {
+    "description": "The iron grate is slid open.\n*",
+    "exits": {
+      "w": "Rocky Beach",
+      "out": "Rocky Beach",
+      "s": "Rocky Beach"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Jetty": {
+    "description": "There is a lobster pot here.\nThe pot contains nothing\n*",
+    "exits": {
+      "e": "Stony beach"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Valve on staircase": {
+    "description": "*",
+    "exits": {
+      "w": "Main passage",
+      "d": "Main passage"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Overgrown grounds of mausoleum": {
+    "description": "*",
+    "exits": {
+      "n": "Forest at base of cliff",
+      "s": "Forest on steep slope"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Sea": {
+    "description": "*",
+    "exits": {
+      "e": "Bottom of waterfall",
+      "n": "Deck",
+      "w": "Deck"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Deck": {
+    "description": "A sailable coracle large enough for one has been beached (?) here.\n*",
+    "exits": {
+      "s": "Sea",
+      "u": "Crow's nest",
+      "d": "Hold",
+      "e": "Sea"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Crow's nest": {
+    "description": "The golden earrings of some forgotten pirate lie here.\n*",
+    "exits": {
+      "d": "Deck"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Hold": {
+    "description": "A raft, large enough to carry one person, has been left here.\nLying on the floor is some fine silk.\n*",
+    "exits": {
+      "u": "Deck"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Kitchen": {
+    "description": "The kitchen door is open.\n*",
+    "exits": {
+      "n": "Hall"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Room CLIFFF": {
+    "description": "Cliff.\n(----*)",
+    "exits": {
+      "e": "Room WPSTRE"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Room HOME": {
+    "description": "(Hide)\nWizards' room.\nMorpheus's almanac is here, containing the following advice:\n\"ERASE is now fixed. Stopped working in 2016... <Viktor>\"\n\"For anyone interested, I saved a backup of the almanac here: https://tinyurl.com/mud1-wiz-almanac\"\n\"I agree it was historical. Viktor, any chance it can be restored? <Bluelight>\"\n\"I noticed that my listed email in the forum Wizard list was an old abandoned one.  Is there any way to update that to Axiomelf@gmail.com  <Aegtwaet> (1/24)\"\n\"Hope you're all well, saying hi after 13 years! Is it possible to list my email as espressoneil@gmail.com in the wizard forum so anyone can contact me if they like? Extremely belated\"\n\"feel free to email me loucypher1403609@gmail.com <Morpheus>\"\n\"new player BOB[103304,2144] \"\n\"Just watched Maeglin fry the want attempt to zap the pool. Pretty indicative of where his development is at.\"\n\"Maeglin [102411,7112] has alts on at the same time dellusion [70534,7112] also  jorbert [103655,7112] and Alios [70222,7112] <Morpheus>\"\n\"Barnaby [72043,7117] online with alts. He has 1 alt per last letter RKJ[a-z] [xxxxxx,7117] Rkjz [74427,7117] Suggestion LIMBO??? <Morpheus>\"\n\"I have sent Barnaby [72043,7117] and RetSech[72043,7117] to Limbo <Morph>\"\n\"I have agreed to a consession. The portcullis and Shrine need multi's online to solve, So for these puzzles only may there be Multi's If there are no Other players<Morph>\"\n\"I disagree. Players should rather find others to joi\"\n\"--n them online.\"\n\"^who? and when you are online, tell them that. There a few players and only 2 people play, this leaves little chance for them to experiment. Hence my comment,\"\n\"Having given Barnaby a little leeway, to learn the Shrine, he has decided to continue to abuse it by Using his alts as a login watchers sitting in Start, the Elizabeth Tea room. this is something I have given a Warning about.<Morph.\"\n\"we should put each of his ALTS in Limbo. Maeglin has started playing more, So they can work together. Trust broken and in light of this, <morph>\"\n\"Maeglin, Maeglen  [102411,7112]  etal also Start watching<morph>\"\n(----*)",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "Room WPSTRE": {
+    "description": "West pasture.\n(----*)",
+    "exits": {
+      "w": "Room CLIFFF",
+      "e": "Room EPSTRE"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Room EPSTRE": {
+    "description": "East pasture.\nA deaf, dumb, blind, lame beggar sits despondently nearby.\n(----*)",
+    "exits": {
+      "w": "Room WPSTRE",
+      "n": "Room LOUNGE",
+      "e": "Room OUTHUT"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Room OUTHUT": {
+    "description": "In front of hut.\n(----*)",
+    "exits": {
+      "s": "Room EPSTRE",
+      "n": "Room GORSE",
+      "w": "Room EPSTRE"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Room GORSE": {
+    "description": "Gorse.\n(----*)",
+    "exits": {
+      "s": "Room OUTHUT"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Room LOUNGE": {
+    "description": "Lounge.\nThere is a fire burning merrily in the grate, its cheerful glare spreads a\ndelightful air of homeliness.\nThe fire contains nothing\n(----*)",
+    "exits": {
+      "s": "Room EPSTRE",
+      "w": "Room HALL"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Room HALL": {
+    "description": "Hall.\nThe kitchen door is locked shut.\n(----*)",
+    "exits": {
+      "e": "Room LOUNGE"
+    },
+    "items": [],
+    "locked_exits": []
+  },
+  "Retsech has just passed on": {
+    "description": "",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "Barnaby has just passed on": {
+    "description": "",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "Rkj has just passed on": {
+    "description": "",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  },
+  "S": {
+    "description": "",
+    "exits": {},
+    "items": [],
+    "locked_exits": []
+  }
+}
