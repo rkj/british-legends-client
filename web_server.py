@@ -775,42 +775,38 @@ class DashboardHTTPHandler(http.server.SimpleHTTPRequestHandler):
 
 # Main server runner
 def run_web_dashboard():
-    # Ensure no orphaned processes are holding our port
-    PORT = 8000
+    import sys
+    import os
+    import webview
+    
+    # If compiled with PyInstaller, the files are extracted to a temp dir (_MEIPASS)
+    if getattr(sys, 'frozen', False):
+        os.chdir(sys._MEIPASS)
+        
+    # Configure and start HTTP Threading server on a random free port
+    server_address = ("127.0.0.1", 0)
+    httpd = http.server.ThreadingHTTPServer(server_address, DashboardHTTPHandler)
+    actual_port = httpd.server_address[1]
+    
+    # Start the web server in a background thread
+    server_thread = threading.Thread(target=httpd.serve_forever, daemon=True)
+    server_thread.start()
+    
+    print(f"\n========================================================")
+    print(f"  British Legends Web UI Dashboard Started successfully!")
+    print(f"  Local URL: http://127.0.0.1:{actual_port}")
+    print(f"========================================================\n", flush=True)
+    
     try:
-        import subprocess
-        import os
-        output = subprocess.check_output(f"netstat -ano | findstr :{PORT}", shell=True, text=True)
-        for line in output.split('\n'):
-            if "LISTENING" in line and f":{PORT}" in line:
-                pid = line.strip().split()[-1]
-                current_pid = str(os.getpid())
-                if pid and pid != current_pid:
-                    print(f"\n[System: Port {PORT} is locked by orphaned background process (PID: {pid}). Terminating it...]")
-                    subprocess.call(f"taskkill /F /PID {pid}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                    import time
-                    time.sleep(1.5)  # Give Windows a moment to release the socket
-    except Exception:
-        pass
-
-    # Setup Gemini
-
-    
-    # Configure and start HTTP Threading server
-    server_address = ("", PORT)
-    
-    # ThreadingHTTPServer allows concurrent connections (polling + static files)
-    with http.server.ThreadingHTTPServer(server_address, DashboardHTTPHandler) as httpd:
-        print(f"\n========================================================")
-        print(f"  British Legends Web UI Dashboard Started successfully!")
-        print(f"  Open your browser and navigate to: http://localhost:{PORT}")
-        print(f"========================================================\n")
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\nShutting down web dashboard...")
-        finally:
-            client.close()
+        # Create and start the native window
+        webview.create_window('British Legends MUD', f'http://127.0.0.1:{actual_port}', width=1200, height=800, background_color='#1a1a1a')
+        webview.start()
+    except Exception as e:
+        print(f"Failed to start webview: {e}")
+    finally:
+        print("\nShutting down web dashboard...", flush=True)
+        httpd.shutdown()
+        client.close()
 
 if __name__ == "__main__":
     run_web_dashboard()
