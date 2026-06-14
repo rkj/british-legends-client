@@ -73,6 +73,7 @@
                         <button id="tips-btn" class="glow-button secondary">Tips for Players</button>
                         <button id="faq-btn" class="glow-button secondary">FAQ</button>
                         <button id="terms-btn" class="glow-button secondary">Terms & Conditions</button>
+                        <button id="client-guide-btn" class="glow-button secondary">Mud Client User Guide</button>
                         <button id="tip-btn" class="glow-button secondary">Tip Jar</button>
                     </div>
                     <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 8px;">
@@ -110,6 +111,9 @@
                 </div>
 
                 <!-- Input area -->
+                <!-- Credential Suggestions -->
+                <div id="credential-suggestions" class="credential-suggestions hidden"></div>
+
                 <div class="cmd-bar">
                     <div class="input-container">
                         <span class="prompt-arrow">*</span>
@@ -699,20 +703,19 @@
             <div class="guide-modal-content" style="text-align: center;">
                 <p>MUD is free to players. However, that doesn't mean that MUD is free to operate. If you would like to help with these operating costs, your financial contribution is most welcome. One way to contribute is via the PayPal online payment service:</p>
                 <div style="margin-top: 30px; display: inline-block; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--gold-dim); padding: 20px; border-radius: 8px;">
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-                        <input name="business" type="hidden" value="sysop@british-legends.com" />
-                        <input name="cancel_return" type="hidden" value="https://www.british-legends.com/" />
-                        <input name="cmd" type="hidden" value="_xclick" />
-                        <input name="custom" type="hidden" value="BL_DONATE" />
-                        <input name="item_name" type="hidden" value="Donation to MUD1/British Legends" />
-                        <input name="no_shipping" type="hidden" value="1" />
-                        <input name="return" type="hidden" value="https://www.british-legends.com/" />
-                        
-                        <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 20px;">
-                            <label style="color: var(--gold-accent); font-weight: bold;">Dollar amount: $</label>
-                            <input name="amount" size="8" type="text" value="20.00" style="background: var(--bg-main); color: var(--terminal-text); border: 1px solid var(--gold-dim); padding: 5px; font-family: 'JetBrains Mono', monospace;" />
-                            <input type="submit" value="Donate Now" class="glow-button secondary" style="cursor: pointer;" />
-                        </div>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <label style="color: var(--gold-accent); font-weight: bold;">Dollar amount: $</label>
+                        <input id="donate-amount-input" size="8" type="text" value="20.00" style="background: var(--bg-main); color: var(--terminal-text); border: 1px solid var(--gold-dim); padding: 5px; font-family: 'JetBrains Mono', monospace;" />
+                        <button id="donate-submit-btn" class="glow-button secondary" style="cursor: pointer;">Donate Now</button>
+                    </div>
+                </div>
+                <script>
+                    document.getElementById('donate-submit-btn').addEventListener('click', function() {
+                        const amount = document.getElementById('donate-amount-input').value;
+                        const url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=sysop@british-legends.com&item_name=Donation+to+MUD1/British+Legends&amount=' + encodeURIComponent(amount) + '&currency_code=USD';
+                        window.open(url, '_blank');
+                    });
+                </script>
                         
                         <div>
                             <a title="PayPal Acceptance Mark" href="https://www.paypal.com/c2/webapps/mpp/home?locale.x=en_C2" target="_blank">
@@ -721,6 +724,73 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client User Guide Modal -->
+    <div id="client-guide-modal-overlay" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(4px); transition: opacity 0.3s ease;">
+        <div class="guide-modal-box">
+            <div class="guide-modal-header">
+                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">Mud Client User Guide</h2>
+                <button id="close-client-guide-btn" class="close-btn" aria-label="Close Guide">X</button>
+            </div>
+            <div class="guide-modal-content">
+                <p>Welcome to the British Legends Desktop Client! This custom-built native application transforms the classic 1978 text adventure into a modern, highly playable experience without sacrificing the nostalgic charm of the original game.</p>
+                
+                <h3 class="guide-h3">The Interface</h3>
+                <p>The client is split into several intelligent panels designed to make playing the game vastly easier.</p>
+                
+                <h4 class="guide-h4">1. The Main Terminal</h4>
+                <p>This is the core of the game. All room descriptions, combat text, and general chatter appear here.</p>
+                <ul>
+                    <li><strong>Command Input</strong>: Type your commands at the bottom.</li>
+                    <li><strong>Command History</strong>: Press the Up Arrow and Down Arrow keys to cycle through your previously typed commands.</li>
+                    <li><strong>Auto-Fill Prompts</strong>: When the game asks for your username or password during login, the client securely remembers them and will instantly auto-fill the input box for you on your next visit!</li>
+                </ul>
+
+                <h4 class="guide-h4">2. The Tell Window (Top Right)</h4>
+                <p>In a busy MUD, private messages (Tells) often scroll right off the screen before you can read them.</p>
+                <ul>
+                    <li><strong>Smart Interception</strong>: Our client intelligently detects whenever someone uses the tell command to speak to you. It duplicates those messages into the dedicated Tell Window so you never miss a private conversation.</li>
+                    <li><strong>Sent Tells</strong>: The messages you send to others via tell are also recorded here.</li>
+                </ul>
+
+                <h4 class="guide-h4">3. The Player List (Middle Right)</h4>
+                <p>Keeping track of who is in the game is crucial.</p>
+                <ul>
+                    <li><strong>Auto-Updating</strong>: Whenever you type the qu command in-game, the client reads the output and automatically populates this visual list of Online players.</li>
+                    <li><strong>Smart Typing</strong>: If you want to interact with a player (e.g., to cast a spell on them), simply click their name in the Player List. Their name will instantly be typed into your command box!</li>
+                    <li><strong>Logged Off</strong>: Players who leave the game are neatly moved to the "Logged Off" column so you know who recently departed.</li>
+                </ul>
+
+                <h4 class="guide-h4">4. Macros (Bottom Right)</h4>
+                <p>Typing repetitive commands (like score or stats) can get tedious.</p>
+                <ul>
+                    <li><strong>Quick Buttons</strong>: Click any of the macro buttons to instantly send that command to the game.</li>
+                    <li><strong>Customizable</strong>: Click the Gear Icon ⚙️ in the Macros panel to edit them. You can change the label and the underlying command for every single button to suit your playstyle. Your custom macros are saved automatically.</li>
+                </ul>
+
+                <h3 class="guide-h3">Advanced Features</h3>
+                
+                <h4 class="guide-h4">💻 Snoop Window</h4>
+                <p>When using the snoop command:</p>
+                <ul>
+                    <li><strong>Auto-Split Screen</strong>: As soon as the snooped player enters a command and text is received, the client automatically splits your screen! Your terminal shrinks to the left, and a dedicated "Snoop Panel" opens on the right, neatly separating the snooped player's text from your own.</li>
+                    <li><strong>Auto-Close</strong>: When you stop snooping, the screen automatically merges back to normal.</li>
+                </ul>
+
+                <h4 class="guide-h4">💾 Session Logging</h4>
+                <p>Want to save a permanent record of your adventure, map out a difficult maze, or prove you defeated the dragon?</p>
+                <ul>
+                    <li><strong>Log Session</strong>: Click the "Log Session" button at the top of the main terminal.</li>
+                    <li><strong>Save to Disk</strong>: A native Windows file picker will pop up, asking you where you'd like to save your log file. It will automatically suggest a formatted name like YYYY-MM-DD_HH-MM-SS_BritishLegends_CharacterName.txt.</li>
+                    <li><strong>Live Recording</strong>: While logging is active, a red recording indicator will pulse, and every single line of text that hits your terminal will be instantly streamed to that text file on your hard drive.</li>
+                    <li><strong>Stop</strong>: Click "Stop Logging" to cleanly close the file. The text file is perfectly formatted (with all terminal formatting stripped away) so you can read it in Notepad or share it with friends.</li>
+                </ul>
+
+                <h3 class="guide-h3">IMPORTANT</h3>
+                <p><strong>Network Disconnections</strong> When connected to the game server there is a green light to the left of the client name. When disconnected the green light turns red. To reconnect click, "Reconnect MUD" button at the right side of the title block.</p>
             </div>
         </div>
     </div>

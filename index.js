@@ -48,8 +48,28 @@ document.addEventListener("DOMContentLoaded", () => {
     let commandHistory = [];
     let historyIndex = -1;
     let myName = "";
-    let lastLoginPrompt = "";
+    let loginState = {
+        prompt: "",
+        pendingUsername: "",
+        autoLoginPass: ""
+    };
     let cachedKnownPlayers = [];
+    
+    function getCredentials() {
+        try { return JSON.parse(localStorage.getItem("mud_credentials") || "[]"); }
+        catch { return []; }
+    }
+    
+    function saveCredential(user, pass) {
+        if (!user || !pass) return;
+        let creds = getCredentials();
+        let existing = creds.find(c => c.username.toLowerCase() === user.toLowerCase());
+        if (existing) { existing.password = pass; }
+        else { creds.push({username: user, password: pass}); }
+        localStorage.setItem("mud_credentials", JSON.stringify(creds));
+    }
+    
+    const credentialSuggestions = document.getElementById("credential-suggestions");
     let currentSuggestion = "";
     let latencySamples = [];
     let resetAnchorElapsed = null;  // Server-reported elapsed seconds at anchor time
@@ -266,13 +286,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Force reset snoop tracking so user input/echo returns to main terminal
         isSnoopingLine = false;
         
-        // Remember username or password
-        if (lastLoginPrompt === "username") {
-            localStorage.setItem("mud_username", command);
-            lastLoginPrompt = "";
-        } else if (lastLoginPrompt === "password") {
-            localStorage.setItem("mud_password", command);
-            lastLoginPrompt = "";
+        // Remember username or password for multi-account
+        if (loginState.prompt === "username") {
+            loginState.pendingUsername = command;
+            loginState.prompt = "";
+            credentialSuggestions.classList.add("hidden");
+        } else if (loginState.prompt === "password") {
+            if (loginState.pendingUsername) {
+                saveCredential(loginState.pendingUsername, command);
+            }
+            loginState.prompt = "";
+            loginState.pendingUsername = "";
+            loginState.autoLoginPass = "";
         }
         
         // Add to history
@@ -596,16 +621,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 // Detect login prompts for auto-fill
                 if (data.mud_output.includes("By what name shall I call you?")) {
-                    lastLoginPrompt = "username";
-                    const savedName = localStorage.getItem("mud_username");
-                    if (savedName && !cmdInput.value) {
-                        cmdInput.value = savedName;
+                    loginState.prompt = "username";
+                    loginState.autoLoginPass = "";
+                    
+                    const creds = getCredentials();
+                    if (creds.length > 0) {
+                        credentialSuggestions.innerHTML = "";
+                        creds.forEach(cred => {
+                            const btn = document.createElement("button");
+                            btn.className = "credential-btn";
+                            btn.innerText = `Log in as ${cred.username}`;
+                            btn.onclick = () => {
+                                loginState.pendingUsername = cred.username;
+                                loginState.autoLoginPass = cred.password;
+                                credentialSuggestions.classList.add("hidden");
+                                cmdInput.value = cred.username;
+                                sendCommand();
+                            };
+                            credentialSuggestions.appendChild(btn);
+                        });
+                        credentialSuggestions.classList.remove("hidden");
                     }
                 } else if (/password/i.test(data.mud_output)) {
-                    lastLoginPrompt = "password";
-                    const savedPass = localStorage.getItem("mud_password");
-                    if (savedPass && !cmdInput.value) {
-                        cmdInput.value = savedPass;
+                    loginState.prompt = "password";
+                    if (loginState.autoLoginPass) {
+                        cmdInput.value = loginState.autoLoginPass;
+                        sendCommand();
                     }
                 }
             }
@@ -702,7 +743,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 myName = data.my_name;
             }
             if (!myName) {
-                myName = localStorage.getItem("mud_username") || "";
+                if (loginState.pendingUsername) {
+                    myName = loginState.pendingUsername;
+                } else {
+                    const creds = getCredentials();
+                    myName = creds.length > 0 ? creds[creds.length - 1].username : "";
+                }
                 if (myName) {
                     myName = myName.charAt(0).toUpperCase() + myName.slice(1).toLowerCase();
                 }
@@ -956,6 +1002,28 @@ document.addEventListener("DOMContentLoaded", () => {
         tipModalOverlay.addEventListener('click', (e) => {
             if (e.target === tipModalOverlay) {
                 tipModalOverlay.classList.add('hidden');
+            }
+        });
+    }
+
+    // Client Guide Modal Logic
+    const clientGuideBtn = document.getElementById('client-guide-btn');
+    const clientGuideModalOverlay = document.getElementById('client-guide-modal-overlay');
+    const closeClientGuideBtn = document.getElementById('close-client-guide-btn');
+
+    if (clientGuideBtn && clientGuideModalOverlay && closeClientGuideBtn) {
+        clientGuideBtn.addEventListener('click', () => {
+            clientGuideModalOverlay.classList.remove('hidden');
+        });
+
+        closeClientGuideBtn.addEventListener('click', () => {
+            clientGuideModalOverlay.classList.add('hidden');
+        });
+
+        // Click outside to close
+        clientGuideModalOverlay.addEventListener('click', (e) => {
+            if (e.target === clientGuideModalOverlay) {
+                clientGuideModalOverlay.classList.add('hidden');
             }
         });
     }

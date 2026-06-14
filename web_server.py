@@ -57,7 +57,7 @@ PLAYER_NAME_BLACKLIST = {
     "Inside", "Outside", "Above", "Below", "Near", "Under", "Standing",
     "Walking", "Sitting", "In", "At", "On", "By", "A", "An", "The",
     "You", "Your", "It", "This", "That", "Also", "Misty", "Rocky",
-    "Dark", "Old", "New", "Big", "Small", "Oh", "Ah"
+    "Dark", "Old", "New", "Big", "Small", "Oh", "Ah", "Hide"
 }
 
 # Initialize persistent map & strategy guide
