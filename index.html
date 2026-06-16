@@ -73,7 +73,7 @@
                         <button id="tips-btn" class="glow-button secondary">Tips for Players</button>
                         <button id="faq-btn" class="glow-button secondary">FAQ</button>
                         <button id="terms-btn" class="glow-button secondary">Terms & Conditions</button>
-                        <button id="client-guide-btn" class="glow-button secondary">Mud Client User Guide</button>
+                        <button id="client-guide-btn" class="glow-button secondary">Mud Client Guide</button>
                         <button id="tip-btn" class="glow-button secondary">Tip Jar</button>
                     </div>
                     <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 8px;">
@@ -178,7 +178,11 @@
                 <div class="side-card section-card">
                     <div class="section-header-row">
                         <h3 class="section-title">Macros</h3>
-                        <button id="edit-macros-btn" class="icon-button" title="Edit Macros">⚙️</button>
+                        <div style="display: flex; gap: 5px;">
+                            <button id="import-macros-btn" class="icon-button" title="Load Macros">📥</button>
+                            <button id="export-macros-btn" class="icon-button" title="Save Macros">📤</button>
+                            <button id="edit-macros-btn" class="icon-button" title="Edit Macros">⚙️</button>
+                        </div>
                     </div>
                     <div id="macros-grid" class="macros-grid">
                         <!-- Macros injected by JS -->
@@ -732,7 +736,7 @@
     <div id="client-guide-modal-overlay" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(4px); transition: opacity 0.3s ease;">
         <div class="guide-modal-box">
             <div class="guide-modal-header">
-                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">Mud Client User Guide</h2>
+                <h2 style="font-family: 'Cinzel', serif; color: var(--gold-accent); margin: 0; font-size: 24px;">Mud Client Guide</h2>
                 <button id="close-client-guide-btn" class="close-btn" aria-label="Close Guide">X</button>
             </div>
             <div class="guide-modal-content">
@@ -791,6 +795,7 @@
 
                 <h3 class="guide-h3">IMPORTANT</h3>
                 <p><strong>Network Disconnections</strong> When connected to the game server there is a green light to the left of the client name. When disconnected the green light turns red. To reconnect click, "Reconnect MUD" button at the right side of the title block.</p>
+                <p style="text-align: right; margin-top: 30px; font-style: italic; color: var(--gold-accent);">(Sunset the Wizard)</p>
             </div>
         </div>
     </div>

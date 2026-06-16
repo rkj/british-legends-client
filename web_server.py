@@ -101,12 +101,12 @@ MUD1_TITLE_PATTERN = "|".join(MUD1_TITLES)
 # Broader login/logout broadcast patterns for MUD1
 # IMPORTANT: Don't use standalone short alternatives like 'entered' or 'arrived' — they cause
 # false positives when 'has' gets captured as a player name from text like 'has entered MUD'.
-re_player_login = re.compile(r"^\s*(?:\*\s*)?([A-Z][a-z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?\s+(?:has (?:entered|logged on|arrived|connected|just (?:arrived|logged on|entered)))", re.IGNORECASE | re.MULTILINE)
-re_player_logout = re.compile(r"^\s*(?:\*\s*)?([A-Z][a-z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?\s+(?:has (?:left|logged off|departed|died|disconnected|just (?:left|passed on|departed|died)|been destroyed|passed on))", re.IGNORECASE | re.MULTILINE)
+re_player_login = re.compile(r"^\s*(?:\*\s*)?([A-Z][a-z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?(?:\s+\[[^\]]+\])?\s+(?:has (?:entered|logged on|connected|just (?:logged on|entered|arrived)))", re.IGNORECASE | re.MULTILINE)
+re_player_logout = re.compile(r"^\s*(?:\*\s*)?([A-Z][a-z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?(?:\s+\[[^\]]+\])?\s+(?:has (?:logged off|disconnected|died|passed on|been destroyed|just (?:passed on|died|left)))", re.IGNORECASE | re.MULTILINE)
 # QU/WHO command output: lines like "  PlayerName the Novice" or "  PlayerName the Legend"
 re_qu_player = re.compile(
     r"^\s*(?:"
-    r"\(([A-Z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?\)(?:\s+\[[^\]\n]+\])?"
+    r"\(([A-Z][A-Za-z0-9_]*)\s+the\s+(" + MUD1_TITLE_PATTERN + r")\)(?:\s+\[[^\]\n]+\])?"
     r"|"
     r"([A-Z][A-Za-z0-9_]*)\s+the\s+(" + MUD1_TITLE_PATTERN + r")(?:\s+\[[^\]\n]+\])?"
     r"|"
@@ -194,6 +194,17 @@ def apply_presence_events(game_text):
     # Mentions can discover players, but should not revive someone already
     # marked offline unless a real login or later QU/WHO line says so.
     for m in re_player_title_mention.finditer(game_text):
+        # Prevent false positives from graveyard tombstones and statues
+        start_idx = max(0, m.start() - 100)
+        context = re.sub(r'\s+', ' ', game_text[start_idx:m.start()].lower())
+        ignore_phrases = [
+            "tombstone of ", "mausoleum of ", "grave of ", "statue of ", "tomb of ", 
+            'name "', "name '", 'name, "', "name, '", "memory of ", "monument to ", "shrine to ", 
+            "remains of ", "resting place of ", "dedicated to ", "here lies ", "rests ",
+            "inscribed ", "inscription "
+        ]
+        if any(ignore_word in context for ignore_word in ignore_phrases):
+            continue
         events.append((m.start(), 2, "mention", m.group(1), m.group(2)))
 
     for _pos, _priority, event_type, name, title in sorted(events, key=lambda event: (event[0], event[1])):
@@ -799,7 +810,7 @@ def run_web_dashboard():
     
     try:
         # Create and start the native window
-        webview.create_window('British Legends MUD', f'http://127.0.0.1:{actual_port}', width=1200, height=800, background_color='#1a1a1a')
+        webview.create_window('British Legends MUD', f'http://127.0.0.1:{actual_port}', width=1200, height=800, background_color='#1a1a1a', text_select=True)
         webview.start()
     except Exception as e:
         print(f"Failed to start webview: {e}")

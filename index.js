@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let commandHistory = [];
     let historyIndex = -1;
     let myName = "";
+    let lastSentCommand = "";
     let loginState = {
         prompt: "",
         pendingUsername: "",
@@ -146,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 this.fileHandle = await window.showSaveFilePicker({
                     suggestedName: dynamicSuggestedName,
+                    id: 'mud-session-logs',
                     types: [{
                         description: 'Text Files',
                         accept: {'text/plain': ['.txt']}
@@ -249,7 +251,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     line = line.substring(1); // Remove the pipe character itself
                     snoopPanel.classList.add("active"); // Ensure panel is visible
                     snoopResizer.classList.add("active"); // Show the resizer
+                } else if (isSnoopingLine && line.startsWith("|")) {
+                    line = line.substring(1); // Already snooping, remove extra pipe if present
                 }
+            }
+
+            const trimmed = line.trim();
+            // Force reset snoop if we see the user's recent command echo, or a main prompt
+            if (lastSentCommand && trimmed.toLowerCase() === lastSentCommand.toLowerCase()) {
+                isSnoopingLine = false;
+                lastSentCommand = ""; // Only match once
+            } else if (trimmed === "*" || trimmed === "(----*)") {
+                isSnoopingLine = false;
             }
 
             const targetScreen = isSnoopingLine ? snoopContent : terminalScreen;
@@ -259,12 +272,8 @@ document.addEventListener("DOMContentLoaded", () => {
             lineSpan.textContent = line + (!isEndOfChunk ? "\n" : "");
             targetScreen.appendChild(lineSpan);
             
-            // If this line piece ended with a newline, reset the snoop tracking for the next line
-            if (!isEndOfChunk) {
-                isSnoopingLine = false;
-            } else if (isSnoopingLine && (line.trim() === "*" || line.trim() === "(----*)")) {
-                // BUGFIX: If the snooped player receives a prompt (* without a newline),
-                // release the snoop lock so YOUR subsequent output/prompt doesn't get swallowed into the snoop feed!
+            // Turn off snooping for subsequent lines if we hit a blank line (might be end of snoop block)
+            if (isSnoopingLine && !isEndOfChunk && trimmed === "") {
                 isSnoopingLine = false;
             }
         });
@@ -282,6 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
     async function sendCommand() {
         const command = cmdInput.value.trim();
         if (!command) return;
+        
+        lastSentCommand = command;
         
         // Force reset snoop tracking so user input/echo returns to main terminal
         isSnoopingLine = false;
@@ -386,7 +397,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (match) {
             // Return the full line with the completed name
             const prefix = parts.slice(0, -1).join(' ') + ' ';
-            return prefix + match;
+            let suffix = "";
+            if ("tell".startsWith(cmd)) {
+                suffix = ", ";
+            } else {
+                suffix = " ";
+            }
+            return prefix + match + suffix;
         }
         return "";
     }
@@ -657,7 +674,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.snoop_target) {
                 snoopTitleText.innerText = `SNOOP FEED: ${data.snoop_target}`;
             } else {
-                snoopTitleText.innerText = `SNOOP FEED`;
+                if (snoopTitleText.innerText !== `SNOOP FEED`) {
+                    snoopTitleText.innerText = `SNOOP FEED`;
+                    snoopContent.innerHTML = '';
+                    snoopPanel.classList.remove("active");
+                    snoopResizer.classList.remove("active");
+                    isSnoopingLine = false;
+                }
             }
             
             // 4. Reset age - anchor elapsed time from server, tick locally
@@ -884,6 +907,49 @@ document.addEventListener("DOMContentLoaded", () => {
             macrosGrid.classList.remove("editing");
         }
         renderMacros();
+    });
+
+    const importMacrosBtn = document.getElementById("import-macros-btn");
+    const exportMacrosBtn = document.getElementById("export-macros-btn");
+
+    exportMacrosBtn.addEventListener("click", async () => {
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: 'mud_macros.json',
+                types: [{
+                    description: 'JSON Files',
+                    accept: {'application/json': ['.json']},
+                }],
+            });
+            const writable = await handle.createWritable();
+            await writable.write(JSON.stringify(macros, null, 2));
+            await writable.close();
+        } catch (err) {
+            console.error("Export cancelled or failed", err);
+        }
+    });
+
+    importMacrosBtn.addEventListener("click", async () => {
+        try {
+            const [fileHandle] = await window.showOpenFilePicker({
+                types: [{
+                    description: 'JSON Files',
+                    accept: {'application/json': ['.json']},
+                }],
+            });
+            const file = await fileHandle.getFile();
+            const contents = await file.text();
+            const imported = JSON.parse(contents);
+            if (Array.isArray(imported)) {
+                macros = imported;
+                localStorage.setItem('mudMacros', JSON.stringify(macros));
+                renderMacros();
+            } else {
+                alert("Invalid macro file format.");
+            }
+        } catch (err) {
+            console.error("Import cancelled or failed", err);
+        }
     });
 
     // Initial render
