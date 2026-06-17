@@ -820,7 +820,7 @@ def run_web_dashboard():
     
     try:
         # Create and start the native window
-        webview.create_window('British Legends MUD', f'http://127.0.0.1:{actual_port}', width=1200, height=800, background_color='#1a1a1a', text_select=True)
+        webview.create_window('British Legends MUD', f'http://127.0.0.1:{actual_port}?v=1.0.1', width=1200, height=800, background_color='#1a1a1a', text_select=True)
         webview.start()
     except Exception as e:
         print(f"Failed to start webview: {e}")
