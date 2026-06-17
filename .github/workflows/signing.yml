@@ -40,4 +40,9 @@ jobs:
           endpoint: https://wus2.codesigning.azure.net/
           certificate-profile-name: NewPublicTrustProfile02
           files-folder: ./dist
-          files-extension: exe,dll
+
+      - name: Upload Signed Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-binaries
+          path: ./dist/
