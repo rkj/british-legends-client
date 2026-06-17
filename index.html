@@ -179,8 +179,8 @@
                     <div class="section-header-row">
                         <h3 class="section-title">Macros</h3>
                         <div style="display: flex; gap: 5px;">
-                            <button id="import-macros-btn" class="icon-button" title="Load Macros">📥</button>
-                            <button id="export-macros-btn" class="icon-button" title="Save Macros">📤</button>
+                            <button id="import-macros-btn" class="icon-button" title="Load Macros">📂</button>
+                            <button id="export-macros-btn" class="icon-button" title="Save Macros">💾</button>
                             <button id="edit-macros-btn" class="icon-button" title="Edit Macros">⚙️</button>
                         </div>
                     </div>
@@ -743,14 +743,15 @@
                 <p>Welcome to the British Legends Desktop Client! This custom-built native application transforms the classic 1978 text adventure into a modern, highly playable experience without sacrificing the nostalgic charm of the original game.</p>
                 
                 <h3 class="guide-h3">The Interface</h3>
-                <p>The client is split into several intelligent panels designed to make playing the game vastly easier.</p>
+                <p>The client is split into multiple panes that deliver some of the characteristics of more modern terminals.</p>
                 
                 <h4 class="guide-h4">1. The Main Terminal</h4>
                 <p>This is the core of the game. All room descriptions, combat text, and general chatter appear here.</p>
                 <ul>
                     <li><strong>Command Input</strong>: Type your commands at the bottom.</li>
                     <li><strong>Command History</strong>: Press the Up Arrow and Down Arrow keys to cycle through your previously typed commands.</li>
-                    <li><strong>Auto-Fill Prompts</strong>: When the game asks for your username or password during login, the client securely remembers them and will instantly auto-fill the input box for you on your next visit!</li>
+                    <li><strong>Auto-Fill Credentials</strong>: When the game asks for your username or password during login, the client securely remembers them and will instantly auto-fill the input box for you on your next visit! The client will even save login credentials for multiple accounts. Simply log in with your account first, and the client will remember it for next time!</li>
+                    <li><strong>Auto-Fill Prompts</strong>: When you type a command and follow it with a current player name the game will automatically suggest the player you are looking for. Simply hit the Tab key to complete it.</li>
                 </ul>
 
                 <h4 class="guide-h4">2. The Tell Window (Top Right)</h4>
@@ -772,7 +773,8 @@
                 <p>Typing repetitive commands (like score or stats) can get tedious.</p>
                 <ul>
                     <li><strong>Quick Buttons</strong>: Click any of the macro buttons to instantly send that command to the game.</li>
-                    <li><strong>Customizable</strong>: Click the Gear Icon ⚙️ in the Macros panel to edit them. You can change the label and the underlying command for every single button to suit your playstyle. Your custom macros are saved automatically.</li>
+                    <li><strong>Customizable</strong>: Click the Gear Icon ⚙️ in the Macros panel to edit them. You can change the label and the underlying command for every single button to suit your playstyle. Note: Your custom macros are only saved when you use the save button and select a directory location.</li>
+                    <li><strong>Save and Load Macros</strong>: Click the 💾 Save Macros button to export your current macro setup to a file on your computer. You can then use the 📂 Load Macros button to import them later!</li>
                 </ul>
 
                 <h3 class="guide-h3">Advanced Features</h3>
@@ -781,7 +783,7 @@
                 <p>When using the snoop command:</p>
                 <ul>
                     <li><strong>Auto-Split Screen</strong>: As soon as the snooped player enters a command and text is received, the client automatically splits your screen! Your terminal shrinks to the left, and a dedicated "Snoop Panel" opens on the right, neatly separating the snooped player's text from your own.</li>
-                    <li><strong>Auto-Close</strong>: When you stop snooping, the screen automatically merges back to normal.</li>
+                    <li><strong>Auto-Close</strong>: When you stop snooping, the screen automatically clears out any text and then closes.</li>
                 </ul>
 
                 <h4 class="guide-h4">💾 Session Logging</h4>
@@ -791,6 +793,13 @@
                     <li><strong>Save to Disk</strong>: A native Windows file picker will pop up, asking you where you'd like to save your log file. It will automatically suggest a formatted name like YYYY-MM-DD_HH-MM-SS_BritishLegends_CharacterName.txt.</li>
                     <li><strong>Live Recording</strong>: While logging is active, a red recording indicator will pulse, and every single line of text that hits your terminal will be instantly streamed to that text file on your hard drive.</li>
                     <li><strong>Stop</strong>: Click "Stop Logging" to cleanly close the file. The text file is perfectly formatted (with all terminal formatting stripped away) so you can read it in Notepad or share it with friends.</li>
+                </ul>
+
+                <h3 class="guide-h3">Upgrading to a New Version</h3>
+                <p>When upgrading to a new version of the British Legends Desktop Client, please keep the following in mind:</p>
+                <ul>
+                    <li><strong>Save Your Macros</strong>: Be sure to export and save your macros using the 💾 Save Macros button before upgrading! You can load them back into the new version using the 📂 Load Macros button.</li>
+                    <li><strong>Login Credentials</strong>: Your securely saved login credentials do not carry over between versions for security reasons. You will need to re-enter your username and password the first time you log in after an update.</li>
                 </ul>
 
                 <h3 class="guide-h3">IMPORTANT</h3>

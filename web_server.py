@@ -102,7 +102,7 @@ MUD1_TITLE_PATTERN = "|".join(MUD1_TITLES)
 # IMPORTANT: Don't use standalone short alternatives like 'entered' or 'arrived' — they cause
 # false positives when 'has' gets captured as a player name from text like 'has entered MUD'.
 re_player_login = re.compile(r"^\s*(?:\*\s*)?([A-Z][a-z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?(?:\s+\[[^\]]+\])?\s+(?:has (?:entered|logged on|connected|just (?:logged on|entered|arrived)))", re.IGNORECASE | re.MULTILINE)
-re_player_logout = re.compile(r"^\s*(?:\*\s*)?([A-Z][a-z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?(?:\s+\[[^\]]+\])?\s+(?:has (?:logged off|disconnected|died|passed on|been destroyed|just (?:passed on|died|left)))", re.IGNORECASE | re.MULTILINE)
+re_player_logout = re.compile(r"^\s*(?:\*\s*)?([A-Z][a-z][A-Za-z0-9_]*)(?:\s+the\s+(" + MUD1_TITLE_PATTERN + r"))?(?:\s+\[[^\]]+\])?\s+(?:has (?:logged off|disconnected|died|passed on|been destroyed|left the game|just (?:passed on|died)))", re.IGNORECASE | re.MULTILINE)
 # QU/WHO command output: lines like "  PlayerName the Novice" or "  PlayerName the Legend"
 re_qu_player = re.compile(
     r"^\s*(?:"
@@ -201,10 +201,20 @@ def apply_presence_events(game_text):
             "tombstone of ", "mausoleum of ", "grave of ", "statue of ", "tomb of ", 
             'name "', "name '", 'name, "', "name, '", "memory of ", "monument to ", "shrine to ", 
             "remains of ", "resting place of ", "dedicated to ", "here lies ", "rests ",
-            "inscribed ", "inscription "
+            "inscribed ", "inscription ", "body of ", 'insculpt "', "insculpt '",
+            "headstone ", "bears the ", "legend, ", "mausoleum to ", "gravestone of ",
+            'reads: "', 'reads "', "tombstone here ", "gravestone here ", "remembrance of ",
+            "marker of ", "bones of ", "which is "
         ]
         if any(ignore_word in context for ignore_word in ignore_phrases):
             continue
+            
+        end_idx = min(len(game_text), m.end() + 30)
+        post_context = re.sub(r'\s+', ' ', game_text[m.end():end_idx].lower())
+        post_ignore_phrases = [" deceased"]
+        if any(ignore_word in post_context for ignore_word in post_ignore_phrases):
+            continue
+            
         events.append((m.start(), 2, "mention", m.group(1), m.group(2)))
 
     for _pos, _priority, event_type, name, title in sorted(events, key=lambda event: (event[0], event[1])):

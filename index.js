@@ -323,6 +323,9 @@ document.addEventListener("DOMContentLoaded", () => {
         ghostText.innerHTML = "";
         currentSuggestion = "";
         
+        // Return focus to the input box so the user can keep typing
+        cmdInput.focus();
+        
         try {
             const response = await fetch("/command", {
                 method: "POST",
@@ -397,12 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (match) {
             // Return the full line with the completed name
             const prefix = parts.slice(0, -1).join(' ') + ' ';
-            let suffix = "";
-            if ("tell".startsWith(cmd)) {
-                suffix = ", ";
-            } else {
-                suffix = " ";
-            }
+            const suffix = ", ";
             return prefix + match + suffix;
         }
         return "";
@@ -883,12 +881,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             btn.onclick = () => {
                 if (!isEditingMacros) {
+                    // Force reset snoop tracking so user input/echo returns to main terminal
+                    lastSentCommand = macro.cmd;
+                    isSnoopingLine = false;
+                    
                     // Send macro command
                     fetch("/command", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ command: macro.cmd })
                     }).catch(err => console.error("Error sending macro:", err));
+                    
+                    // Return focus to main input
+                    document.getElementById("cmd-input").focus();
                 }
             };
 
