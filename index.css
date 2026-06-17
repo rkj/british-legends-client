@@ -153,12 +153,12 @@ body {
 }
 
 .version-badge {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--gold-accent);
+    font-size: 13px;
+    font-weight: normal;
+    color: var(--color-text-muted);
     background: rgba(0, 0, 0, 0.5);
     padding: 2px 8px;
-    border-radius: 4px;
+    border-radius: 0;
     border: 1px solid var(--gold-dim);
     margin-left: 8px;
     align-self: center;
