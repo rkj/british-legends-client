@@ -21,12 +21,14 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       
-      - name: Setup Trusted Signing
+      -- name: Setup Trusted Signing
         uses: azure/trusted-signing-action@v0.4.0
         with:
-          azure-resource-group: MUD-Project
-          azure-subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          # Required account details
+          trusted-signing-account-name: MUDClientSigningWestUS2
           endpoint: https://wus2.codesigning.azure.net/
           certificate-profile-name: NewPublicTrustProfile02
+          
+          # File configuration
           files-folder: ./bin 
           files-extension: exe,dll
