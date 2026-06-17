@@ -22,7 +22,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       
       - name: Setup Trusted Signing
-        uses: azure/trusted-signing-action@v0.3.1
+        uses: azure/trusted-signing-action@v0.4.0
         with:
           azure-resource-group: MUD-Project
           azure-subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
