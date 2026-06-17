@@ -152,6 +152,18 @@ body {
     text-shadow: 0 0 8px var(--glow-cyan);
 }
 
+.version-badge {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--gold-accent);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--gold-dim);
+    margin-left: 8px;
+    align-self: center;
+}
+
 .system-status {
     display: flex;
     align-items: center;
