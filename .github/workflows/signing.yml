@@ -8,6 +8,7 @@ on:
 jobs:
   sign-job:
     runs-on: windows-latest
+    environment: production
     permissions:
       id-token: write
       contents: write # 'write' is required for creating Releases
