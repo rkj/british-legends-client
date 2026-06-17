@@ -11,6 +11,7 @@ Built from the ground up to bring a premium, modern aesthetic to a classic game 
 
 ## ✨ Features
 
+- **The following game guides have been incorporated into the interface for quick easy review during play: How to Play, Tips for Players, FAQ, Terms and Conditions, MUD Client guide and finally a Tip Jar to Sysop!
 - **Modern & Premium UI:** A beautiful, responsive interface with customized typography, glowing gold accents, and dynamic styling that brings an ease of play not present in standard command-prompt telnet clients.
 - **Verified Security:** The Windows `.exe` release is **digitally signed** using Microsoft Azure Trusted Signing. No scary "Windows Protect Your PC" blue screens or unknown publisher warnings! (HOWEVER, you may still get that scary screen as I'm hardly a know software developer entity, so no reputation)
 - **Auto-fill & Auto-complete:** Intelligent name auto-completion for faster typing.
