@@ -204,7 +204,7 @@ def apply_presence_events(game_text):
             "inscribed ", "inscription ", "body of ", 'insculpt "', "insculpt '",
             "headstone ", "bears the ", "legend, ", "mausoleum to ", "gravestone of ",
             'reads: "', 'reads "', "tombstone here ", "gravestone here ", "remembrance of ",
-            "marker of ", "bones of ", "which is "
+            "marker of ", "bones of ", "which is ", "vault of ", "soul of "
         ]
         if any(ignore_word in context for ignore_word in ignore_phrases):
             continue
