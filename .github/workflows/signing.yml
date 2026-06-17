@@ -14,6 +14,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyinstaller pywebview requests websockets
+
+      - name: Build executable
+        run: .\build.bat
+
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -28,5 +39,5 @@ jobs:
           trusted-signing-account-name: MUDClientSigningWestUS2
           endpoint: https://wus2.codesigning.azure.net/
           certificate-profile-name: NewPublicTrustProfile02
-          files-folder: ./bin
+          files-folder: ./dist
           files-extension: exe,dll
