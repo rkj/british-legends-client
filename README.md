@@ -38,3 +38,9 @@ For those curious about how it works under the hood, the client bridges the gap 
 We use GitHub Actions to fully automate our builds and code signing, but if you want to build it locally to test changes:
 1. Ensure you have Python installed.
 2. Run the provided `build.bat` script to clean previous builds and package the application into a standalone Windows executable using `PyInstaller`.
+
+## 🐛 Feedback & Bug Reports
+
+I would love to hear your feedback! Whether you've found a bug, have an idea for a new feature, or just want to suggest an improvement, please let me know.
+
+You can report bugs or suggest features by opening an issue on the [GitHub Issues page](https://github.com/scottlafond/british-legends-client/issues).
