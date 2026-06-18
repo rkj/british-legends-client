@@ -1,2 +1,5 @@
+pyinstaller
+pywebview[qt]; sys_platform == "linux"
+pywebview; sys_platform != "linux"
 requests
 websockets
