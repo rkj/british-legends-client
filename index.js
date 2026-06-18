@@ -683,14 +683,15 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // 4. Reset age - anchor elapsed time from server, tick locally
             if (data.reset_elapsed != null && data.is_connected) {
-                if (resetAnchorElapsed === null || data.reset_elapsed < resetAnchorElapsed) {
+                const localDelta = resetAnchorLocal ? (performance.now() - resetAnchorLocal) / 1000 : 0;
+                const localProjected = resetAnchorElapsed !== null ? resetAnchorElapsed + localDelta : null;
+                
+                // Only re-anchor if we drift by more than 2 seconds to prevent stuttering
+                if (resetAnchorElapsed === null || data.reset_elapsed < resetAnchorElapsed || (localProjected !== null && Math.abs(data.reset_elapsed - localProjected) > 2)) {
                     resetAnchorElapsed = data.reset_elapsed;
                     resetAnchorLocal = performance.now();
                 }
-                const h = Math.floor(data.reset_elapsed / 3600);
-                const m = Math.floor((data.reset_elapsed % 3600) / 60);
-                const s = data.reset_elapsed % 60;
-                resetAgeVal.innerText = `${h > 0 ? h + 'h ' : ''}${m}m ${s}s`;
+                // Do not render here! Let setInterval render to prevent stuttering.
                 resetAgeVal.style.color = "var(--gold-highlight)";
             } else if (data.reset_elapsed === null && data.is_connected) {
                 resetAgeVal.innerText = "--m --s";
