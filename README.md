@@ -61,8 +61,6 @@ We use GitHub Actions to fully automate our builds and code signing, but if you 
    - Windows users can also run `build.bat`.
    - Linux users can also run `./build.sh`.
 
-## 🐛 Feedback & Bug Reports
+## Acknowledgments
 
-I would love to hear your feedback! Whether you've found a bug, have an idea for a new feature, or just want to suggest an improvement, please let me know.
-
-You can report bugs or suggest features by opening an issue on the [GitHub Issues page](https://github.com/scottlafond/british-legends-client/issues).
+This project was developed with extensive assistance from OpenAI Codex, used as an AI coding collaborator for design, implementation, testing, documentation, and release workflow support.
