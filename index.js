@@ -152,9 +152,30 @@ document.addEventListener("DOMContentLoaded", () => {
         autoLoginPass: ""
     };
     let cachedKnownPlayers = [];
+    const credentialsStorageKey = "mud_credentials";
+    const credentialsBuildKey = "mud_credentials_build";
+
+    function getClientBuildId() {
+        const script = document.querySelector('script[src*="index.js"]');
+        return script ? script.getAttribute("src") : "index.js";
+    }
+
+    function clearCredentialsForNewBuild() {
+        try {
+            const currentBuildId = getClientBuildId();
+            if (localStorage.getItem(credentialsBuildKey) !== currentBuildId) {
+                localStorage.removeItem(credentialsStorageKey);
+                localStorage.setItem(credentialsBuildKey, currentBuildId);
+            }
+        } catch {
+            // Local storage may be unavailable in private or locked-down browser modes.
+        }
+    }
+
+    clearCredentialsForNewBuild();
     
     function getCredentials() {
-        try { return JSON.parse(localStorage.getItem("mud_credentials") || "[]"); }
+        try { return JSON.parse(localStorage.getItem(credentialsStorageKey) || "[]"); }
         catch { return []; }
     }
     
@@ -164,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let existing = creds.find(c => c.username.toLowerCase() === user.toLowerCase());
         if (existing) { existing.password = pass; }
         else { creds.push({username: user, password: pass}); }
-        localStorage.setItem("mud_credentials", JSON.stringify(creds));
+        localStorage.setItem(credentialsStorageKey, JSON.stringify(creds));
     }
     
     const credentialSuggestions = document.getElementById("credential-suggestions");

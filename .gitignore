@@ -5,6 +5,9 @@ __pycache__/
 *.pyo
 *.pyd
 *.log
+do_post_error.txt
+out.txt
+telnet_debug.txt
 .DS_Store
 BritishLegendsClient.zip
 build/
