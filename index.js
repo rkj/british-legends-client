@@ -189,6 +189,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     const credentialSuggestions = document.getElementById("credential-suggestions");
+
+    function hideCredentialSuggestions() {
+        credentialSuggestions.innerHTML = "";
+        credentialSuggestions.classList.add("hidden");
+    }
+
+    function clearLoginState() {
+        loginState.prompt = "";
+        loginState.pendingUsername = "";
+        loginState.autoLoginPass = "";
+        hideCredentialSuggestions();
+    }
+
+    function hasUsernamePrompt(text) {
+        return text.includes("By what name shall I call you?");
+    }
+
+    function hasPasswordPrompt(text) {
+        return /(?:^|\n)\s*(?:password(?:\s+for\s+[A-Za-z0-9_]+)?\s*:?)\s*$/im.test(text);
+    }
+
+    function hasLoggedInGreeting(text) {
+        return /^(?:welcome,|welcome back,|hello again,|hello,)\s+[A-Za-z0-9_]+/im.test(text);
+    }
+
+    function showCredentialSuggestions() {
+        const creds = getCredentials();
+        if (creds.length === 0) {
+            hideCredentialSuggestions();
+            return;
+        }
+
+        credentialSuggestions.innerHTML = "";
+        creds.forEach(cred => {
+            const btn = document.createElement("button");
+            btn.className = "credential-btn";
+            btn.innerText = `Log in as ${cred.username}`;
+            btn.onclick = () => {
+                loginState.pendingUsername = cred.username;
+                loginState.autoLoginPass = cred.password;
+                hideCredentialSuggestions();
+                cmdInput.value = cred.username;
+                sendCommand();
+            };
+            credentialSuggestions.appendChild(btn);
+        });
+        credentialSuggestions.classList.remove("hidden");
+    }
+
     let currentSuggestion = "";
     let latencySamples = [];
     let resetAnchorElapsed = null;  // Server-reported elapsed seconds at anchor time
@@ -531,14 +580,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (handleLogin && loginState.prompt === "username") {
             loginState.pendingUsername = command;
             loginState.prompt = "";
-            credentialSuggestions.classList.add("hidden");
+            hideCredentialSuggestions();
         } else if (handleLogin && loginState.prompt === "password") {
             if (loginState.pendingUsername) {
                 saveCredential(loginState.pendingUsername, command);
             }
-            loginState.prompt = "";
-            loginState.pendingUsername = "";
-            loginState.autoLoginPass = "";
+            clearLoginState();
         }
         
         // Add to history
@@ -949,32 +996,23 @@ document.addEventListener("DOMContentLoaded", () => {
             // 1. Terminal screen output
             if (data.mud_output) {
                 appendTerminalText(data.mud_output);
-                
+
                 // Detect login prompts for auto-fill
-                if (data.mud_output.includes("By what name shall I call you?")) {
+                const sawUsernamePrompt = hasUsernamePrompt(data.mud_output);
+                const sawPasswordPrompt = hasPasswordPrompt(data.mud_output);
+                const sawLoggedInGreeting = hasLoggedInGreeting(data.mud_output);
+                const hasConfirmedPlayerName = Boolean(data.my_name) && !sawUsernamePrompt && !sawPasswordPrompt;
+
+                if (sawLoggedInGreeting || hasConfirmedPlayerName) {
+                    clearLoginState();
+                } else if (sawUsernamePrompt) {
                     loginState.prompt = "username";
+                    loginState.pendingUsername = "";
                     loginState.autoLoginPass = "";
-                    
-                    const creds = getCredentials();
-                    if (creds.length > 0) {
-                        credentialSuggestions.innerHTML = "";
-                        creds.forEach(cred => {
-                            const btn = document.createElement("button");
-                            btn.className = "credential-btn";
-                            btn.innerText = `Log in as ${cred.username}`;
-                            btn.onclick = () => {
-                                loginState.pendingUsername = cred.username;
-                                loginState.autoLoginPass = cred.password;
-                                credentialSuggestions.classList.add("hidden");
-                                cmdInput.value = cred.username;
-                                sendCommand();
-                            };
-                            credentialSuggestions.appendChild(btn);
-                        });
-                        credentialSuggestions.classList.remove("hidden");
-                    }
-                } else if (/password/i.test(data.mud_output)) {
+                    showCredentialSuggestions();
+                } else if (sawPasswordPrompt && loginState.pendingUsername) {
                     loginState.prompt = "password";
+                    hideCredentialSuggestions();
                     if (loginState.autoLoginPass) {
                         cmdInput.value = loginState.autoLoginPass;
                         sendCommand();
