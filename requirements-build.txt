@@ -1,0 +1,7 @@
+# Build/packaging dependencies for the PyInstaller desktop client.
+# Runtime/server deps live in requirements.txt; the headless Pi bridge
+# installs only requirements.txt and does not need anything here.
+-r requirements.txt
+pyinstaller
+pywebview[qt]; sys_platform == "linux"
+pywebview; sys_platform != "linux"
