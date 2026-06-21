@@ -71,7 +71,8 @@ chmod 0644 "${ENV_DIR}/british-legends.env"
 
 install -m 0644 "${APP_DIR}/deploy/british-legends.service" "/etc/systemd/system/${SERVICE_NAME}.service"
 systemctl daemon-reload
-systemctl enable --now "${SERVICE_NAME}.service"
+systemctl enable "${SERVICE_NAME}.service"
+systemctl restart "${SERVICE_NAME}.service"
 
 echo
 echo "Service status:"
