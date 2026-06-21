@@ -48,6 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const topCharacterCard = document.querySelector(".top-character-card");
     const sidebarPanel = document.querySelector(".sidebar-panel");
     const mobileDrawerItems = [];
+    const mobileMenuPlaceholder = document.createComment("mobile menu placeholder");
+    if (mobileMenuToggle && mobileMenuToggle.parentNode) {
+        mobileMenuToggle.parentNode.insertBefore(mobileMenuPlaceholder, mobileMenuToggle);
+    }
 
     function trackMobileDrawerItem(node, classNames = "") {
         if (!node || !node.parentNode) return;
@@ -66,6 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.toggle("mobile-menu-open", open);
         mobileDrawerBackdrop.classList.toggle("hidden", !open);
         mobileMenuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    function setSnoopMenuDocked(docked) {
+        if (!mobileMenuToggle || !reconnectBtn || !mobileMenuPlaceholder.parentNode) return;
+        const shouldDock = docked && mobileDrawerMedia.matches;
+
+        if (shouldDock) {
+            reconnectBtn.parentNode.insertBefore(mobileMenuToggle, reconnectBtn);
+            mobileMenuToggle.classList.add("snoop-docked");
+        } else {
+            mobileMenuPlaceholder.parentNode.insertBefore(mobileMenuToggle, mobileMenuPlaceholder.nextSibling);
+            mobileMenuToggle.classList.remove("snoop-docked");
+        }
     }
 
     function setMobileDrawerEnabled(enabled) {
@@ -92,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!enabled) {
             setMobileMenuOpen(false);
+            setSnoopMenuDocked(false);
         }
     }
 
@@ -378,6 +396,8 @@ document.addEventListener("DOMContentLoaded", () => {
         isSnoopCollapsed = collapsed;
         const isActive = snoopPanel.classList.contains("active");
         snoopPanel.classList.toggle("collapsed", collapsed && isActive);
+        document.body.classList.toggle("snoop-overlay-open", isActive && !collapsed);
+        setSnoopMenuDocked(isActive && !collapsed);
         closeSnoopBtn.textContent = collapsed ? "+" : "-";
         closeSnoopBtn.title = collapsed ? "Show Snoop Feed" : "Hide Snoop Feed";
         closeSnoopBtn.setAttribute("aria-label", closeSnoopBtn.title);
@@ -398,6 +418,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function resetSnoopPanel() {
         snoopPanel.classList.remove("active", "collapsed");
         snoopResizer.classList.remove("active");
+        document.body.classList.remove("snoop-overlay-open");
+        setSnoopMenuDocked(false);
         setSnoopCollapsed(false);
     }
 
@@ -1084,18 +1106,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Macros Logic
     let savedMacros = JSON.parse(localStorage.getItem('mudMacros'));
-    let defaultMacros = [
+    const legacyDefaultMacros = [
         { label: "Exits", cmd: "exits" }, { label: "S", cmd: "s" }, { label: "Down", cmd: "d" },
         { label: "Score", cmd: "sc" }, { label: "Stats", cmd: "st" }, { label: "Who", cmd: "who" },
         { label: "Smile", cmd: "smile" }, { label: "Flee", cmd: "flee o" }, { label: "Quit", cmd: "quit" },
         { label: "M1", cmd: "" }, { label: "M2", cmd: "" }, { label: "M3", cmd: "" }
     ];
+    let defaultMacros = Array.from({length: 12}, (_, index) => ({
+        label: `M${index + 1}`,
+        cmd: ""
+    }));
     if (savedMacros) {
         if (savedMacros.length === 18) {
             savedMacros = savedMacros.slice(6);
         }
-        for (let i = 0; i < savedMacros.length && i < 12; i++) {
-            defaultMacros[i] = savedMacros[i];
+        const isLegacyDefaultSet = savedMacros.length === 12 && savedMacros.every((macro, index) => {
+            const legacyMacro = legacyDefaultMacros[index];
+            return macro && macro.label === legacyMacro.label && macro.cmd === legacyMacro.cmd;
+        });
+
+        if (isLegacyDefaultSet) {
+            localStorage.removeItem('mudMacros');
+        } else {
+            for (let i = 0; i < savedMacros.length && i < 12; i++) {
+                defaultMacros[i] = savedMacros[i];
+            }
         }
     }
     let macros = defaultMacros;

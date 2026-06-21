@@ -2045,6 +2045,20 @@ body {
         cursor: pointer;
     }
 
+    body.snoop-overlay-open .system-status {
+        grid-template-columns: minmax(62px, 1fr) minmax(54px, 0.8fr) 36px 36px;
+    }
+
+    body.snoop-overlay-open .mobile-menu-toggle.snoop-docked {
+        width: 36px;
+        height: 30px;
+        min-height: 30px;
+        justify-self: stretch;
+        align-self: end;
+        z-index: 45;
+        position: relative;
+    }
+
     .mobile-menu-toggle span {
         display: block;
         width: 18px;
