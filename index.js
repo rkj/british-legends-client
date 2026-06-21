@@ -160,6 +160,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let autocompleteTouchStart = null;
     const prefersTouchControls = window.matchMedia("(pointer: coarse)");
     const autocompleteHintText = (prefersTouchControls.matches || mobileDrawerMedia.matches) ? " Swipe right" : " Tab";
+    const mobileUserAgentPattern = /Android|iPhone|iPad|iPod/i;
+
+    function shouldUseMobileDownloadFlow() {
+        return mobileDrawerMedia.matches || prefersTouchControls.matches || mobileUserAgentPattern.test(navigator.userAgent);
+    }
 
     // Smooth 1-second reset age timer using anchored elapsed time
     setInterval(() => {
@@ -245,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.memoryLog = [];
                 this.writeQueue = [];
                 this.fileHandle = null;
-                this.mode = window.showSaveFilePicker ? "file" : "download";
+                this.mode = window.showSaveFilePicker && !shouldUseMobileDownloadFlow() ? "file" : "download";
 
                 if (this.mode === "file") {
                     this.fileHandle = await window.showSaveFilePicker({
