@@ -1,12 +1,15 @@
+import os
 import socket
 import re
 import threading
 import time
 
 class MUDTelnetClient:
-    def __init__(self, host="british-legends.com", port=27750):
-        self.host = host
-        self.port = port
+    def __init__(self, host=None, port=None, debug_log_path=None):
+        self.host = host or os.environ.get("BL_MUD_HOST", "british-legends.com")
+        self.port = int(port or os.environ.get("BL_MUD_PORT", "27750"))
+        self.debug_log_enabled = os.environ.get("BL_TELNET_DEBUG", "").lower() in ("1", "true", "yes", "on")
+        self.debug_log_path = debug_log_path or os.environ.get("BL_TELNET_DEBUG_FILE", "telnet_debug.txt")
         self.sock = None
         self.buffer = ""
         self.lock = threading.Lock()
@@ -16,10 +19,18 @@ class MUDTelnetClient:
     def connect(self):
         """Establish connection to the MUD server."""
         print(f"Connecting to {self.host}:{self.port}...")
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.settimeout(10)
-        self.sock.connect((self.host, self.port))
-        self.sock.settimeout(None)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            sock.settimeout(10)
+            sock.connect((self.host, self.port))
+            sock.settimeout(None)
+        except Exception:
+            sock.close()
+            self.running = False
+            self.sock = None
+            raise
+
+        self.sock = sock
         self.running = True
         
         # Start background reader thread
@@ -75,6 +86,7 @@ class MUDTelnetClient:
                 if not data:
                     print("\n[Connection closed by server]")
                     self.running = False
+                    self._close_socket()
                     break
                 
                 cleaned_text = self._process_telnet_data(data)
@@ -83,6 +95,7 @@ class MUDTelnetClient:
             except Exception as e:
                 print(f"\n[Read error: {e}]")
                 self.running = False
+                self._close_socket()
                 break
 
     def read_buffer(self):
@@ -94,21 +107,41 @@ class MUDTelnetClient:
 
     def send_command(self, cmd):
         """Send a text command to the MUD."""
-        if not self.running or not self.sock:
+        sock = self.sock
+        if not self.running or not sock:
             raise ConnectionError("Not connected to MUD server.")
         
         # Append CRLF (standard telnet line ending) and send
         full_cmd = (cmd + "\r\n").encode('utf-8')
-        with open("telnet_debug.txt", "a", encoding="utf-8") as f:
-            f.write(f"SENDING: {repr(full_cmd)}\n")
-        self.sock.sendall(full_cmd)
+        if self.debug_log_enabled:
+            with open(self.debug_log_path, "a", encoding="utf-8") as f:
+                f.write(f"SENDING: {repr(full_cmd)}\n")
+        try:
+            sock.sendall(full_cmd)
+        except OSError as e:
+            self.running = False
+            self._close_socket()
+            raise ConnectionError("MUD socket write failed.") from e
 
     def close(self):
         """Close connection."""
         self.running = False
-        if self.sock:
-            self.sock.close()
+        self._close_socket()
         print("Connection closed.")
+
+    def _close_socket(self):
+        sock = self.sock
+        self.sock = None
+        if not sock:
+            return
+        try:
+            sock.shutdown(socket.SHUT_RDWR)
+        except OSError:
+            pass
+        try:
+            sock.close()
+        except OSError:
+            pass
 
 if __name__ == "__main__":
     # Quick manual test to verify connection

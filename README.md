@@ -26,6 +26,20 @@ You don't need to install Python, configure environments, or mess with code to p
 2. Download the latest **`BritishLegends.exe`** from the Assets section.
 3. Double-click to run and start adventuring!
 
+## 📱 DIY Mobile Bridge
+
+For die-hard players who want an always-on mobile browser client, the project now includes a Raspberry Pi + Cloudflare Tunnel package.
+
+Start here:
+
+```bash
+git clone https://github.com/scottlafond/british-legends-client.git
+cd british-legends-client
+sudo bash deploy/install-pi.sh
+```
+
+Then add a Cloudflare Tunnel public hostname and protect it with Cloudflare Access. Full instructions are in [`docs/diy-pi-package.md`](docs/diy-pi-package.md).
+
 ## 🐛 Feedback & Bug Reports
 I would love to hear your feedback! Whether you've found a bug, have an idea for a new feature, or just want to suggest an improvement, please let me know.
 You can report bugs or suggest features by opening an issue on the [GitHub Issues page](https://github.com/scottlafond/british-legends-client/issues).

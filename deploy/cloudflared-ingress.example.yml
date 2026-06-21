@@ -1,0 +1,16 @@
+# Example only. If your tunnel is managed in the Cloudflare dashboard,
+# add these as Public Hostname routes there instead of editing this file.
+
+tunnel: <existing-n8n-tunnel-uuid>
+credentials-file: /home/pi/.cloudflared/<existing-n8n-tunnel-uuid>.json
+
+ingress:
+  - hostname: n8n.example.com
+    service: http://localhost:5678
+
+  # Use http://localhost:8080 only when cloudflared is installed directly
+  # on the Pi host. If cloudflared runs in Docker, point at the Pi LAN IP.
+  - hostname: mud.example.com
+    service: http://<pi-lan-ip>:8080
+
+  - service: http_status:404

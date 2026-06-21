@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>British Legends Web UI Dashboard</title>
+    <title>British Legends Mobile MUD1 Client</title>
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?v=15">
+    <link rel="stylesheet" href="index.css?v=24">
 </head>
 <body>
     <div class="app-container">
@@ -16,10 +16,17 @@
         <!-- Top Row: Header + Character (shared grid row for equal height) -->
         <div class="top-row">
             <header class="app-header">
-                <div class="logo-area">
-                    <span class="pulse-indicator connected"></span>
-                    <h1>British Legends <span>MUD1 Client</span></h1>
-                    <span class="version-badge">v1.0.4</span>
+                <div class="mobile-header-row">
+                    <div class="logo-area">
+                        <span class="pulse-indicator connected"></span>
+                        <h1><span class="brand-title">British Legends</span> <span class="brand-mode">MUD1 Mobile Client</span></h1>
+                        <span class="version-badge"><span class="version-full">v1.0.5-m1</span><span class="version-mobile">m1</span></span>
+                    </div>
+                    <button id="mobile-menu-toggle" class="mobile-menu-toggle" type="button" aria-controls="mobile-drawer" aria-expanded="false" title="Open panels">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
                 
                 <div class="system-status">
@@ -31,7 +38,7 @@
                         <span class="label">Latency:</span>
                         <span id="latency-val" class="value">~1ms</span>
                     </div>
-                    <button id="reconnect-btn" class="glow-button secondary">Reconnect MUD</button>
+                    <button id="reconnect-btn" class="glow-button secondary" title="Reconnect MUD" aria-label="Reconnect MUD"><span class="button-label-full">Reconnect MUD</span><span class="button-label-short">↻</span></button>
                 </div>
             </header>
 
@@ -95,7 +102,7 @@
                     <div id="snoop-screen" class="terminal-body snoop-panel">
                         <div class="snoop-header">
                             <div><span class="icon">👁️</span> <span id="snoop-title-text">SNOOP FEED</span></div>
-                            <button id="close-snoop-btn" class="close-snoop-btn" title="Close Snoop Feed">✖</button>
+                            <button id="close-snoop-btn" class="close-snoop-btn snoop-toggle-btn" title="Hide Snoop Feed" aria-label="Hide Snoop Feed" aria-expanded="true">-</button>
                         </div>
                         <div id="snoop-content">
                             <div class="log-line system-msg">Waiting for snoop data... (Use '|' or the SNOOP command)</div>
@@ -194,8 +201,17 @@
         </main>
     </div>
 
+    <div id="mobile-drawer-backdrop" class="mobile-drawer-backdrop hidden"></div>
+    <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile panels">
+        <div class="mobile-drawer-header">
+            <span>Panels</span>
+            <button id="mobile-menu-close" class="mobile-menu-close" type="button" aria-label="Close panels">X</button>
+        </div>
+        <div id="mobile-drawer-content" class="mobile-drawer-content"></div>
+    </nav>
+
     <!-- Frontend logic -->
-    <script src="index.js"></script>
+    <script src="index.js?v=14"></script>
 
     <!-- How to Play Guide Modal -->
     <div id="guide-modal-overlay" class="hidden">

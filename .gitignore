@@ -1,4 +1,6 @@
 __pycache__/
+.venv/
+.codex-remote-attachments/
 *.pyc
 *.pyo
 *.pyd
@@ -8,3 +10,4 @@ BritishLegendsClient.zip
 build/
 dist/
 *.spec
+phone_test_server.py
