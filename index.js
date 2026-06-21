@@ -38,6 +38,101 @@ document.addEventListener("DOMContentLoaded", () => {
     const snoopTitleText = document.getElementById("snoop-title-text");
     let isSnoopingLine = false;
 
+    // Mobile drawer: move secondary panels out of the play surface on phone screens.
+    const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+    const mobileMenuClose = document.getElementById("mobile-menu-close");
+    const mobileDrawerBackdrop = document.getElementById("mobile-drawer-backdrop");
+    const mobileDrawerContent = document.getElementById("mobile-drawer-content");
+    const mobileDrawerMedia = window.matchMedia("(max-width: 760px)");
+    const panelHeader = document.querySelector(".panel-header");
+    const topCharacterCard = document.querySelector(".top-character-card");
+    const sidebarPanel = document.querySelector(".sidebar-panel");
+    const mobileDrawerItems = [];
+    const mobileMenuPlaceholder = document.createComment("mobile menu placeholder");
+    if (mobileMenuToggle && mobileMenuToggle.parentNode) {
+        mobileMenuToggle.parentNode.insertBefore(mobileMenuPlaceholder, mobileMenuToggle);
+    }
+
+    function trackMobileDrawerItem(node, classNames = "") {
+        if (!node || !node.parentNode) return;
+        const placeholder = document.createComment("mobile drawer placeholder");
+        node.parentNode.insertBefore(placeholder, node);
+        mobileDrawerItems.push({ node, placeholder, classNames });
+    }
+
+    trackMobileDrawerItem(topCharacterCard);
+    trackMobileDrawerItem(panelHeader?.children[1], "mobile-drawer-actions");
+    trackMobileDrawerItem(panelHeader?.children[2], "mobile-drawer-actions");
+    trackMobileDrawerItem(sidebarPanel);
+
+    function setMobileMenuOpen(open) {
+        if (!mobileMenuToggle || !mobileDrawerBackdrop) return;
+        document.body.classList.toggle("mobile-menu-open", open);
+        mobileDrawerBackdrop.classList.toggle("hidden", !open);
+        mobileMenuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    function setSnoopMenuDocked(docked) {
+        if (!mobileMenuToggle || !reconnectBtn || !mobileMenuPlaceholder.parentNode) return;
+        const shouldDock = docked && mobileDrawerMedia.matches;
+
+        if (shouldDock) {
+            reconnectBtn.parentNode.insertBefore(mobileMenuToggle, reconnectBtn);
+            mobileMenuToggle.classList.add("snoop-docked");
+        } else {
+            mobileMenuPlaceholder.parentNode.insertBefore(mobileMenuToggle, mobileMenuPlaceholder.nextSibling);
+            mobileMenuToggle.classList.remove("snoop-docked");
+        }
+    }
+
+    function setMobileDrawerEnabled(enabled) {
+        if (!mobileDrawerContent) return;
+        document.body.classList.toggle("mobile-terminal-mode", enabled);
+
+        mobileDrawerItems.forEach(({ node, placeholder, classNames }) => {
+            if (enabled) {
+                if (classNames) {
+                    node.classList.add(...classNames.split(" ").filter(Boolean));
+                }
+                if (node.parentNode !== mobileDrawerContent) {
+                    mobileDrawerContent.appendChild(node);
+                }
+            } else {
+                if (node.parentNode !== placeholder.parentNode && placeholder.parentNode) {
+                    placeholder.parentNode.insertBefore(node, placeholder.nextSibling);
+                }
+                if (classNames) {
+                    node.classList.remove(...classNames.split(" ").filter(Boolean));
+                }
+            }
+        });
+
+        if (!enabled) {
+            setMobileMenuOpen(false);
+            setSnoopMenuDocked(false);
+        }
+    }
+
+    if (mobileMenuToggle && mobileMenuClose && mobileDrawerBackdrop && mobileDrawerContent) {
+        mobileMenuToggle.addEventListener("click", () => {
+            setMobileMenuOpen(!document.body.classList.contains("mobile-menu-open"));
+        });
+        mobileMenuClose.addEventListener("click", () => setMobileMenuOpen(false));
+        mobileDrawerBackdrop.addEventListener("click", () => setMobileMenuOpen(false));
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                setMobileMenuOpen(false);
+            }
+        });
+
+        setMobileDrawerEnabled(mobileDrawerMedia.matches);
+        if (mobileDrawerMedia.addEventListener) {
+            mobileDrawerMedia.addEventListener("change", (event) => setMobileDrawerEnabled(event.matches));
+        } else {
+            mobileDrawerMedia.addListener((event) => setMobileDrawerEnabled(event.matches));
+        }
+    }
+
     // Advanced UI Tracking
     const sleepOverlay = document.getElementById("sleep-overlay");
     const combatHud = document.getElementById("combat-hud");
@@ -49,15 +144,38 @@ document.addEventListener("DOMContentLoaded", () => {
     let historyIndex = -1;
     let myName = "";
     let lastSentCommand = "";
+    let isSnoopCollapsed = false;
+    let activeSnoopTarget = "";
     let loginState = {
         prompt: "",
         pendingUsername: "",
         autoLoginPass: ""
     };
     let cachedKnownPlayers = [];
+    const credentialsStorageKey = "mud_credentials";
+    const credentialsBuildKey = "mud_credentials_build";
+
+    function getClientBuildId() {
+        const script = document.querySelector('script[src*="index.js"]');
+        return script ? script.getAttribute("src") : "index.js";
+    }
+
+    function clearCredentialsForNewBuild() {
+        try {
+            const currentBuildId = getClientBuildId();
+            if (localStorage.getItem(credentialsBuildKey) !== currentBuildId) {
+                localStorage.removeItem(credentialsStorageKey);
+                localStorage.setItem(credentialsBuildKey, currentBuildId);
+            }
+        } catch {
+            // Local storage may be unavailable in private or locked-down browser modes.
+        }
+    }
+
+    clearCredentialsForNewBuild();
     
     function getCredentials() {
-        try { return JSON.parse(localStorage.getItem("mud_credentials") || "[]"); }
+        try { return JSON.parse(localStorage.getItem(credentialsStorageKey) || "[]"); }
         catch { return []; }
     }
     
@@ -67,16 +185,74 @@ document.addEventListener("DOMContentLoaded", () => {
         let existing = creds.find(c => c.username.toLowerCase() === user.toLowerCase());
         if (existing) { existing.password = pass; }
         else { creds.push({username: user, password: pass}); }
-        localStorage.setItem("mud_credentials", JSON.stringify(creds));
+        localStorage.setItem(credentialsStorageKey, JSON.stringify(creds));
     }
     
     const credentialSuggestions = document.getElementById("credential-suggestions");
+
+    function hideCredentialSuggestions() {
+        credentialSuggestions.innerHTML = "";
+        credentialSuggestions.classList.add("hidden");
+    }
+
+    function clearLoginState() {
+        loginState.prompt = "";
+        loginState.pendingUsername = "";
+        loginState.autoLoginPass = "";
+        hideCredentialSuggestions();
+    }
+
+    function hasUsernamePrompt(text) {
+        return text.includes("By what name shall I call you?");
+    }
+
+    function hasPasswordPrompt(text) {
+        return /(?:^|\n)\s*(?:password(?:\s+for\s+[A-Za-z0-9_]+)?\s*:?)\s*$/im.test(text);
+    }
+
+    function hasLoggedInGreeting(text) {
+        return /^(?:welcome,|welcome back,|hello again,|hello,)\s+[A-Za-z0-9_]+/im.test(text);
+    }
+
+    function showCredentialSuggestions() {
+        const creds = getCredentials();
+        if (creds.length === 0) {
+            hideCredentialSuggestions();
+            return;
+        }
+
+        credentialSuggestions.innerHTML = "";
+        creds.forEach(cred => {
+            const btn = document.createElement("button");
+            btn.className = "credential-btn";
+            btn.innerText = `Log in as ${cred.username}`;
+            btn.onclick = () => {
+                loginState.pendingUsername = cred.username;
+                loginState.autoLoginPass = cred.password;
+                hideCredentialSuggestions();
+                cmdInput.value = cred.username;
+                sendCommand();
+            };
+            credentialSuggestions.appendChild(btn);
+        });
+        credentialSuggestions.classList.remove("hidden");
+    }
+
     let currentSuggestion = "";
     let latencySamples = [];
     let resetAnchorElapsed = null;  // Server-reported elapsed seconds at anchor time
     let resetAnchorLocal = null;    // performance.now() when we anchored
     const ghostText = document.getElementById("ghost-text");
     let isConnected = false;
+    let mudEventSeq = 0;
+    let autocompleteTouchStart = null;
+    const prefersTouchControls = window.matchMedia("(pointer: coarse)");
+    const autocompleteHintText = (prefersTouchControls.matches || mobileDrawerMedia.matches) ? " Swipe right" : " Tab";
+    const mobileUserAgentPattern = /Android|iPhone|iPad|iPod/i;
+
+    function shouldUseMobileDownloadFlow() {
+        return mobileDrawerMedia.matches || prefersTouchControls.matches || mobileUserAgentPattern.test(navigator.userAgent);
+    }
 
     // Smooth 1-second reset age timer using anchored elapsed time
     setInterval(() => {
@@ -110,6 +286,9 @@ document.addEventListener("DOMContentLoaded", () => {
             this.isLogging = false;
             this.writeQueue = [];
             this.isWriting = false;
+            this.mode = null;
+            this.memoryLog = [];
+            this.currentSuggestedName = "BritishLegends_Log.txt";
             
             this.logBtn = document.getElementById('log-session-btn');
             this.logIndicator = document.getElementById('log-indicator');
@@ -117,6 +296,31 @@ document.addEventListener("DOMContentLoaded", () => {
             if (this.logBtn) {
                 this.logBtn.addEventListener('click', () => this.toggleLogging());
             }
+        }
+
+        makeSuggestedName() {
+            const now = new Date();
+            const timestamp = now.getFullYear().toString() + 
+                             (now.getMonth() + 1).toString().padStart(2, '0') + 
+                             now.getDate().toString().padStart(2, '0') + "_" + 
+                             now.getHours().toString().padStart(2, '0') + 
+                             now.getMinutes().toString().padStart(2, '0') + 
+                             now.getSeconds().toString().padStart(2, '0');
+            
+            const charName = typeof myName !== 'undefined' && myName ? myName : "Log";
+            return `${timestamp}_BritishLegends_${charName}.txt`;
+        }
+
+        cleanLogText(text) {
+            let cleanText = text.replace(/<[^>]*>?/gm, '');
+            cleanText = cleanText.replace(/\x1b\[[0-9;]*[mK]/g, "");
+            return cleanText.replace(/\r\n/g, "\n").replace(/\n/g, "\r\n");
+        }
+
+        setLoggingUi(active) {
+            if (!this.logBtn || !this.logIndicator) return;
+            this.logBtn.innerText = active ? "Stop Logging" : "Log Session";
+            this.logIndicator.classList.toggle('hidden', !active);
         }
 
         async toggleLogging() {
@@ -129,35 +333,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         async startLogging() {
             try {
-                if (!window.showSaveFilePicker) {
-                    alert("Your browser doesn't support the File System Access API. Please use a modern browser like Chrome or Edge.");
-                    return;
+                const dynamicSuggestedName = this.makeSuggestedName();
+                this.currentSuggestedName = dynamicSuggestedName;
+                this.memoryLog = [];
+                this.writeQueue = [];
+                this.fileHandle = null;
+                this.mode = window.showSaveFilePicker && !shouldUseMobileDownloadFlow() ? "file" : "download";
+
+                if (this.mode === "file") {
+                    this.fileHandle = await window.showSaveFilePicker({
+                        suggestedName: dynamicSuggestedName,
+                        id: 'mud-session-logs',
+                        types: [{
+                            description: 'Text Files',
+                            accept: {'text/plain': ['.txt']}
+                        }]
+                    });
                 }
                 
-                const now = new Date();
-                const timestamp = now.getFullYear().toString() + 
-                                 (now.getMonth() + 1).toString().padStart(2, '0') + 
-                                 now.getDate().toString().padStart(2, '0') + "_" + 
-                                 now.getHours().toString().padStart(2, '0') + 
-                                 now.getMinutes().toString().padStart(2, '0') + 
-                                 now.getSeconds().toString().padStart(2, '0');
-                
-                const charName = typeof myName !== 'undefined' && myName ? myName : "Log";
-                const dynamicSuggestedName = `${timestamp}_BritishLegends_${charName}.txt`;
-                
-                this.fileHandle = await window.showSaveFilePicker({
-                    suggestedName: dynamicSuggestedName,
-                    id: 'mud-session-logs',
-                    types: [{
-                        description: 'Text Files',
-                        accept: {'text/plain': ['.txt']}
-                    }]
-                });
-                
                 this.isLogging = true;
-                
-                this.logBtn.innerText = "Stop Logging";
-                this.logIndicator.classList.remove('hidden');
+                this.setLoggingUi(true);
                 
                 // Write a header
                 this.logText(`--- Session Log Started: ${new Date().toLocaleString()} ---\n`);
@@ -165,6 +360,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Logging cancelled or failed:", error);
                 this.isLogging = false;
                 this.fileHandle = null;
+                this.mode = null;
+                this.memoryLog = [];
+                this.setLoggingUi(false);
             }
         }
 
@@ -173,23 +371,62 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.logText(`--- Session Log Ended: ${new Date().toLocaleString()} ---\n`);
             }
             
+            if (this.mode === "file") {
+                await this.flushQueue();
+            } else if (this.mode === "download") {
+                this.downloadMemoryLog();
+            }
+
             this.isLogging = false;
             this.fileHandle = null;
+            this.mode = null;
             
-            this.logBtn.innerText = "Log Session";
-            this.logIndicator.classList.add('hidden');
+            this.setLoggingUi(false);
         }
 
         logText(text) {
-            if (!this.isLogging || !this.fileHandle) return;
+            if (!this.isLogging) return;
             
-            // Clean text for the file
-            let cleanText = text.replace(/<[^>]*>?/gm, '');
-            cleanText = cleanText.replace(/\x1b\[[0-9;]*[mK]/g, "");
-            cleanText = cleanText.replace(/\r\n/g, "\n").replace(/\n/g, "\r\n"); // Ensure Windows-style newlines for local txt
+            // Ensure Windows-style newlines for local txt logs.
+            const cleanText = this.cleanLogText(text);
+
+            if (this.mode === "download") {
+                this.memoryLog.push(cleanText);
+                return;
+            }
+
+            if (!this.fileHandle) return;
             
             this.writeQueue.push(cleanText);
             this.processQueue();
+        }
+
+        downloadMemoryLog() {
+            const textToDownload = this.memoryLog.join("");
+            if (!textToDownload) return;
+
+            const blob = new Blob([textToDownload], {type: "text/plain;charset=utf-8"});
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = this.currentSuggestedName || "BritishLegends_Log.txt";
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+                link.remove();
+            }, 1000);
+        }
+
+        async flushQueue() {
+            while (this.isWriting) {
+                await new Promise(resolve => setTimeout(resolve, 25));
+            }
+
+            if (this.writeQueue.length > 0) {
+                await this.processQueue();
+            }
         }
 
         async processQueue() {
@@ -211,8 +448,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Stop logging if write fails (e.g., file was locked or deleted)
                 this.isLogging = false;
                 this.fileHandle = null;
-                this.logBtn.innerText = "Log Session";
-                this.logIndicator.classList.add('hidden');
+                this.mode = null;
+                this.memoryLog = [];
+                this.setLoggingUi(false);
             } finally {
                 this.isWriting = false;
                 if (this.writeQueue.length > 0 && this.isLogging) {
@@ -223,6 +461,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const sessionLogger = new SessionLogger();
+
+    function setSnoopCollapsed(collapsed) {
+        isSnoopCollapsed = collapsed;
+        const isActive = snoopPanel.classList.contains("active");
+        snoopPanel.classList.toggle("collapsed", collapsed && isActive);
+        document.body.classList.toggle("snoop-overlay-open", isActive && !collapsed);
+        setSnoopMenuDocked(isActive && !collapsed);
+        closeSnoopBtn.textContent = collapsed ? "+" : "-";
+        closeSnoopBtn.title = collapsed ? "Show Snoop Feed" : "Hide Snoop Feed";
+        closeSnoopBtn.setAttribute("aria-label", closeSnoopBtn.title);
+        closeSnoopBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+
+        if (isActive && !collapsed) {
+            snoopResizer.classList.add("active");
+        } else {
+            snoopResizer.classList.remove("active");
+        }
+    }
+
+    function activateSnoopPanel() {
+        snoopPanel.classList.add("active");
+        setSnoopCollapsed(isSnoopCollapsed);
+    }
+
+    function resetSnoopPanel() {
+        snoopPanel.classList.remove("active", "collapsed");
+        snoopResizer.classList.remove("active");
+        document.body.classList.remove("snoop-overlay-open");
+        setSnoopMenuDocked(false);
+        setSnoopCollapsed(false);
+    }
 
     // Helper: Append text to terminal and scroll
     function appendTerminalText(text) {
@@ -243,15 +512,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const lines = formatted.split("\n");
         lines.forEach((line, index) => {
             const isEndOfChunk = (index === lines.length - 1);
+            const canRouteToSnoop = Boolean(activeSnoopTarget);
             
             // Determine if this line belongs to Snoop feed or Main terminal
+            if (!canRouteToSnoop) {
+                isSnoopingLine = false;
+            }
+
             if (!isEndOfChunk || line.length > 0) {
-                if (!isSnoopingLine && line.startsWith("|")) {
+                if (canRouteToSnoop && !isSnoopingLine && line.startsWith("|")) {
                     isSnoopingLine = true;
                     line = line.substring(1); // Remove the pipe character itself
-                    snoopPanel.classList.add("active"); // Ensure panel is visible
-                    snoopResizer.classList.add("active"); // Show the resizer
-                } else if (isSnoopingLine && line.startsWith("|")) {
+                    activateSnoopPanel();
+                } else if (canRouteToSnoop && isSnoopingLine && line.startsWith("|")) {
                     line = line.substring(1); // Already snooping, remove extra pipe if present
                 }
             }
@@ -265,7 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 isSnoopingLine = false;
             }
 
-            const targetScreen = isSnoopingLine ? snoopContent : terminalScreen;
+            const targetScreen = canRouteToSnoop && isSnoopingLine ? snoopContent : terminalScreen;
 
             const lineSpan = document.createElement("span");
             // Only append a newline if it was actually present in the original text chunk
@@ -273,7 +546,7 @@ document.addEventListener("DOMContentLoaded", () => {
             targetScreen.appendChild(lineSpan);
             
             // Turn off snooping for subsequent lines if we hit a blank line (might be end of snoop block)
-            if (isSnoopingLine && !isEndOfChunk && trimmed === "") {
+            if (canRouteToSnoop && isSnoopingLine && !isEndOfChunk && trimmed === "") {
                 isSnoopingLine = false;
             }
         });
@@ -287,44 +560,54 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Send Command to Backend
-    async function sendCommand() {
-        const command = cmdInput.value.trim();
+    async function submitCommand(rawCommand, options = {}) {
+        const command = (rawCommand || "").trim();
         if (!command) return;
         
+        const {
+            handleLogin = false,
+            clearInput = false,
+            focusInput = true,
+            addToHistory = true
+        } = options;
+
         lastSentCommand = command;
         
         // Force reset snoop tracking so user input/echo returns to main terminal
         isSnoopingLine = false;
         
         // Remember username or password for multi-account
-        if (loginState.prompt === "username") {
+        if (handleLogin && loginState.prompt === "username") {
             loginState.pendingUsername = command;
             loginState.prompt = "";
-            credentialSuggestions.classList.add("hidden");
-        } else if (loginState.prompt === "password") {
+            hideCredentialSuggestions();
+        } else if (handleLogin && loginState.prompt === "password") {
             if (loginState.pendingUsername) {
                 saveCredential(loginState.pendingUsername, command);
             }
-            loginState.prompt = "";
-            loginState.pendingUsername = "";
-            loginState.autoLoginPass = "";
+            clearLoginState();
         }
         
         // Add to history
-        commandHistory.push(command);
-        if (commandHistory.length > 100) {
-            commandHistory.shift();
+        if (addToHistory) {
+            commandHistory.push(command);
+            if (commandHistory.length > 100) {
+                commandHistory.shift();
+            }
+            historyIndex = -1;
         }
-        historyIndex = -1;
         
-        // Clear input field and ghost text
-        cmdInput.value = "";
-        ghostText.innerHTML = "";
-        currentSuggestion = "";
+        if (clearInput) {
+            // Clear input field and ghost text
+            cmdInput.value = "";
+            ghostText.innerHTML = "";
+            currentSuggestion = "";
+        }
         
         // Return focus to the input box so the user can keep typing
-        cmdInput.focus();
+        if (focusInput) {
+            cmdInput.focus();
+        }
         
         try {
             const response = await fetch("/command", {
@@ -335,12 +618,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ command })
             });
             if (!response.ok) {
-                console.error("Failed to send command:", response.statusText);
+                const data = await response.json().catch(() => ({}));
+                const message = data.error || `Command failed: ${response.statusText}`;
+                console.error("Failed to send command:", message);
+                appendTerminalText(`\n[System Error: ${message}]\n`);
             }
         } catch (err) {
             console.error("Error sending command:", err);
             appendTerminalText(`\n[System Error: Connection to backend server failed while sending command.]\n`);
         }
+    }
+
+    // Send Command to Backend
+    async function sendCommand() {
+        await submitCommand(cmdInput.value, {
+            handleLogin: true,
+            clearInput: true,
+            focusInput: true
+        });
     }
     // Reconnect to MUD
     async function reconnectMud() {
@@ -374,8 +669,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     closeSnoopBtn.addEventListener("click", () => {
-        snoopPanel.classList.remove("active");
-        snoopResizer.classList.remove("active");
+        if (!snoopPanel.classList.contains("active")) return;
+        setSnoopCollapsed(!isSnoopCollapsed);
+        if (!isSnoopCollapsed) {
+            snoopContent.scrollTop = snoopContent.scrollHeight;
+        }
         isSnoopingLine = false;
     });
     
@@ -416,10 +714,26 @@ document.addEventListener("DOMContentLoaded", () => {
             const typedPart = currentSuggestion.substring(0, typedLength);
             const remainingPart = currentSuggestion.substring(typedLength);
             
-            ghostText.innerHTML = `<span style="opacity: 0;">${escapeHtml(typedPart)}</span>${escapeHtml(remainingPart)}<span class="ghost-hint"> Tab</span>`;
+            ghostText.innerHTML = `<span style="opacity: 0;">${escapeHtml(typedPart)}</span>${escapeHtml(remainingPart)}<span class="ghost-hint">${autocompleteHintText}</span>`;
         } else {
             ghostText.innerHTML = "";
         }
+    }
+
+    function acceptAutocompleteSuggestion() {
+        if (!currentSuggestion) return false;
+        cmdInput.value = currentSuggestion;
+        ghostText.innerHTML = "";
+        currentSuggestion = "";
+        cmdInput.focus();
+        const cursorPosition = cmdInput.value.length;
+        requestAnimationFrame(() => {
+            cmdInput.setSelectionRange(cursorPosition, cursorPosition);
+        });
+        if (navigator.vibrate) {
+            navigator.vibrate(8);
+        }
+        return true;
     }
 
     cmdInput.addEventListener("input", () => {
@@ -429,11 +743,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cmdInput.addEventListener("keydown", (e) => {
         if (e.key === "Tab") {
             // Accept autocomplete suggestion
-            if (currentSuggestion) {
+            if (acceptAutocompleteSuggestion()) {
                 e.preventDefault();
-                cmdInput.value = currentSuggestion;
-                ghostText.innerHTML = "";
-                currentSuggestion = "";
             }
         } else if (e.key === "Enter") {
             sendCommand();
@@ -475,6 +786,41 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
         }
     });
+
+    const autocompleteSwipeTarget = cmdInput.closest(".input-container");
+    if (autocompleteSwipeTarget) {
+        autocompleteSwipeTarget.addEventListener("touchstart", (event) => {
+            if (!currentSuggestion || event.touches.length !== 1) {
+                autocompleteTouchStart = null;
+                return;
+            }
+            const touch = event.touches[0];
+            autocompleteTouchStart = {
+                x: touch.clientX,
+                y: touch.clientY,
+                time: performance.now()
+            };
+        }, { passive: true });
+
+        autocompleteSwipeTarget.addEventListener("touchend", (event) => {
+            if (!autocompleteTouchStart || !currentSuggestion || event.changedTouches.length !== 1) return;
+
+            const touch = event.changedTouches[0];
+            const dx = touch.clientX - autocompleteTouchStart.x;
+            const dy = touch.clientY - autocompleteTouchStart.y;
+            const elapsed = performance.now() - autocompleteTouchStart.time;
+            autocompleteTouchStart = null;
+
+            if (dx > 56 && Math.abs(dy) < 40 && elapsed < 900) {
+                event.preventDefault();
+                acceptAutocompleteSuggestion();
+            }
+        }, { passive: false });
+
+        autocompleteSwipeTarget.addEventListener("touchcancel", () => {
+            autocompleteTouchStart = null;
+        }, { passive: true });
+    }
 
     // Make player lists clickable to easily target players
     document.addEventListener("click", (e) => {
@@ -604,10 +950,13 @@ document.addEventListener("DOMContentLoaded", () => {
     async function pollUpdates() {
         const startTime = performance.now();
         try {
-            const response = await fetch("/updates");
+            const response = await fetch(`/updates?since=${mudEventSeq}`);
             if (!response.ok) throw new Error(response.statusText);
             
             const data = await response.json();
+            if (Number.isFinite(data.mud_event_seq)) {
+                mudEventSeq = data.mud_event_seq;
+            }
             
             // Calculate and display rolling average latency
             const endTime = performance.now();
@@ -630,54 +979,44 @@ document.addEventListener("DOMContentLoaded", () => {
                 latencyVal.style.color = "var(--color-text-muted)";
             }
             
+            // Snoop Target
+            if (data.snoop_target) {
+                activeSnoopTarget = data.snoop_target;
+                snoopTitleText.innerText = `SNOOP FEED: ${data.snoop_target}`;
+            } else {
+                activeSnoopTarget = "";
+                if (snoopTitleText.innerText !== `SNOOP FEED` || snoopPanel.classList.contains("active")) {
+                    snoopTitleText.innerText = `SNOOP FEED`;
+                    snoopContent.innerHTML = '';
+                    resetSnoopPanel();
+                    isSnoopingLine = false;
+                }
+            }
+
             // 1. Terminal screen output
             if (data.mud_output) {
                 appendTerminalText(data.mud_output);
-                
+
                 // Detect login prompts for auto-fill
-                if (data.mud_output.includes("By what name shall I call you?")) {
+                const sawUsernamePrompt = hasUsernamePrompt(data.mud_output);
+                const sawPasswordPrompt = hasPasswordPrompt(data.mud_output);
+                const sawLoggedInGreeting = hasLoggedInGreeting(data.mud_output);
+                const hasConfirmedPlayerName = Boolean(data.my_name) && !sawUsernamePrompt && !sawPasswordPrompt;
+
+                if (sawLoggedInGreeting || hasConfirmedPlayerName) {
+                    clearLoginState();
+                } else if (sawUsernamePrompt) {
                     loginState.prompt = "username";
+                    loginState.pendingUsername = "";
                     loginState.autoLoginPass = "";
-                    
-                    const creds = getCredentials();
-                    if (creds.length > 0) {
-                        credentialSuggestions.innerHTML = "";
-                        creds.forEach(cred => {
-                            const btn = document.createElement("button");
-                            btn.className = "credential-btn";
-                            btn.innerText = `Log in as ${cred.username}`;
-                            btn.onclick = () => {
-                                loginState.pendingUsername = cred.username;
-                                loginState.autoLoginPass = cred.password;
-                                credentialSuggestions.classList.add("hidden");
-                                cmdInput.value = cred.username;
-                                sendCommand();
-                            };
-                            credentialSuggestions.appendChild(btn);
-                        });
-                        credentialSuggestions.classList.remove("hidden");
-                    }
-                } else if (/password/i.test(data.mud_output)) {
+                    showCredentialSuggestions();
+                } else if (sawPasswordPrompt && loginState.pendingUsername) {
                     loginState.prompt = "password";
+                    hideCredentialSuggestions();
                     if (loginState.autoLoginPass) {
                         cmdInput.value = loginState.autoLoginPass;
                         sendCommand();
                     }
-                }
-            }
-            
-
-            
-            // Snoop Target
-            if (data.snoop_target) {
-                snoopTitleText.innerText = `SNOOP FEED: ${data.snoop_target}`;
-            } else {
-                if (snoopTitleText.innerText !== `SNOOP FEED`) {
-                    snoopTitleText.innerText = `SNOOP FEED`;
-                    snoopContent.innerHTML = '';
-                    snoopPanel.classList.remove("active");
-                    snoopResizer.classList.remove("active");
-                    isSnoopingLine = false;
                 }
             }
             
@@ -826,18 +1165,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Macros Logic
     let savedMacros = JSON.parse(localStorage.getItem('mudMacros'));
-    let defaultMacros = [
+    const legacyDefaultMacros = [
         { label: "Exits", cmd: "exits" }, { label: "S", cmd: "s" }, { label: "Down", cmd: "d" },
         { label: "Score", cmd: "sc" }, { label: "Stats", cmd: "st" }, { label: "Who", cmd: "who" },
         { label: "Smile", cmd: "smile" }, { label: "Flee", cmd: "flee o" }, { label: "Quit", cmd: "quit" },
         { label: "M1", cmd: "" }, { label: "M2", cmd: "" }, { label: "M3", cmd: "" }
     ];
+    let defaultMacros = Array.from({length: 12}, (_, index) => ({
+        label: `M${index + 1}`,
+        cmd: ""
+    }));
     if (savedMacros) {
         if (savedMacros.length === 18) {
             savedMacros = savedMacros.slice(6);
         }
-        for (let i = 0; i < savedMacros.length && i < 12; i++) {
-            defaultMacros[i] = savedMacros[i];
+        const isLegacyDefaultSet = savedMacros.length === 12 && savedMacros.every((macro, index) => {
+            const legacyMacro = legacyDefaultMacros[index];
+            return macro && macro.label === legacyMacro.label && macro.cmd === legacyMacro.cmd;
+        });
+
+        if (isLegacyDefaultSet) {
+            localStorage.removeItem('mudMacros');
+        } else {
+            for (let i = 0; i < savedMacros.length && i < 12; i++) {
+                defaultMacros[i] = savedMacros[i];
+            }
         }
     }
     let macros = defaultMacros;
@@ -880,22 +1232,23 @@ document.addEventListener("DOMContentLoaded", () => {
             editPanel.appendChild(cmdInput);
             editPanel.appendChild(saveBtn);
 
-            btn.onclick = () => {
-                if (!isEditingMacros) {
-                    // Force reset snoop tracking so user input/echo returns to main terminal
-                    lastSentCommand = macro.cmd;
-                    isSnoopingLine = false;
-                    
-                    // Send macro command
-                    fetch("/command", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ command: macro.cmd })
-                    }).catch(err => console.error("Error sending macro:", err));
-                    
-                    // Return focus to main input
-                    document.getElementById("cmd-input").focus();
+            btn.onclick = async () => {
+                if (isEditingMacros) return;
+
+                const macroCommand = (macro.cmd || "").trim();
+                if (!macroCommand) {
+                    appendTerminalText(`\n[System: Macro "${macro.label}" has no command assigned.]\n`);
+                    setMobileMenuOpen(false);
+                    return;
                 }
+
+                await submitCommand(macroCommand, {
+                    handleLogin: false,
+                    clearInput: false,
+                    focusInput: true
+                });
+
+                setMobileMenuOpen(false);
             };
 
             wrapper.appendChild(btn);
@@ -918,45 +1271,131 @@ document.addEventListener("DOMContentLoaded", () => {
     const importMacrosBtn = document.getElementById("import-macros-btn");
     const exportMacrosBtn = document.getElementById("export-macros-btn");
 
-    exportMacrosBtn.addEventListener("click", async () => {
+    function downloadTextFile(filename, contents, mimeType = "text/plain;charset=utf-8") {
+        const blob = new Blob([contents], {type: mimeType});
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+            URL.revokeObjectURL(url);
+            link.remove();
+        }, 1000);
+    }
+
+    function pickMacroFileFromInput() {
+        return new Promise((resolve) => {
+            const input = document.createElement("input");
+            input.type = "file";
+            // Mobile exports use .txt so Android filters out screenshots and other media noise.
+            input.accept = ".txt,.json,text/plain,application/json";
+            input.style.display = "none";
+            input.addEventListener("change", () => {
+                const file = input.files && input.files[0] ? input.files[0] : null;
+                input.remove();
+                resolve(file);
+            }, {once: true});
+            document.body.appendChild(input);
+            input.click();
+        });
+    }
+
+    function normalizeImportedMacros(imported) {
+        if (!Array.isArray(imported)) return null;
+        const source = imported.length === 18 ? imported.slice(6) : imported;
+        const normalized = [];
+
+        for (let i = 0; i < source.length && i < 12; i++) {
+            const macro = source[i] || {};
+            normalized.push({
+                label: String(macro.label || `Macro ${i + 1}`),
+                cmd: String(macro.cmd || "")
+            });
+        }
+
+        return normalized.length > 0 ? normalized : null;
+    }
+
+    function applyImportedMacros(imported) {
+        const normalized = normalizeImportedMacros(imported);
+        if (!normalized) {
+            appendTerminalText(`\n[System: Invalid macro file format.]\n`);
+            return false;
+        }
+
+        macros = normalized;
+        localStorage.setItem('mudMacros', JSON.stringify(macros));
+        renderMacros();
+        appendTerminalText(`\n[System: Loaded ${macros.length} macros.]\n`);
+        return true;
+    }
+
+    async function exportMacros() {
+        const contents = JSON.stringify(macros, null, 2);
+        const desktopFilename = "mud_macros.json";
+        const mobileFilename = "british_legends_macros.txt";
+
         try {
+            if (!window.showSaveFilePicker) {
+                downloadTextFile(mobileFilename, contents);
+                appendTerminalText(`\n[System: Macro backup downloaded as ${mobileFilename}. On Android, load it from Downloads.]\n`);
+                return;
+            }
+
             const handle = await window.showSaveFilePicker({
-                suggestedName: 'mud_macros.json',
+                suggestedName: desktopFilename,
                 types: [{
-                    description: 'JSON Files',
-                    accept: {'application/json': ['.json']},
+                    description: 'Macro Files',
+                    accept: {
+                        'application/json': ['.json'],
+                        'text/plain': ['.txt']
+                    },
                 }],
             });
             const writable = await handle.createWritable();
-            await writable.write(JSON.stringify(macros, null, 2));
+            await writable.write(contents);
             await writable.close();
         } catch (err) {
             console.error("Export cancelled or failed", err);
+            appendTerminalText(`\n[System: Macro export cancelled or failed.]\n`);
         }
-    });
+    }
 
-    importMacrosBtn.addEventListener("click", async () => {
+    async function importMacros() {
         try {
-            const [fileHandle] = await window.showOpenFilePicker({
-                types: [{
-                    description: 'JSON Files',
-                    accept: {'application/json': ['.json']},
-                }],
-            });
-            const file = await fileHandle.getFile();
+            let file = null;
+
+            if (window.showOpenFilePicker) {
+                const [fileHandle] = await window.showOpenFilePicker({
+                    types: [{
+                        description: 'Macro Files',
+                        accept: {
+                            'application/json': ['.json'],
+                            'text/plain': ['.txt']
+                        },
+                    }],
+                });
+                file = await fileHandle.getFile();
+            } else {
+                file = await pickMacroFileFromInput();
+            }
+
+            if (!file) return;
+
             const contents = await file.text();
             const imported = JSON.parse(contents);
-            if (Array.isArray(imported)) {
-                macros = imported;
-                localStorage.setItem('mudMacros', JSON.stringify(macros));
-                renderMacros();
-            } else {
-                alert("Invalid macro file format.");
-            }
+            applyImportedMacros(imported);
         } catch (err) {
             console.error("Import cancelled or failed", err);
+            appendTerminalText(`\n[System: Macro import cancelled or failed.]\n`);
         }
-    });
+    }
+
+    exportMacrosBtn.addEventListener("click", exportMacros);
+    importMacrosBtn.addEventListener("click", importMacros);
 
     // Initial render
     renderMacros();
