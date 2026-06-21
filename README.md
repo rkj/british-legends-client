@@ -3,7 +3,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/scottlafond/british-legends-client?color=success&style=flat-square)](https://github.com/scottlafond/british-legends-client/releases/latest)
 [![Windows Code Signing](https://img.shields.io/badge/Security-Digitally_Signed-blue?style=flat-square&logo=windows)](https://github.com/scottlafond/british-legends-client/releases/latest)
 
-A custom-built, modern, and highly polished desktop client for the classic MUD, **British Legends** (MUD1). 
+A custom-built modern client for British Legends (MUD1), available as a signed Windows desktop app and as a DIY Raspberry Pi mobile browser bridge.
 
 Built from the ground up to bring a premium, modern aesthetic to a classic game without sacrificing the raw text-based feel.
 
@@ -25,6 +25,21 @@ You don't need to install Python, configure environments, or mess with code to p
 1. Go to the [**Releases Page**](https://github.com/scottlafond/british-legends-client/releases/latest).
 2. Download the latest **`BritishLegends.exe`** from the Assets section.
 3. Double-click to run and start adventuring!
+
+## 📱 DIY Mobile Bridge
+
+For die-hard players who want an always-on mobile browser client, the project now includes a Raspberry Pi + Cloudflare Tunnel package. 
+First packaged beta: [v1.1.0-beta.1](https://github.com/scottlafond/british-legends-client/releases/tag/v1.1.0-beta.1)
+
+Start here:
+
+```bash
+git clone https://github.com/scottlafond/british-legends-client.git
+cd british-legends-client
+sudo bash deploy/install-pi.sh
+```
+
+Then add a Cloudflare Tunnel public hostname and protect it with Cloudflare Access. Full instructions are in [`docs/diy-pi-package.md`](docs/diy-pi-package.md).
 
 ## 🐛 Feedback & Bug Reports
 I would love to hear your feedback! Whether you've found a bug, have an idea for a new feature, or just want to suggest an improvement, please let me know.

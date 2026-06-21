@@ -1,10 +1,16 @@
 __pycache__/
+.venv/
+.codex-remote-attachments/
 *.pyc
 *.pyo
 *.pyd
 *.log
+do_post_error.txt
+out.txt
+telnet_debug.txt
 .DS_Store
 BritishLegendsClient.zip
 build/
 dist/
 *.spec
+phone_test_server.py

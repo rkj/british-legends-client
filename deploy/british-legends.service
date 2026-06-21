@@ -1,0 +1,18 @@
+[Unit]
+Description=British Legends Mobile Bridge
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=britishlegends
+Group=britishlegends
+WorkingDirectory=/opt/british-legends-client
+EnvironmentFile=/etc/british-legends-client/british-legends.env
+ExecStart=/opt/british-legends-client/.venv/bin/python /opt/british-legends-client/service_server.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

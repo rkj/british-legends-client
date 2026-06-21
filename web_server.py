@@ -20,7 +20,12 @@ def resource_path(*parts):
 
 # Global state shared between HTTP server threads, Telnet reader, and AI loop
 state_lock = threading.Lock()
+reconnect_lock = threading.Lock()
 mud_buffer = ""
+mud_events = []
+mud_event_seq = 0
+legacy_update_cursors = {}
+MAX_MUD_EVENTS = 500
 tell_messages = []
 
 players_online = set()
@@ -80,8 +85,36 @@ except Exception as e:
 
 
 # Initialize MUD Telnet connection
+CONNECT_ON_START = os.environ.get("BL_CONNECT_ON_START", "1").lower() in ("1", "true", "yes", "on")
 client = MUDTelnetClient()
-client.connect()
+if CONNECT_ON_START:
+    try:
+        client.connect()
+    except Exception as e:
+        print(f"[Warning: Initial MUD connection failed: {e}]")
+
+
+def is_mud_connected(client_instance=None):
+    active_client = client_instance or client
+    return bool(active_client and active_client.running and active_client.sock)
+
+
+def append_mud_output(text):
+    global mud_buffer, mud_event_seq
+    if not text:
+        return
+    mud_buffer += text
+    mud_event_seq += 1
+    mud_events.append({"seq": mud_event_seq, "text": text})
+    if len(mud_events) > MAX_MUD_EVENTS:
+        del mud_events[:len(mud_events) - MAX_MUD_EVENTS]
+
+
+def reset_mud_output(text=""):
+    global mud_buffer, mud_events
+    mud_buffer = ""
+    mud_events.clear()
+    append_mud_output(text)
 
 # Regular Expressions for Parsing
 re_stats_qs = re.compile(r"Score:\s*(\d+),\s*sta:\s*(\d+)/(\d+),\s*str:\s*(\d+),\s*dex:\s*(\d+)", re.IGNORECASE)
@@ -261,7 +294,7 @@ def mud_reader_loop(client_instance):
                 with state_lock:
                     # Only add the message once, then exit thread
                     if not getattr(client_instance, 'disconnected_reported', False):
-                        mud_buffer += "\n[System Error: Connection to MUD server lost or closed.]\n"
+                        append_mud_output("\n[System Error: Connection to MUD server lost or closed.]\n")
                         client_instance.disconnected_reported = True
                 break
             output = client_instance.read_buffer()
@@ -292,7 +325,7 @@ def mud_reader_loop(client_instance):
 
                 # Add to text buffer for UI
                 with state_lock:
-                    mud_buffer += filtered_output
+                    append_mud_output(filtered_output)
 
                 parse_buffer += filtered_output
                 if '\n' in parse_buffer:
@@ -449,20 +482,6 @@ def mud_reader_loop(client_instance):
                 with state_lock:
                     apply_presence_events(no_snoop_text)
 
-                # Anti-idle: detect the kick warning and send a harmless command
-                if "if you don't type something soon" in no_snoop_text.lower():
-                    import time as _time
-                    now = _time.time()
-                    last_anti_idle = getattr(mud_reader_loop, '_last_anti_idle', 0)
-                    if now - last_anti_idle > 30:  # Cooldown: at most once per 30 seconds
-                        mud_reader_loop._last_anti_idle = now
-                        try:
-                            client_instance.write("\r\n")
-                            with state_lock:
-                                mud_buffer += "\n[Anti-idle: sent empty command to prevent kick]\n"
-                        except Exception:
-                            pass
-
                 # 2. Parse reset age
                 m_reset = re_reset.search(no_snoop_text)
                 if m_reset:
@@ -572,58 +591,71 @@ def mud_reader_loop(client_instance):
         time.sleep(0.1)
 
 # Start reader background thread
-reader_thread = threading.Thread(target=mud_reader_loop, args=(client,), daemon=True)
-reader_thread.start()
+reader_thread = None
+if client.running:
+    reader_thread = threading.Thread(target=mud_reader_loop, args=(client,), daemon=True)
+    reader_thread.start()
 
 # AI Play Background Loop
 
 
 def reconnect_mud():
     global client, waiting_for_name, my_name, snoop_target, pending_snoop_target, pending_snoop_since
-    print("[Reconnecting MUD...]")
-    with state_lock:
-        waiting_for_name = False
-        my_name = None
-    try:
-        client.close()
-    except Exception as e:
-        print(f"[Error closing client socket during reconnect: {e}]")
-    
-    # Cooldown for MUD server to drop the old connection completely
-    time.sleep(2.0)
-    
-    with state_lock:
-        global mud_buffer, players_online, players_offline, stats, current_room, previous_room, is_sleeping, in_combat, combat_logs
-        mud_buffer = "\n[System: Connecting to British Legends...]\n"
-        players_online.clear()
-        players_offline.clear()
-        recently_logged_out.clear()
-        snoop_target = None
-        pending_snoop_target = None
-        pending_snoop_since = 0.0
-        stats["score"] = 0
-        stats["stamina"] = "0/0"
-        stats["stamina_val"] = 0
-        stats["stamina_max"] = 0
-        stats["strength"] = 0
-        stats["dexterity"] = 0
-        current_room = None
-        previous_room = None
-        is_sleeping = False
-        in_combat = False
-        combat_logs.clear()
-    
-    client = MUDTelnetClient()
-    try:
-        client.connect()
-        # Start a new reader loop thread, passing the specific client instance
-        new_reader = threading.Thread(target=mud_reader_loop, args=(client,), daemon=True)
-        new_reader.start()
-        print("[MUD Reconnected successfully]")
-    except Exception as e:
-        print(f"[Failed to connect to MUD: {e}]")
+    global mud_buffer, players_online, players_offline, stats, current_room, previous_room, is_sleeping, in_combat, combat_logs
+    if not reconnect_lock.acquire(blocking=False):
         with state_lock:
-            mud_buffer += f"[System Error: Connection failed: {e}]\n"
+            append_mud_output("\n[System: Reconnect is already in progress.]\n")
+        return False, "Reconnect is already in progress."
+
+    print("[Reconnecting MUD...]")
+    try:
+        with state_lock:
+            waiting_for_name = False
+            my_name = None
+        try:
+            setattr(client, "disconnected_reported", True)
+            client.close()
+        except Exception as e:
+            print(f"[Error closing client socket during reconnect: {e}]")
+        
+        # Cooldown for MUD server to drop the old connection completely
+        time.sleep(2.0)
+        
+        with state_lock:
+            reset_mud_output("\n[System: Connecting to British Legends...]\n")
+            players_online.clear()
+            players_offline.clear()
+            recently_logged_out.clear()
+            snoop_target = None
+            pending_snoop_target = None
+            pending_snoop_since = 0.0
+            stats["score"] = 0
+            stats["stamina"] = "0/0"
+            stats["stamina_val"] = 0
+            stats["stamina_max"] = 0
+            stats["strength"] = 0
+            stats["dexterity"] = 0
+            current_room = None
+            previous_room = None
+            is_sleeping = False
+            in_combat = False
+            combat_logs.clear()
+        
+        client = MUDTelnetClient()
+        try:
+            client.connect()
+            # Start a new reader loop thread, passing the specific client instance
+            new_reader = threading.Thread(target=mud_reader_loop, args=(client,), daemon=True)
+            new_reader.start()
+            print("[MUD Reconnected successfully]")
+            return True, "MUD reconnected successfully."
+        except Exception as e:
+            print(f"[Failed to connect to MUD: {e}]")
+            with state_lock:
+                append_mud_output(f"[System Error: Connection failed: {e}]\n")
+            return False, f"Connection failed: {e}"
+    finally:
+        reconnect_lock.release()
 
 # HTTP Request Handler for UI static files & polling API
 class DashboardHTTPHandler(http.server.SimpleHTTPRequestHandler):
@@ -631,19 +663,39 @@ class DashboardHTTPHandler(http.server.SimpleHTTPRequestHandler):
         # Silence server request logs in command line
         pass
 
+    def send_json(self, payload, status=200):
+        self.send_response(status)
+        self.send_header("Content-type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(json.dumps(payload).encode("utf-8"))
+
     def do_GET(self):
-        global mud_buffer, players_online, players_offline, reset_age, stats, my_name, origin_time, room_state, inventory_state
+        global players_online, players_offline, reset_age, stats, my_name, origin_time, room_state, inventory_state
         global snoop_target, pending_snoop_target, pending_snoop_since
+        parsed_url = urllib.parse.urlparse(self.path)
+        request_path = parsed_url.path
         
         # API Route: Fetch live state updates
-        if self.path == "/updates":
+        if request_path == "/updates":
+            query_params = urllib.parse.parse_qs(parsed_url.query)
+            has_since_param = "since" in query_params
+            legacy_cursor_key = (self.client_address[0], self.headers.get("User-Agent", "")) if not has_since_param else None
+            if has_since_param:
+                try:
+                    since_seq = int(query_params.get("since", ["0"])[0])
+                except ValueError:
+                    since_seq = 0
+            else:
+                since_seq = 0
+
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             
             # If not connected, make sure stats and state are cleared
-            is_connected = client.running if (client and client.sock) else False
+            is_connected = is_mud_connected()
             if not is_connected:
                 with state_lock:
                     stats["score"] = 0
@@ -667,11 +719,14 @@ class DashboardHTTPHandler(http.server.SimpleHTTPRequestHandler):
                 if my_name:
                     mark_player_online(my_name)
 
-                # Get and clear buffers
-                out_text = mud_buffer
-                mud_buffer = ""
-                
-
+                # Return all unseen terminal chunks for this browser.
+                if legacy_cursor_key is not None:
+                    since_seq = legacy_update_cursors.get(legacy_cursor_key, 0)
+                event_slice = [event for event in mud_events if event["seq"] > since_seq]
+                out_text = "".join(event["text"] for event in event_slice)
+                latest_seq = mud_event_seq
+                if legacy_cursor_key is not None:
+                    legacy_update_cursors[legacy_cursor_key] = latest_seq
                 
                 # Send elapsed seconds since reset (computed server-side to avoid clock skew)
                 reset_elapsed = None
@@ -682,6 +737,7 @@ class DashboardHTTPHandler(http.server.SimpleHTTPRequestHandler):
                 
                 response = {
                     "mud_output": out_text,
+                    "mud_event_seq": latest_seq,
 
                     "players_online": sorted(list(players_online)),
                     "players_offline": sorted(list(players_offline)),
@@ -705,101 +761,108 @@ class DashboardHTTPHandler(http.server.SimpleHTTPRequestHandler):
             return
 
         # Serve static assets
-        if self.path == "/":
+        if request_path == "/":
             self.path = "/index.html"
             
         return super().do_GET()
 
     def do_POST(self):
-        global last_sent_command, previous_room, last_direction_command, current_room, waiting_for_name, my_name, mud_buffer
+        global last_sent_command, previous_room, last_direction_command, current_room, waiting_for_name, my_name
+        global mud_buffer, expecting_inventory
         
-        try:
-            # API Route: Send user typed command
-            if self.path == "/command":
-                content_length = int(self.headers["Content-Length"])
+        # API Route: Send user typed command
+        if self.path == "/command":
+            try:
+                content_length = int(self.headers.get("Content-Length", "0"))
                 post_data = self.rfile.read(content_length)
-                data = json.loads(post_data.decode("utf-8"))
-                command = data.get("command", "").strip()
-
-                # Intercept outgoing tells
-                m_sent_tell = re.match(r"^tell\s+([A-Za-z0-9_]+)\s*,\s*(.*)$", command, re.IGNORECASE)
-                if not m_sent_tell:
-                    m_sent_tell = re.match(r"^tell\s+([A-Za-z0-9_]+)\s+(.*)$", command, re.IGNORECASE)
-                
-                if m_sent_tell:
-                    target = m_sent_tell.group(1).capitalize()
-                    message = m_sent_tell.group(2)
-                    with state_lock:
-                        tell_messages.append({"type": "sent", "to": target, "message": message})
-                        if len(tell_messages) > 100:
-                            tell_messages.pop(0)
-
-                if command:
-
-                    
-                    # Send to MUD
-                    client.send_command(command)
-                    last_sent_command = command
-                    
-                    # Track direction movement
-                    cmd_cleaned = command.strip().lower()
-                    
-                    if cmd_cleaned in ["qu", "who", "query"]:
-                        with state_lock:
-                            # Move all to offline so the incoming response correctly rebuilds the online list
-                            for p in list(players_online):
-                                players_offline.add(p)
-                            players_online.clear()
-                    
-                    if cmd_cleaned in ["i", "inv", "inventory", "eq", "equipment"]:
-                        with state_lock:
-                            expecting_inventory = True
-                            
-                    is_movement = cmd_cleaned in ["n", "s", "e", "w", "u", "d", "ne", "nw", "se", "sw", "in", "out", "swamp", "back"]
-                    if is_movement:
-                        last_direction_command = cmd_cleaned
-                        previous_room = current_room
-                    elif cmd_cleaned in ["get all", "g all"]:
-                        world_map.clear_all_items(current_room)
-                    elif cmd_cleaned.startswith("get ") or cmd_cleaned.startswith("g "):
-                        item_to_remove = re.sub(r'^(?:get|g)\s+', '', cmd_cleaned)
-                        world_map.remove_item(current_room, item_to_remove)
-
-                self.send_response(200)
-                self.send_header("Content-type", "application/json")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(json.dumps({"status": "ok"}).encode("utf-8"))
+                data = json.loads(post_data.decode("utf-8")) if post_data else {}
+            except (ValueError, json.JSONDecodeError):
+                self.send_json({"status": "error", "error": "Invalid command request."}, status=400)
                 return
-        except Exception as e:
-            with open("do_post_error.txt", "w") as f:
-                import traceback
-                f.write(traceback.format_exc())
-            raise
+
+            command = data.get("command", "").strip()
+            if not command:
+                self.send_json({"status": "ok"})
+                return
+
+            active_client = client
+            if not is_mud_connected(active_client):
+                message = "MUD connection is closed. Tap Reconnect MUD, then wait for the name prompt."
+                self.send_json({"status": "error", "error": message}, status=409)
+                return
+
+            try:
+                active_client.send_command(command)
+            except ConnectionError:
+                message = "MUD connection closed while sending command. Tap Reconnect MUD, then wait for the name prompt."
+                self.send_json({"status": "error", "error": message}, status=409)
+                return
+            except Exception as e:
+                print(f"[Command send error: {e}]")
+                message = "Unexpected backend error while sending command."
+                self.send_json({"status": "error", "error": message}, status=500)
+                return
+
+            last_sent_command = command
+
+            # Intercept outgoing tells only after a successful send.
+            m_sent_tell = re.match(r"^tell\s+([A-Za-z0-9_]+)\s*,\s*(.*)$", command, re.IGNORECASE)
+            if not m_sent_tell:
+                m_sent_tell = re.match(r"^tell\s+([A-Za-z0-9_]+)\s+(.*)$", command, re.IGNORECASE)
+            
+            if m_sent_tell:
+                target = m_sent_tell.group(1).capitalize()
+                message = m_sent_tell.group(2)
+                with state_lock:
+                    tell_messages.append({"type": "sent", "to": target, "message": message})
+                    if len(tell_messages) > 100:
+                        tell_messages.pop(0)
+            
+            # Track direction movement
+            cmd_cleaned = command.strip().lower()
+            
+            if cmd_cleaned in ["qu", "who", "query"]:
+                with state_lock:
+                    # Move all to offline so the incoming response correctly rebuilds the online list
+                    for p in list(players_online):
+                        players_offline.add(p)
+                    players_online.clear()
+            
+            if cmd_cleaned in ["i", "inv", "inventory", "eq", "equipment"]:
+                with state_lock:
+                    expecting_inventory = True
+                    
+            is_movement = cmd_cleaned in ["n", "s", "e", "w", "u", "d", "ne", "nw", "se", "sw", "in", "out", "swamp", "back"]
+            if is_movement:
+                last_direction_command = cmd_cleaned
+                previous_room = current_room
+            elif cmd_cleaned in ["get all", "g all"]:
+                world_map.clear_all_items(current_room)
+            elif cmd_cleaned.startswith("get ") or cmd_cleaned.startswith("g "):
+                item_to_remove = re.sub(r'^(?:get|g)\s+', '', cmd_cleaned)
+                world_map.remove_item(current_room, item_to_remove)
+
+            self.send_json({"status": "ok"})
             return
-
-
 
         # API Route: Reconnect to MUD
         if self.path == "/reconnect":
-            reconnect_mud()
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(json.dumps({"status": "ok"}).encode("utf-8"))
+            ok, message = reconnect_mud()
+            if ok:
+                self.send_json({"status": "ok", "message": message})
+            else:
+                status = 409 if "already in progress" in message else 503
+                self.send_json({"status": "error", "error": message}, status=status)
             return
 
         # API Route: Clear Tells
         if self.path == "/clear_tells":
             with state_lock:
                 tell_messages.clear()
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(json.dumps({"status": "ok"}).encode("utf-8"))
+            self.send_json({"status": "ok"})
             return
+
+        self.send_json({"status": "error", "error": "Unknown endpoint."}, status=404)
 
 # Main server runner
 def run_web_dashboard():
