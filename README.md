@@ -56,7 +56,10 @@ For those curious about how it works under the hood, the client bridges the gap 
 
 We use GitHub Actions to fully automate our builds and code signing, but if you want to build it locally to test changes:
 1. Ensure you have Python installed.
-2. Run the provided `build.bat` script to clean previous builds and package the application into a standalone Windows executable using `PyInstaller`.
+2. Install build dependencies with `python -m pip install -r requirements-build.txt` (this pulls in the runtime deps from `requirements.txt` plus PyInstaller and the pywebview/Qt packaging deps).
+3. Run `python build.py` to package the application with PyInstaller.
+   - Windows users can also run `build.bat`.
+   - Linux users can also run `./build.sh`.
 
 ## 🐛 Feedback & Bug Reports
 

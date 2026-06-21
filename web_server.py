@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import json
 import re
@@ -10,6 +11,12 @@ import datetime
 from telnet_client import MUDTelnetClient
 
 from world_map import MUDWorldMap
+
+
+def resource_path(*parts):
+    base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, *parts)
+
 
 # Global state shared between HTTP server threads, Telnet reader, and AI loop
 state_lock = threading.Lock()
@@ -66,10 +73,10 @@ PLAYER_NAME_BLACKLIST = {
 }
 
 # Initialize persistent map & strategy guide
-world_map = MUDWorldMap()
+world_map = MUDWorldMap(resource_path("world_map_static.json"))
 strategy_guide = {}
 try:
-    with open("strategy.json", "r") as f:
+    with open(resource_path("strategy.json"), "r") as f:
         strategy_guide = json.load(f)
     print("Loaded strategy guide.")
 except Exception as e:
@@ -859,8 +866,6 @@ class DashboardHTTPHandler(http.server.SimpleHTTPRequestHandler):
 
 # Main server runner
 def run_web_dashboard():
-    import sys
-    import os
     import webview
     
     # If compiled with PyInstaller, the files are extracted to a temp dir (_MEIPASS)

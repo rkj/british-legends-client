@@ -22,10 +22,10 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install pyinstaller pywebview requests websockets
+        run: python -m pip install -r requirements-build.txt
 
       - name: Build executable
-        run: .\build.bat
+        run: python build.py
 
       - name: Azure Login
         uses: azure/login@v2
