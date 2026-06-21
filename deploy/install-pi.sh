@@ -83,7 +83,8 @@ echo "Health check:"
 HEALTH_URL="http://127.0.0.1:${WEB_PORT}/healthz"
 HEALTH_OK=0
 for _attempt in $(seq 1 15); do
-  if curl -fsS "${HEALTH_URL}"; then
+  if HEALTH_RESPONSE="$(curl -fs "${HEALTH_URL}" 2>/dev/null)"; then
+    echo "${HEALTH_RESPONSE}"
     HEALTH_OK=1
     break
   fi
