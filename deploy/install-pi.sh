@@ -80,7 +80,17 @@ systemctl --no-pager --full status "${SERVICE_NAME}.service" || true
 
 echo
 echo "Health check:"
-if curl -fsS "http://127.0.0.1:${WEB_PORT}/healthz"; then
+HEALTH_URL="http://127.0.0.1:${WEB_PORT}/healthz"
+HEALTH_OK=0
+for _attempt in $(seq 1 15); do
+  if curl -fsS "${HEALTH_URL}"; then
+    HEALTH_OK=1
+    break
+  fi
+  sleep 1
+done
+
+if [[ "${HEALTH_OK}" == "1" ]]; then
   echo "Local service is answering."
 else
   echo "Local health check failed. Read logs with:"
